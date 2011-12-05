@@ -1,0 +1,4448 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="RIDE" /> 
+<meta name="rf-template" content="False" /> 
+<style type="text/css">
+html {
+  font-family: Arial,Helvetica,sans-serif;
+  background-color: white;
+  color: black;
+}
+table {
+  border-collapse: collapse;
+  empty-cells: show;
+  margin: 1em 0em;
+  border: 1px solid black;
+}
+th, td {
+  border: 1px solid black;
+  padding: 0.1em 0.2em;
+  height: 1.5em;
+  width: 12em;
+}
+th {
+  background-color: rgb(192, 192, 192);
+  color: black;
+  height: 1.7em;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+td.name {
+  background-color: rgb(240, 240, 240);
+  letter-spacing: 0.1em;
+}
+td.name, th.name {
+  width: 10em;
+}
+</style>
+<title>Cream Test Suite</title>
+</head>
+<body>
+<h1>Cream Test Suite</h1>
+<table id="settings" border="1">
+<tr>
+<th class="name">Setting</th>
+<th colspan="4">Value</th>
+</tr>
+<tr>
+<td class="name">Documentation</td>
+<td colspan="4">This is the main testing module,needed for testing the CREAM functionality.For more information check these urls:\nCREAM User's Guide:\nhttp://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide\n\nJDL Guide:\nhttp://wiki.italiangrid.org/twiki/bin/view/CREAM/JdlGuide\n\nCREAM Administrator's Guide:\nhttp://wiki.italiangrid.org/twiki/bin/view/CREAM/SystemAdministratorGuideForEMI1\n\nCREAM Test Suite Guide:\nhttps://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests\n\nEMI Robot Framework Quickstart Guide:\nhttps://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide</td>
+</tr>
+<tr>
+<td class="name">Suite Teardown</td>
+<td>Clean Up</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name">Metadata</td>
+<td>Temporary Files Location</td>
+<td>${tmp_dir}</td>
+<td># The directory in which the temporary test suite files will be stored.</td>
+<td></td>
+</tr>
+<tr>
+<td class="name">Library</td>
+<td>/opt/cream_test/lib/cream_testing.py</td>
+<td># This is the main cream testing robot library,implemented as a python module.For more information,check the accompanied html documention (created with pydoc).</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name">Library</td>
+<td>Operating System</td>
+<td># Builtin "Operating System" library,providing keywords for interaction with the system.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name">Library</td>
+<td>Collections</td>
+<td># List and dictionary manipulating library</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name">Variables</td>
+<td>/opt/cream_test/lib/vars.py</td>
+<td># This is the variables file</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<table id="variables" border="1"></table>
+<table id="testcases" border="1">
+<tr>
+<th class="name">Test Case</th>
+<th>Action</th>
+<th colspan="3">Arguments</th>
+</tr>
+<tr>
+<td class="name"><a name="test_Set Log Level">Set Log Level</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Set the log level used for the test suite. This changes the verbosity of the final test suite log files.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>loglevel</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Set Log Level</td>
+<td>${log_level}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Check Executables">Check Executables</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Check whether the needed executables for the test are available in the underlying system.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>check_exe</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-delegate-proxy</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-job-cancel</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-job-list</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-job-output</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-job-purge</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-job-resume</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-job-submit</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-job-suspend</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-delegation-destroy</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/lcg-cp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/lcg-cr</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/lcg-del</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/lcg-ls</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/lfc-ls</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/lfc-mkdir</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/lfc-rm</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/voms-proxy-destroy</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/voms-proxy-info</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/voms-proxy-init</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-service-info</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Simple Submit">Simple Submit</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Submit the jdl and wait for final job status to be done-ok.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>simple</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_ISB Base URI">ISB Base URI</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandboxBaseURI is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>isb_baseuri</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Setup]</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${script}=</td>
+<td>Create Dummy Script</td>
+<td>${tmp_dir}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Ignore Error</td>
+<td>Execute UberFTP Command</td>
+<td>rm</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}/cream_test/*</td>
+<td># delete any leftover files</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Ignore Error</td>
+<td>Execute UberFTP Command</td>
+<td>rmdir</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}/cream_test</td>
+<td># delete any leftover dirs</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Execute UberFTP Command</td>
+<td>mkdir</td>
+<td>${gridftp_server}</td>
+<td>${gridftp_dir}/cream_test</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Uberftp Upload</td>
+<td>${gridftp_server}</td>
+<td>${gridftp_dir}/cream_test</td>
+<td>${script}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>ISB BaseURI JDL</td>
+<td>${vo}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}/cream_test</td>
+<td>${script}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>ISB Base URI Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_ISB Client to CE">ISB Client to CE</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute a bash shell script.The script is stored on the UI.The jdl attribute InputSandbox is used.Firstly submit the jdl and then wait for final job state to be done-ok.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>isb_client</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}</td>
+<td>${script}=</td>
+<td>ISB Client to CE JDL</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_ISB gsiftp to CE">ISB gsiftp to CE</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandbox is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>isb_gsiftp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${script}=</td>
+<td>Create Dummy Script</td>
+<td>${tmp_dir}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Ignore Error</td>
+<td>Execute UberFTP Command</td>
+<td>rm</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}/cream_test/*</td>
+<td># delete any leftover files</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Ignore Error</td>
+<td>Execute UberFTP Command</td>
+<td>rmdir</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}/cream_test</td>
+<td># delete any leftover dirs</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Execute UberFTP Command</td>
+<td>mkdir</td>
+<td>${gridftp_server}</td>
+<td>${gridftp_dir}/cream_test</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Uberftp Upload</td>
+<td>${gridftp_server}</td>
+<td>${gridftp_dir}/cream_test</td>
+<td>${script}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>ISB gsiftp to CE JDL</td>
+<td>${vo}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}/cream_test</td>
+<td>${script}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>ISB Base URI Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_OSB localhost">OSB localhost</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Store std out and error streams on "<a href="gsiftp://localhost">gsiftp://localhost</a>" .Firstly submit the jdl,wait for final job state done-ok,download the produced files,get the output file list from the jdl file and compare the two file lists.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>osb_localhost</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Localhost Output JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>mkdir /tmp/robot_tmp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${local_list}=</td>
+<td>Fetch Output Files</td>
+<td>/tmp/robot_tmp</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>60</td>
+<td># any smaller timeout will result in failure of the test,since the output sandbox files won't be uploaded yet to the CREAM gridftp server</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl_list}=</td>
+<td>Get OSB</td>
+<td>${jdl}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${local_list}</td>
+<td>${jdl_list}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sort List</td>
+<td>${local_list}</td>
+<td># sort before compare,since comparing is index based,not content based</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sort List</td>
+<td>${jdl_list}</td>
+<td># sort before compare,since comparing is index based,not content based</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Lists Should Be Equal</td>
+<td>${local_list}</td>
+<td>${jdl_list}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp</td>
+<td># post-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_OSB gsiftp BaseDestURI">OSB gsiftp BaseDestURI</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxBaseDestURI is used.\n2) Get output file list from jdl,base dest uri.\n3) lcg-ls base dest uri and files shouldn't exist\n4) Execute jdl\n5) lcg-ls base dest uri and files should exist\n6) Delete files (cleanup)\n7) lcg-ls base dest uri and files shouldn't exist</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>osb_basedesturi</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>OSB BaseDestURI JDL</td>
+<td>${vo}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td>${tmp_dir}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Ignore Error</td>
+<td>Delete OSB BaseDestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td># clean up of leftover files from previous executions</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${file_exist}=</td>
+<td>Check OSB BaseDestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Be Equal As Strings</td>
+<td>${file_exist}</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${file_exist_2}=</td>
+<td>Check OSB BaseDestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Be Equal As Strings</td>
+<td>${file_exist_2}</td>
+<td>True</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Delete OSB BaseDestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+<td>${gridftp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># clean up</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${file_exist_3}=</td>
+<td>Check OSB BaseDestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td># sanity check</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Be Equal As Strings</td>
+<td>${file_exist_3}</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_OSB gsiftp DestURI">OSB gsiftp DestURI</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxDestURI is used.\n2) Get output file list from jdl,base dest uri.\n3) lcg-ls base dest uri and files shouldn't exist\n4) Execute jdl\n5) lcg-ls base dest uri and files should exist\n6) Delete files (cleanup)\n7) lcg-ls base dest uri and files shouldn't exist</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>osb_desturi</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>OSB DestURI JDL</td>
+<td>${vo}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td>${tmp_dir}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Ignore Error</td>
+<td>Delete OSB DestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># clean up of leftover files from previous executions</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${file_exist}=</td>
+<td>Check OSB DestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Be Equal As Strings</td>
+<td>${file_exist}</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${file_exist_2}=</td>
+<td>Check OSB DestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Be Equal As Strings</td>
+<td>${file_exist_2}</td>
+<td>True</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Delete OSB DestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+<td># clean up</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${file_exist_3}=</td>
+<td>Check OSB DestURI Files</td>
+<td>${jdl}</td>
+<td>${gridftp_server}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${gridftp_dir}</td>
+<td># sanity check</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Be Equal As Strings</td>
+<td>${file_exist_3}</td>
+<td>False</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Environment">Environment</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute a bash shell script.The script is stored locally.The jdl sets an environmental variable.The script prints the value of that variable.\nSubmit the jdl,the final state should be done-ok and the output file should have the designated variable.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>env</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}</td>
+<td>${script}=</td>
+<td>Environment JDL</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp2</td>
+<td># pre-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>mkdir /tmp/robot_tmp2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${local_list}=</td>
+<td>Fetch Output Files</td>
+<td>/tmp/robot_tmp2</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>60</td>
+<td># any smaller timeout will result in failure of the test,since the output sandbox files won't be uploaded yet to the CREAM gridftp server</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Contain</td>
+<td>/tmp/robot_tmp2/job.out</td>
+<td>"ENV_VAR=This_is_the_right_value"</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp2</td>
+<td># post-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Epilogue">Epilogue</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute two bash shell scripts,one for the job and the other as an epilogue.The epilogue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>epilogue</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}</td>
+<td>${script}</td>
+<td>${epilogue}=</td>
+<td>Epilogue JDL</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp3</td>
+<td># pre-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>mkdir /tmp/robot_tmp3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${local_list}=</td>
+<td>Fetch Output Files</td>
+<td>/tmp/robot_tmp3</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>60</td>
+<td># any smaller timeout will result in failure of the test,since the output sandbox files won't be uploaded yet to the CREAM gridftp server</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Contain</td>
+<td>/tmp/robot_tmp3/epilogue.txt</td>
+<td>8fb9391ad53014bdb49919e6a92606a5</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp3</td>
+<td># post-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Prologue">Prologue</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute two bash shell scripts,one for the job and the other as a prologue.The prologue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>prologue</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}</td>
+<td>${script}</td>
+<td>${prologue}=</td>
+<td>Prologue JDL</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp4</td>
+<td># pre-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>mkdir /tmp/robot_tmp4</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${local_list}=</td>
+<td>Fetch Output Files</td>
+<td>/tmp/robot_tmp4</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>60</td>
+<td># any smaller timeout will result in failure of the test,since the output sandbox files won't be uploaded yet to the CREAM gridftp server</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Contain</td>
+<td>/tmp/robot_tmp4/prologue.txt</td>
+<td>b71fa4b80bfa78785d57e42482a7fa04</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp4</td>
+<td># post-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_CPUNumber">CPUNumber</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Set the jdl attribute CPUNumber to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM918215196)</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cpunum</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPUNumber JDL</td>
+<td>${vo}</td>
+<td>0</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPUNumber JDL</td>
+<td>${vo}</td>
+<td>1</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPUNumber JDL</td>
+<td>${vo}</td>
+<td>1924000</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>ABORTED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_HostNumber">HostNumber</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Set the jdl attribute HostNumber to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: [BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM150008664)]</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>hostnum</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>HostNumber JDL</td>
+<td>${vo}</td>
+<td>0</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>HostNumber JDL</td>
+<td>${vo}</td>
+<td>1</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>HostNumber JDL</td>
+<td>${vo}</td>
+<td>1924000</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>ABORTED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_SMPGranularity">SMPGranularity</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Set the jdl attribute SMPGranularity to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: [BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM348964588)]</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>smpgran</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>SMPGranularity JDL</td>
+<td>${vo}</td>
+<td>0</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>SMPGranularity JDL</td>
+<td>${vo}</td>
+<td>1</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>SMPGranularity JDL</td>
+<td>${vo}</td>
+<td>1924000</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>ABORTED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_WholeNodes">WholeNodes</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Set the jdl attribute WholeNodes to True and False.\nThe submission is expected to succeed for both values and the final job state should be done-ok.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>wnodes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>WholeNodes JDL</td>
+<td>${vo}</td>
+<td>FALSE</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>WholeNodes JDL</td>
+<td>${vo}</td>
+<td>TRUE</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_HostNumber SMPGranularity and WholeNodes">HostNumber SMPGranularity and WholeNodes</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Execute /bin/uname -a.Set the jdl attributes HostNumber and SMPGranularity to a random -correct- value and WholeNodes to True and False.Job submission should fail for "False" and succeed for "True",the latter with a final job state of done-ok.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>combo</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Combo JDL</td>
+<td>${vo}</td>
+<td>true</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>1</td>
+<td>2</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Combo JDL</td>
+<td>${vo}</td>
+<td>false</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>1</td>
+<td>2</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Explicit Delegation">Explicit Delegation</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Test job submission with explicit delegation.Three cases are tested:\n1) Delegate a proxy and submit a job (job final state should be done-ok)\n2) Create an allready existing delegation id (failure is treated as correct behaviour)\n3) Submit job with explicit delegation of a non existant delegation id (failure is treated as correct behaviour)</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>deleg</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Delegation</td>
+<td>${ce_endpoint}</td>
+<td>${deleg_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td>${deleg_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+<td>Create Delegation</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${deleg_id}</td>
+<td># delegation with this name allready exists and this command should fail.</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Delegation</td>
+<td>${deleg_endpoint}</td>
+<td>${deleg_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td>${deleg_id}</td>
+<td># job submission should fail since the delegation id given doesn't exist.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Job Cancel">Job Cancel</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Test job cancellation.Two cases are tested:\n1) Submit and then cancel a job.The final state should be cancelled.\n2) Cancel the aforementioned job again (failure is treated as correct behaviour).</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cancel</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Sleep JDL</td>
+<td>${vo}</td>
+<td>100</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Wait for Status</td>
+<td>${job_id}</td>
+<td>REALLY-RUNNING</td>
+<td># wait for the job to reach a valid cancellation state</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Cancel Job</td>
+<td>${job_id}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>CANCELLED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+<td>Cancel Job</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># cancelled job shouldn't be able to get cancelled.</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Job List">Job List</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Test the job listing cli utility.Store the list of the user's jobs,before and after a job submission.The returned job id shouldn't exist in the job list command output before the submission and should exist afterwards.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>list</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${list_before}=</td>
+<td>List Jobs</td>
+<td>${ce_endpoint}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${list_after}=</td>
+<td>List Jobs</td>
+<td>${ce_endpoint}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${list_before}</td>
+<td>${list_after}</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Contain</td>
+<td>${list_after}</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Contain</td>
+<td>${list_before}</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Job Suspend - Resume">Job Suspend - Resume</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Submit a job and suspend it.Wait until it's state is REALLY-RUNNING.\nCase LSF batch system:\nIt's state should be HELD.Then resume the same job.It's status should be REALLY-RUNNING.The final status should be DONE-OK.\nCase Torque batch system:\nIt's state should still be REALLY-RUNNING.Resume the job and expect an error.It's status should be REALLY-RUNNING.The final status should be DONE-OK.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>susp_res</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Sleep JDL</td>
+<td>${vo}</td>
+<td>60</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Wait for Status</td>
+<td>${job_id}</td>
+<td>REALLY-RUNNING</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Suspend Job</td>
+<td>${job_id}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${batch_system}' == 'lsf'</td>
+<td>Sleep</td>
+<td>30s</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${batch_system}' == 'lsf'</td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>Suspend Job</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${batch_system}' == 'lsf'</td>
+<td>Job Status Should Be</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>HELD</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${batch_system}' == 'lsf'</td>
+<td>Resume Job</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${batch_system}' == 'lsf'</td>
+<td>Sleep</td>
+<td>30s</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${batch_system}' == 'pbs'</td>
+<td>Run Keyword And Expect Error</td>
+<td>*</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>Resume Job</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Job Status Should Be</td>
+<td>${job_id}</td>
+<td>REALLY-RUNNING</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${status}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Be Equal As Strings</td>
+<td>${status}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Qdel Job">Qdel Job</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Submit a job and then manually qdel it on the Torque host.\nThe final status should be either "DONE-FAILED" or "CANCELLED"\nInternally, ssh is used to connect and execute qstat and qdel on the Torque host by a torque admin user.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>qdel</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Sleep JDL</td>
+<td>${vo}</td>
+<td>300</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Qdel Job</td>
+<td>${job_id}</td>
+<td>${torque_host}</td>
+<td>${torque_admin_user}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${torque_admin_pass}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>@{legal_states}=</td>
+<td>Create List</td>
+<td>DONE-FAILED</td>
+<td>CANCELLED</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Contain</td>
+<td>${legal_states}</td>
+<td>${final_state}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Verify CE service info">Verify CE service info</a></td>
+<td>[Documentation]</td>
+<td colspan="3">This test case verifies the output of the glite-ce-service-info command for both verbosity levels.\n</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>ce_info</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${output_verb1}=</td>
+<td>CE Service Info</td>
+<td>${ce_endpoint}</td>
+<td>1</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># verbosity 1</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${output_verb2}=</td>
+<td>CE Service Info</td>
+<td>${ce_endpoint}</td>
+<td>2</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># verbosity 2</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Validate CE Service Info</td>
+<td>${output_verb1}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Validate CE Service Info</td>
+<td>${output_verb2}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Enable - Disable Submission">Enable - Disable Submission</a></td>
+<td>[Documentation]</td>
+<td colspan="3">This test case tests the proper functionality of the glite-ce-allowed-submission and glite-ce-enable/disable-submission commands, for admin and non-admin users.\nThe test executes the following steps:\n1) Checks if initially the submission is allowed (it should)\n2) Executes a simple job (it should succeed)\n3) Disables submission (the current user executing the test case is considered to NOT be a CREAM admin, thus this step should fail)\n4) Add the current user as a CREAM admin\n5) Disable submission (this time it should succeed)\n6) Check if submission is allowed (it shouldn't)\n7) Execute a simple job submission (it should fail)\n8) Enable submission\n9) Execute a simple job (it should succeed)\n10) Remove current user from CREAM admin\n11) Disable submission (should fail, since the user isn't a CREAM admin anymore)\nThis test case internally uses root ssh access to the cream host, in order to add/remove a cream administrator.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>en_dis_sub</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${is_allowed}=</td>
+<td>Allowed Submission</td>
+<td>${ce_endpoint}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Contain</td>
+<td>${is_allowed}</td>
+<td>enabled</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Disable Submission</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># not an admin yet, this should fail</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${dn}=</td>
+<td>Get Proxy DN</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Enable Cream Admin</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Disable Submission</td>
+<td>${ce_endpoint}</td>
+<td># now admin, should succeed</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${is_allowed}=</td>
+<td>Allowed Submission</td>
+<td>${ce_endpoint}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Contain</td>
+<td>${is_allowed}</td>
+<td>disabled</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Enable Submission</td>
+<td>${ce_endpoint}</td>
+<td># now admin, should succeed</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Disable Cream Admin</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Disable Submission</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># not an admin again, this should fail</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Job Purge">Job Purge</a></td>
+<td>[Documentation]</td>
+<td colspan="3">This test case verifies the proper functionality of the glite-ce-job-purge command. In order to do that, it purges a job and then searches for its status and its sandbox dirs on the cream node. The job shouldn't be found by the status command and the sandbox dirs shouldn't exist.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>purge</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${server}</td>
+<td>${dir_path}=</td>
+<td>Get Job SB</td>
+<td>${jid}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Purge Job</td>
+<td>${jid}</td>
+<td>${ce_endpoint}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>30</td>
+<td># wait a little for the purging operation to be completed</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Execute UberFTP Command</td>
+<td>ls</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${server}</td>
+<td>${dir_path}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Admin Manage Job">Admin Manage Job</a></td>
+<td>[Tags]</td>
+<td>job_man</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Sleep JDL</td>
+<td>${vo}</td>
+<td>100</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Wait for Status</td>
+<td>${job_id}</td>
+<td>REALLY-RUNNING</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Proxy</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${sec_proxy_pass}</td>
+<td>${vo}</td>
+<td>${sec_cert}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${sec_key}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${dn}=</td>
+<td>Get Proxy DN</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Disable Cream Admin</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td># disable from admin, in case he allready was</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Cancel Job</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Enable Cream Admin</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Cancel Job</td>
+<td>${job_id}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Disable Cream Admin</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Limiter">Limiter</a></td>
+<td>[Documentation]</td>
+<td colspan="3">NOTE: This test case is about 25 minutes long!\nThis test case, tests the functionality of the CREAM self limiting behaviour. It has the following logic:\n1) Set a limiter threshold to a value which will triger it\n2) Wait for 11 minutes for the limiter script to be run automatically\n3) Submit and job and expect failure\n4) Reset the limiter to the original values\n5) Wait for 11 minutes for the limiter script to be run automatically\n6) Submit a command and succeed</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>limit</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Set Limiter Threshold</td>
+<td>DiskUsage</td>
+<td>1</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${cream_root_pass}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>11 minutes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Reset Limiter Threshold</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>11 minutes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Ban User">Ban User</a></td>
+<td>[Documentation]</td>
+<td colspan="3">This test case tests if the banning of user, using lcas, works. The test case has the following logic:\n1) Add the user's DN to /etc/lcas/ban_users.db on the cream host\n2) Submit job and expect failure\n3) Remove DN from the aforementioned file\n4) Submit job and succeed</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>ban</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${dn}=</td>
+<td>Get Proxy DN</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Ban User</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword and Expect Error</td>
+<td>*</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Unban User</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Sandbox Staging">Sandbox Staging</a></td>
+<td>[Documentation]</td>
+<td colspan="3">This test case tests the two different Sandbox staging operations available for the /etc/glite-ce-cream/cream-config.xml, LRMS and GSIFTP. The test case has the following logic:\n1) Change the setting (if GSIFTP, set to LRMS, if LRMS, set to GSIFTP)\n2) Run the osb_localhost test case (it uses input and output sandboxes)\n3) Reset the setting to its original and rerun the osb_localhost test case.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>sb_stage</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Localhost Output JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Change Sandbox Transfer Method</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>mkdir /tmp/robot_tmp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${local_list}=</td>
+<td>Fetch Output Files</td>
+<td>/tmp/robot_tmp</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>60</td>
+<td># any smaller timeout will result in failure of the test,since the output sandbox files won't be uploaded yet to the CREAM gridftp server</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl_list}=</td>
+<td>Get OSB</td>
+<td>${jdl}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${local_list}</td>
+<td>${jdl_list}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sort List</td>
+<td>${local_list}</td>
+<td># sort before compare,since comparing is index based,not content based</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sort List</td>
+<td>${jdl_list}</td>
+<td># sort before compare,since comparing is index based,not content based</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Lists Should Be Equal</td>
+<td>${local_list}</td>
+<td>${jdl_list}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp</td>
+<td># post-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Change Sandbox Transfer Method</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_id}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${job_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>mkdir /tmp/robot_tmp</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${local_list}=</td>
+<td>Fetch Output Files</td>
+<td>/tmp/robot_tmp</td>
+<td>${job_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>60</td>
+<td># any smaller timeout will result in failure of the test,since the output sandbox files won't be uploaded yet to the CREAM gridftp server</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl_list}=</td>
+<td>Get OSB</td>
+<td>${jdl}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${local_list}</td>
+<td>${jdl_list}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sort List</td>
+<td>${local_list}</td>
+<td># sort before compare,since comparing is index based,not content based</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sort List</td>
+<td>${jdl_list}</td>
+<td># sort before compare,since comparing is index based,not content based</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Lists Should Be Equal</td>
+<td>${local_list}</td>
+<td>${jdl_list}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run</td>
+<td>rm -rf /tmp/robot_tmp</td>
+<td># post-cleanup</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Validate Glue Schema">Validate Glue Schema</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Run the glue validator on the cream host.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>glue</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${output1}=</td>
+<td>Validate Glue</td>
+<td>${ce_endpoint}</td>
+<td>2170</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>glue1</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${output2}=</td>
+<td>Validate Glue</td>
+<td>${ce_endpoint}</td>
+<td>2170</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=infosys</td>
+<td>glue1</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${output3}=</td>
+<td>Validate Glue</td>
+<td>${ce_endpoint}</td>
+<td>2170</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>glue2</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${output4}=</td>
+<td>Validate Glue</td>
+<td>${ce_endpoint}</td>
+<td>2170</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=infosys</td>
+<td>glue2</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${output1}</td>
+<td>${output2}</td>
+<td>${output3}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${output4}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Contain</td>
+<td>${output1}</td>
+<td>FAILED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Contain</td>
+<td>${output2}</td>
+<td>FAILED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Contain</td>
+<td>${output3}</td>
+<td>FAILED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Contain</td>
+<td>${output4}</td>
+<td>FAILED</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<table id="keywords" border="1">
+<tr>
+<th class="name">Keyword</th>
+<th>Action</th>
+<th colspan="3">Arguments</th>
+</tr>
+<tr>
+<td class="name"><a name="keyword_Simple Teardown">Simple Teardown</a></td>
+<td>Destroy Proxy</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="keyword_ISB Base URI Teardown">ISB Base URI Teardown</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Delete files/dirs created on a gridftp server, for usage with ISB jdl attributes.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Execute UberFTP Command</td>
+<td>rm</td>
+<td>${gridftp_server}</td>
+<td>${gridftp_dir}/cream_test/*</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Execute UberFTP Command</td>
+<td>rmdir</td>
+<td>${gridftp_server}</td>
+<td>${gridftp_dir}/cream_test</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Proxy</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="keyword_Clean Up">Clean Up</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Delete any and all leftover files from the test.All the files created are located under /tmp and have the prefix "cream_testing-".</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${delete_files}' == 'True'</td>
+<td>Remove Directory</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>recursive="True"</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
+</body>
+</html>

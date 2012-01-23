@@ -1,4 +1,4 @@
-# Copyright 2011 Dimosthenes Fioretos dfiore -at- noc -dot- edunet -dot- gr
+# Copyright 2012 Dimosthenes Fioretos dfiore -at- noc -dot- edunet -dot- gr
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -40,22 +40,22 @@ deleg_id=""
 
 # The log level used during the test.Default is INFO.For extra output,set to DEBUG or TRACE.
 # (possible values: NONE FAIL WARN INFO DEBUG TRACE)
-log_level=""
+log_level="TRACE"
 
 #The underlying batch system of the CREAM endpoint.Either pbs or lsf.
 batch_system=""
 
 # A directory in the gridftp server.This directory has to allready exist and your vo have write access to it. Used for OSB file storage. Example: /tmp
-gridftp_dir=""
+gridftp_dir="/tmp"
 
-# The hostname where TORQUE is running. Example: ctb07.gridctb.uoa.gr
-torque_host=""
+# The hostname where the lrms is running. Example: ctb07.gridctb.uoa.gr
+lrms_host=""
 
-# A user on the TORQUE host, who has job admin priviledges and ssh access to the machine. Example: root
-torque_admin_user=""
+# A user on the lrms host, who has job admin priviledges and ssh access to the machine. Example: root
+lrms_admin_user=""
 
 # The aforementioned user's ssh password. Example: p4sSw0rD
-torque_admin_pass=""
+lrms_admin_pass=""
 
 # The path in which temporary files will reside.
 # They will be automatically cleaned up unless you set the variable delete_files to "False" or explicitely don't run the cleanup test case.
@@ -80,8 +80,26 @@ sec_key=""
 # Password for the second certificate
 sec_proxy_pass=""
 
-# do not change this variable
-ce=ce_endpoint + "/" + cream_queue
+# The cream db host
+creamdb_host=""
+
+#The cream db port
+creamdb_port=""
+
+# The user to read the cream db
+creamdb_user=""
+
+# The aforementioned user's db pass
+creamdb_pass=""
+
+# The authorization model in use. Either gjaf or argus
+authz_model=""
+
+# The host of the argus service, if applicable
+argus_host=""
+
+# Root user password for ssh access on argus host
+argus_root_pass=""
 
 
 #########################################
@@ -90,8 +108,12 @@ ce=ce_endpoint + "/" + cream_queue
 # Do not edit. (unless you know what and why you are doing it!)
 #
 #########################################
+# do not change this variable
+ce=ce_endpoint + "/" + cream_queue
+
 import os as _os       # underscored libs aren't included into rf when the module itself is loaded
 import tempfile as _tf # same as above
+
 
 class _error(Exception):
 	def __init__(self,string):

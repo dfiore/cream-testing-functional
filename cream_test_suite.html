@@ -50,7 +50,17 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name">Documentation</td>
-<td colspan="4">This is the main testing module,needed for testing the CREAM functionality.For more information check these urls:\nCREAM User's Guide:\nhttp://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide\n\nJDL Guide:\nhttp://wiki.italiangrid.org/twiki/bin/view/CREAM/JdlGuide\n\nCREAM Administrator's Guide:\nhttp://wiki.italiangrid.org/twiki/bin/view/CREAM/SystemAdministratorGuideForEMI1\n\nCREAM Test Suite Guide:\nhttps://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests\n\nEMI Robot Framework Quickstart Guide:\nhttps://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide</td>
+<td colspan="4">This is the main testing module,needed for testing the CREAM functionality.For more information check these urls: \n<br>
+CREAM User's Guide: \n<br>
+<a href="http://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide">http://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide</a> \n<br>
+JDL Guide: \n<br>
+<a href="http://wiki.italiangrid.org/twiki/bin/view/CREAM/JdlGuide">http://wiki.italiangrid.org/twiki/bin/view/CREAM/JdlGuide</a> \n<br>
+CREAM Administrator's Guide: \n<br>
+<a href="http://wiki.italiangrid.org/twiki/bin/view/CREAM/SystemAdministratorGuideForEMI1">http://wiki.italiangrid.org/twiki/bin/view/CREAM/SystemAdministratorGuideForEMI1</a> \n<br>
+CREAM Test Suite Guide: \n<br>
+<a href="https://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests">https://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests</a> \n<br>
+EMI Robot Framework Quickstart Guide: \n<br>
+<a href="https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide">https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide</a> </td>
 </tr>
 <tr>
 <td class="name">Suite Teardown</td>
@@ -68,7 +78,7 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name">Library</td>
-<td>/opt/cream_test/lib//cream_testing.py</td>
+<td>/opt/cream_test/lib/cream_testing.py</td>
 <td># This is the main cream testing robot library,implemented as a python module.For more information,check the accompanied html documention (created with pydoc).</td>
 <td></td>
 <td></td>
@@ -89,15 +99,8 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name">Variables</td>
-<td>/opt/cream_test/lib//vars.py</td>
+<td>/opt/cream_test/lib/vars.py</td>
 <td># This is the variables file, containing various needed values for the execution of the test suite.</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name">Library</td>
-<td>DatabaseLibrary</td>
-<td># External "Database Library", providing relevant key words.</td>
 <td></td>
 <td></td>
 </tr>
@@ -296,6 +299,20 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/glite-ce-proxy-renew</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>File Should Exist</td>
+<td>/usr/bin/ldapsearch</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td></td>
 <td></td>
 <td></td>
@@ -315,6 +332,13 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -326,6 +350,13 @@ td.name, th.name {
 <td>Simple JDL</td>
 <td>${vo}</td>
 <td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -400,6 +431,20 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_server}</td>
+<td>Mandatory variable gridftp_server is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_dir}</td>
+<td>Mandatory variable gridftp_dir is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -641,6 +686,20 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_server}</td>
+<td>Mandatory variable gridftp_server is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_dir}</td>
+<td>Mandatory variable gridftp_dir is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -949,6 +1008,20 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_server}</td>
+<td>Mandatory variable gridftp_server is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_dir}</td>
+<td>Mandatory variable gridftp_dir is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -1132,6 +1205,20 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_server}</td>
+<td>Mandatory variable gridftp_server is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_dir}</td>
+<td>Mandatory variable gridftp_dir is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -2518,6 +2605,20 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>Should not be empty</td>
+<td>${deleg_endpoint}</td>
+<td>Mandatory variable delegation_endpoint is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${deleg_id}</td>
+<td>Mandatory variable deleg_id is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -2869,6 +2970,13 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>Should not be empty</td>
+<td>${batch_system}</td>
+<td>Mandatory variable batch_system is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -3031,6 +3139,27 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${lrms_host}</td>
+<td>Mandatory variable lrms_host is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${lrms_admin_user}</td>
+<td>Mandatory variable lrms_admin_user is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${lrms_admin_pass}</td>
+<td>Mandatory variable lrms_admin_pass is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -3251,6 +3380,13 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -3608,6 +3744,13 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -3753,6 +3896,13 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -3859,7 +4009,7 @@ td.name, th.name {
 <tr>
 <td class="name"></td>
 <td>[Teardown]</td>
-<td>Simple Teardown</td>
+<td>Limiter Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -3886,6 +4036,55 @@ td.name, th.name {
 <td class="name"></td>
 <td># Setup</td>
 <td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${authz_model}</td>
+<td>Mandatory variable authz_model is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${authz_model}' == 'gjaf'</td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${authz_model}' == 'argus'</td>
+<td>Should not be empty</td>
+<td>${argus_host}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>Mandatory variable argus_host is empty!</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${authz_model}' == 'argus'</td>
+<td>Should not be empty</td>
+<td>${argus_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>Mandatory variable argus_root_pass is empty!</td>
 <td></td>
 <td></td>
 </tr>
@@ -4025,7 +4224,7 @@ td.name, th.name {
 <tr>
 <td class="name"></td>
 <td>[Teardown]</td>
-<td>Simple Teardown</td>
+<td>Ban User Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -4053,6 +4252,13 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -4088,6 +4294,13 @@ td.name, th.name {
 <td>Restart Cream</td>
 <td>${ce_endpoint}</td>
 <td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>30</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4207,6 +4420,13 @@ td.name, th.name {
 <td>Restart Cream</td>
 <td>${ce_endpoint}</td>
 <td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>30</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4342,10 +4562,17 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>${output1}=</td>
 <td>Validate Glue</td>
 <td>${ce_endpoint}</td>
-<td>2170</td>
+<td>${cream_ldap_port}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4359,7 +4586,7 @@ td.name, th.name {
 <td>${output2}=</td>
 <td>Validate Glue</td>
 <td>${ce_endpoint}</td>
-<td>2170</td>
+<td>${cream_ldap_port}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4373,13 +4600,6 @@ td.name, th.name {
 <td>Log Many</td>
 <td>${output1}</td>
 <td>${output2}</td>
-<td>${output3}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${output4}</td>
-<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4387,6 +4607,13 @@ td.name, th.name {
 <td>Should Not Contain</td>
 <td>${output1}</td>
 <td>FAILED</td>
+<td>Validation failed! Check report file.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>False</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4394,6 +4621,13 @@ td.name, th.name {
 <td>Should Not Contain</td>
 <td>${output2}</td>
 <td>FAILED</td>
+<td>Validation failed! Check report file.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>False</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4424,6 +4658,41 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_user}</td>
+<td>Mandatory variable creamdb_user is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_pass}</td>
+<td>Mandatory variable creamdb_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_host}</td>
+<td>Mandatory variable creamdb_host is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_port}</td>
+<td>Mandatory variable creamdb_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -4435,34 +4704,6 @@ td.name, th.name {
 <td>Simple JDL</td>
 <td>${vo}</td>
 <td>${tmp_dir}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${creamdb_pass}</td>
-<td>1234</td>
-<td>${creamdb_port}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td># ${tunnel_pid}= Create SSH Tunnel ${creamdb_host} ${creamdb_user}</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Connect To Database</td>
-<td>MySQLdb</td>
-<td>delegationdb</td>
-<td>${creamdb_user}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${creamdb_pass}</td>
-<td>${creamdb_host}</td>
-<td>${creamdb_port}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4530,7 +4771,21 @@ td.name, th.name {
 <tr>
 <td class="name"></td>
 <td>@{db_before_purger}=</td>
-<td>Query</td>
+<td>Execute Remote MySQL Query</td>
+<td>${creamdb_host}</td>
+<td>${creamdb_ssh_user}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${creamdb_ssh_pass}</td>
+<td>${creamdb_user}</td>
+<td>${creamdb_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>delegationdb</td>
 <td>select dlg_id from t_credential</td>
 <td></td>
 </tr>
@@ -4572,7 +4827,21 @@ td.name, th.name {
 <tr>
 <td class="name"></td>
 <td>@{db_after_purger}=</td>
-<td>Query</td>
+<td>Execute Remote MySQL Query</td>
+<td>${creamdb_host}</td>
+<td>${creamdb_ssh_user}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${creamdb_ssh_pass}</td>
+<td>${creamdb_user}</td>
+<td>${creamdb_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>delegationdb</td>
 <td>select dlg_id from t_credential</td>
 <td></td>
 </tr>
@@ -4656,7 +4925,7 @@ td.name, th.name {
 <tr>
 <td class="name"></td>
 <td>[Teardown]</td>
-<td>Simple Teardown</td>
+<td>Automatic Proxy Purging Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -4934,6 +5203,20 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${gridftp_server}</td>
+<td>Mandatory variable gridftp_server is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${lfn_dir}</td>
+<td>Mandatory variable lfn_dir is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -5219,7 +5502,7 @@ td.name, th.name {
 <tr>
 <td class="name"></td>
 <td>[Teardown]</td>
-<td>OutputData Teardown</td>
+<td>Simple Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -5247,6 +5530,41 @@ td.name, th.name {
 <td># Setup</td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_user}</td>
+<td>Mandatory variable creamdb_user is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_pass}</td>
+<td>Mandatory variable creamdb_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_host}</td>
+<td>Mandatory variable creamdb_host is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${creamdb_port}</td>
+<td>Mandatory variable creamdb_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -5316,15 +5634,15 @@ td.name, th.name {
 <td class="name"></td>
 <td>JobDBAdminPurger</td>
 <td>${jid}</td>
-<td>${creamdb_host}</td>
-<td>root</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>${creamdb_user}</td>
 <td>${creamdb_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5358,6 +5676,1014 @@ td.name, th.name {
 <td class="name"></td>
 <td>[Teardown]</td>
 <td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Proxy Renewal">Proxy Renewal</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Submit a job lasting 1 hour using a proxy valid 30 minutes.\nAfter 15 minutes renew the proxy with the glite-ce-proxy-renew command.\nVerify the final job status which should eventually be DONE-OK</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>renew</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td>time=00:30</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Sleep JDL</td>
+<td>${vo}</td>
+<td>3600</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${tmp_dir}</td>
+<td># one hour sleep</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Wait for Status</td>
+<td>${jid}</td>
+<td>REALLY-RUNNING</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>15 minutes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${dlg_id}=</td>
+<td>Get Delegation ID</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Renew Proxy</td>
+<td>${ce_endpoint}</td>
+<td>${dlg_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>47 minutes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>Get Final Status</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_CPU Allocation 1">CPU Allocation 1</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cpu_alloc</td>
+<td>cpu_alloc1</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${middleware_version}</td>
+<td>Mandatory variable middleware_version is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${batch_system}</td>
+<td>Mandatory variable batch_system is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Save Batch Job Submission Script On</td>
+<td>${ce_endpoint}</td>
+<td>${middleware_version}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${smp_size}=</td>
+<td>Get Arch SMP Size</td>
+<td>${ce_endpoint}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test 1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPU Allocation JDL</td>
+<td>${tmp_dir}</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>wholenodes=True</td>
+<td>smpgranularity=2</td>
+<td>hostnumber=2</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>10</td>
+<td># wait for the batch script to be copied</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${retVal}=</td>
+<td>CPU Allocation Test</td>
+<td>${jid}</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${cream_root_pass}</td>
+<td>test_type=1</td>
+<td>wholenodes=True</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>cpunumber=-1</td>
+<td>smpgranularity=2</td>
+<td>hostnumber=2</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>smpsize=${smp_size}</td>
+<td>batch_system=${batch_system}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>CPU Allocation Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_CPU Allocation 2">CPU Allocation 2</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cpu_alloc</td>
+<td>cpu_alloc2</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${middleware_version}</td>
+<td>Mandatory variable middleware_version is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${batch_system}</td>
+<td>Mandatory variable batch_system is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Save Batch Job Submission Script On</td>
+<td>${ce_endpoint}</td>
+<td>${middleware_version}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${smp_size}=</td>
+<td>Get Arch SMP Size</td>
+<td>${ce_endpoint}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test 2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPU Allocation JDL</td>
+<td>${tmp_dir}</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>wholenodes=True</td>
+<td>smpgranularity=2</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>10</td>
+<td># wait for the batch script to be copied</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${retVal}=</td>
+<td>CPU Allocation Test</td>
+<td>${jid}</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${cream_root_pass}</td>
+<td>test_type=2</td>
+<td>wholenodes=True</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>cpunumber=-1</td>
+<td>smpgranularity=2</td>
+<td>hostnumber=-1</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>smpsize=${smp_size}</td>
+<td>batch_system=${batch_system}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>CPU Allocation Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_CPU Allocation 3">CPU Allocation 3</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cpu_alloc</td>
+<td>cpu_alloc3</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${middleware_version}</td>
+<td>Mandatory variable middleware_version is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${batch_system}</td>
+<td>Mandatory variable batch_system is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Save Batch Job Submission Script On</td>
+<td>${ce_endpoint}</td>
+<td>${middleware_version}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${smp_size}=</td>
+<td>Get Arch SMP Size</td>
+<td>${ce_endpoint}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test 3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPU Allocation JDL</td>
+<td>${tmp_dir}</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>wholenodes=True</td>
+<td>hostnumber=2</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>10</td>
+<td># wait for the batch script to be copied</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${retVal}=</td>
+<td>CPU Allocation Test</td>
+<td>${jid}</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${cream_root_pass}</td>
+<td>test_type=3</td>
+<td>wholenodes=True</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>cpunumber=-1</td>
+<td>smpgranularity=-1</td>
+<td>hostnumber=2</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>smpsize=${smp_size}</td>
+<td>batch_system=${batch_system}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>CPU Allocation Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_CPU Allocation 4">CPU Allocation 4</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cpu_alloc</td>
+<td>cpu_alloc4</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${middleware_version}</td>
+<td>Mandatory variable middleware_version is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${batch_system}</td>
+<td>Mandatory variable batch_system is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Save Batch Job Submission Script On</td>
+<td>${ce_endpoint}</td>
+<td>${middleware_version}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${smp_size}=</td>
+<td>Get Arch SMP Size</td>
+<td>${ce_endpoint}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test 4</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPU Allocation JDL</td>
+<td>${tmp_dir}</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>wholenodes=False</td>
+<td>smpgranularity=1</td>
+<td>cpunumber=2</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>10</td>
+<td># wait for the batch script to be copied</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${retVal}=</td>
+<td>CPU Allocation Test</td>
+<td>${jid}</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${cream_root_pass}</td>
+<td>test_type=4</td>
+<td>wholenodes=False</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>cpunumber=2</td>
+<td>smpgranularity=1</td>
+<td>hostnumber=-1</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>smpsize=${smp_size}</td>
+<td>batch_system=${batch_system}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>CPU Allocation Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_CPU Allocation 5">CPU Allocation 5</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cpu_alloc</td>
+<td>cpu_alloc5</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${middleware_version}</td>
+<td>Mandatory variable middleware_version is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${batch_system}</td>
+<td>Mandatory variable batch_system is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Save Batch Job Submission Script On</td>
+<td>${ce_endpoint}</td>
+<td>${middleware_version}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${smp_size}=</td>
+<td>Get Arch SMP Size</td>
+<td>${ce_endpoint}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test 5</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPU Allocation JDL</td>
+<td>${tmp_dir}</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>wholenodes=False</td>
+<td>hostnumber=2</td>
+<td>cpunumber=2</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>10</td>
+<td># wait for the batch script to be copied</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${retVal}=</td>
+<td>CPU Allocation Test</td>
+<td>${jid}</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${cream_root_pass}</td>
+<td>test_type=5</td>
+<td>wholenodes=False</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>cpunumber=2</td>
+<td>smpgranularity=-1</td>
+<td>hostnumber=2</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>smpsize=${smp_size}</td>
+<td>batch_system=${batch_system}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>CPU Allocation Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_CPU Allocation 6">CPU Allocation 6</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>cpu_alloc</td>
+<td>cpu_alloc6</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_root_pass}</td>
+<td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${middleware_version}</td>
+<td>Mandatory variable middleware_version is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${batch_system}</td>
+<td>Mandatory variable batch_system is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Save Batch Job Submission Script On</td>
+<td>${ce_endpoint}</td>
+<td>${middleware_version}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${smp_size}=</td>
+<td>Get Arch SMP Size</td>
+<td>${ce_endpoint}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test 6</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>CPU Allocation JDL</td>
+<td>${tmp_dir}</td>
+<td>${vo}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>wholenodes=False</td>
+<td>cpunumber=2</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>Submit Job</td>
+<td>${jdl}</td>
+<td>${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>10</td>
+<td># wait for the batch script to be copied</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${retVal}=</td>
+<td>CPU Allocation Test</td>
+<td>${jid}</td>
+<td>${ce_endpoint}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${cream_root_pass}</td>
+<td>test_type=6</td>
+<td>wholenodes=False</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>cpunumber=2</td>
+<td>smpgranularity=-1</td>
+<td>hostnumber=-1</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>smpsize=${smp_size}</td>
+<td>batch_system=${batch_system}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>CPU Allocation Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -5449,7 +6775,12 @@ td.name, th.name {
 <td></td>
 </tr>
 <tr>
-<td class="name"><a name="keyword_OutputData Teardown">OutputData Teardown</a></td>
+<td class="name"><a name="keyword_Limiter Teardown">Limiter Teardown</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Reset the CREAM limiter script to the stored default values.</td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Destroy Proxy</td>
 <td></td>
 <td></td>
@@ -5457,10 +6788,130 @@ td.name, th.name {
 </tr>
 <tr>
 <td class="name"></td>
-<td># Run rm -rf /tmp/robot_tmp</td>
+<td>Reset Limiter Threshold</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td></td>
 <td></td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="keyword_Automatic Proxy Purging Teardown">Automatic Proxy Purging Teardown</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Restore the "delegation_purge_rate" to the default value.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Proxy</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Modify Cream Config XML</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+<td>delegation_purge_rate</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>720</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="keyword_Ban User Teardown">Ban User Teardown</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Remove the current user (i.e.: the user whose cert/key pair is in the standard location ~/.globus) from the CREAM administrator list.\n(note: the user's proxy is re-created here, just in case it doesn't exist for any reason, though at this point of execution, the user should have an active proxy)</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${dn}=</td>
+<td>Get Proxy DN</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${authz_model}' == 'gjaf'</td>
+<td>Unban User gJaf</td>
+<td>${dn}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword If</td>
+<td>'${authz_model}' == 'argus'</td>
+<td>Unban User Argus</td>
+<td>${dn}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${argus_host}</td>
+<td>${argus_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Proxy</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="keyword_CPU Allocation Teardown">CPU Allocation Teardown</a></td>
+<td>[Documentation]</td>
+<td colspan="3">Reset CREAM's behavior to not save the batch job submission script.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Proxy</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Save Batch Job Submission Script Off</td>
+<td>${ce_endpoint}</td>
+<td>${middleware_version}</td>
+<td>${cream_root_pass}</td>
 </tr>
 <tr>
 <td class="name"></td>

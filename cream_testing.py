@@ -41,6 +41,7 @@ JDL Creation
 simple_jdl() sleep_jdl() cpunumber_jdl() hostnumber_jdl() wholenodes_jdl() smpgranularity_jdl()
 combo_jdl() localhost_output_jdl() environment_jdl() osb_basedesturi_jdl() isb_client_to_ce_jdl()
 osb_desturi_jdl() prologue_jdl() epilogue_jdl() isb_baseuri_jdl() isb_gsiftp_to_ce_jdl()
+cpu_allocation_jdl()
 
 Utils
 --
@@ -54,21 +55,25 @@ get_job_sb() validate_glue()
 set_limiter_threshold() reset_limiter_threshold()
 ban_user_gjaf() unban_user_gjaf()
 change_sandbox_transfer_method()
-modify_cream_config_xml() reset_cream_config_xml()
-execute_mysql_query() restart_cream()
+modify_cream_config_xml() reset_cream_config_xml() restart_cream()
 get_deleg_id_from_status() check_delegation_id_in_db()
 list_proxy_sandbox() check_delegation_id_in_filesystem()
 ban_user_argus() unban_user_argus()
 validate_job_status() get_time_in_status_format()
 get_status_with_filter() files_should_not_be_empty()
 create_ssh_tunnel() send_signal_to_process()
+execute_noninteractive_ssh_com()
+string_should_contain() _log_to_screen()
 
 CREAM Utils
 --
 ce_service_info() allowed_submission()
 enable_cream_admin() disable_cream_admin()
 enable_submission() disable_submission()
-jobdbadminpurger()
+jobdbadminpurger() cpu_allocation_test()
+get_arch_smp_size() renew_proxy()
+save_batch_job_submission_script_on() save_batch_job_submission_script_off()
+get_delegation_id()
 
 
 Implemented methods enumeration:
@@ -81,97 +86,104 @@ Implemented methods enumeration:
  7) get_osb
  8) fetch_output_files
  9) list_jobs
-10) cancel_job
-11) destroy_proxy
-12) suspend_job
-13) resume_job
-14) cancel_all_jobs
-15) purge_all_jobs
-16) suspend_all_jobs
-17) resume_all_jobs
-18) submit_and_wait
-19) get_current_status_verbose
-20) check_osb_basedesturi_files
-21) delete_osb_basedesturi_files
-22) check_osb_desturi_files
-23) delete_osb_desturi_files
-24) file_should_contain
-25) destroy_delegation
-26) lfc_ls
-27) lcg_cr
-28) lcg_del
-29) lcg_cp
-30) lfc_mkdir
-31) lfc_rmdir
-32) test_jdls
-33) simple_jdl
-34) sleep_jdl
-35) cpunumber_jdl
-36) hostnumber_jdl
-37) wholenodes_jdl
-38) smpgranularity_jdl
-39) combo_jdl
-40) localhost_output_jdl
-41) environment_jdl
-42) osb_basedesturi_jdl
-43) isb_client_to_ce_jdl
-44) osb_desturi_jdl
-45) prologue_jdl
-46) epilogue_jdl
-47) isb_baseuri_jdl
-48) create_dummy_script
-49) isb_gsiftp_to_ce_jdl
-50) output_data_jdl
-51) wait_for_status
-52) job_status_should_be
-53) qdel_job
-54) test_qdel
-55) execute_uberftp_command
-56) uberftp_upload
-57) ce_service_info
-58) validate_ce_service_info
-59) proxy_info
-60) get_proxy_dn
-61) enable_cream_admin
-62) disable_cream_admin
-63) allowed_submission
-64) enable_submission
-65) disable_submission
-66) purge_job
-67) get_job_sb
-68) set_limiter_threshold
-69) reset_limiter_threshold
-70) ban_user_gjaf
-71) unban_user_gjaf
-72) change_sandbox_transfer_method
-73) validate_glue
-74) modify_cream_config_xml
-75) reset_cream_config_xml
-76) execute_mysql_query
-77) restart_cream
-78) get_deleg_id_from_status
-79) check_delegation_id_in_db
-80) list_proxy_sandbox
-81) check_delegation_id_in_filesystem
-82) ban_user_argus
-83) unban_user_argus
-84) validate_job_status
-85) get_time_in_status_format
-86) get_status_with_filter
-87) get_guid
-88) multiple_lcg_cp
-89) files_should_not_be_empty
-90) bkill_job
-91) create_ssh_tunnel
-92) _create_ssh_tunnel_internal
-93) send_signal_to_process
-94) jobdbadminpurger
+ 10) cancel_job
+ 11) destroy_proxy
+ 12) suspend_job
+ 13) resume_job
+ 14) cancel_all_jobs
+ 15) purge_all_jobs
+ 16) suspend_all_jobs
+ 17) resume_all_jobs
+ 18) submit_and_wait
+ 19) get_current_status_verbose
+ 20) check_osb_basedesturi_files
+ 21) delete_osb_basedesturi_files
+ 22) check_osb_desturi_files
+ 23) delete_osb_desturi_files
+ 24) file_should_contain
+ 25) destroy_delegation
+ 26) lfc_ls
+ 27) lcg_cr
+ 28) lcg_del
+ 29) lcg_cp
+ 30) lfc_mkdir
+ 31) lfc_rmdir
+ 32) test_jdls
+ 33) simple_jdl
+ 34) sleep_jdl
+ 35) cpunumber_jdl
+ 36) hostnumber_jdl
+ 37) wholenodes_jdl
+ 38) smpgranularity_jdl
+ 39) combo_jdl
+ 40) localhost_output_jdl
+ 41) environment_jdl
+ 42) osb_basedesturi_jdl
+ 43) isb_client_to_ce_jdl
+ 44) osb_desturi_jdl
+ 45) prologue_jdl
+ 46) epilogue_jdl
+ 47) isb_baseuri_jdl
+ 48) create_dummy_script
+ 49) isb_gsiftp_to_ce_jdl
+ 50) output_data_jdl
+ 51) wait_for_status
+ 52) job_status_should_be
+ 53) qdel_job
+ 54) test_qdel
+ 55) execute_uberftp_command
+ 56) uberftp_upload
+ 57) ce_service_info
+ 58) validate_ce_service_info
+ 59) proxy_info
+ 60) get_proxy_dn
+ 61) enable_cream_admin
+ 62) disable_cream_admin
+ 63) allowed_submission
+ 64) enable_submission
+ 65) disable_submission
+ 66) purge_job
+ 67) get_job_sb
+ 68) set_limiter_threshold
+ 69) reset_limiter_threshold
+ 70) ban_user_gjaf
+ 71) unban_user_gjaf
+ 72) change_sandbox_transfer_method
+ 73) validate_glue
+ 74) modify_cream_config_xml
+ 75) reset_cream_config_xml
+ 76) execute_remote_mysql_query
+ 77) restart_cream
+ 78) get_deleg_id_from_status
+ 79) check_delegation_id_in_db
+ 80) list_proxy_sandbox
+ 81) check_delegation_id_in_filesystem
+ 82) ban_user_argus
+ 83) unban_user_argus
+ 84) validate_job_status
+ 85) get_time_in_status_format
+ 86) get_status_with_filter
+ 87) get_guid
+ 88) multiple_lcg_cp
+ 89) files_should_not_be_empty
+ 90) bkill_job
+ 92) send_signal_to_process
+ 93) jobdbadminpurger
+ 94) execute_noninteractive_ssh_com
+ 95) get_delegation_id
+ 96) renew_proxy
+ 97) save_batch_job_submission_script_on
+ 98) save_batch_job_submission_script_off
+ 99) cpu_allocation_jdl
+100) get_arch_smp_size
+101) cpu_allocation_test
+102) string_should_contain
+103) _log_to_screen
 
 '''
 
 
-import subprocess , shlex , os , sys , time , re , string , paramiko , fileinput , random , pexpect
-import MySQLdb as mdb
+import subprocess , shlex , os , sys , time , re , string , paramiko , fileinput , random , pexpect , pxssh
 
 
 
@@ -392,7 +404,7 @@ def get_current_status(job_id):
         output=fPtr.readlines()
 
         if retVal != 0 or ("FaultCause" in output and "ErrorCode" in output):
-                raise _error("Job status polling failed with return value: " + str(p.returncode) + "\nCommand reported: " + output)
+                raise _error("Job status polling failed with return value: " + str(p.returncode) + "\nCommand reported: " + ','.join(output))
 
         print output
 
@@ -509,21 +521,18 @@ def list_jobs(ce_endpoint):
         '''
 
         com="/usr/bin/glite-ce-job-list %s" % ce_endpoint
-        args = shlex.split(com.encode('ascii'))
-        p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
-	fPtr=p.stdout
-
-        retVal=p.wait()
-
-        output=fPtr.readlines()
+        (output,retVal) = pexpect.run(com, timeout=30, withexitstatus=True)
 
 	if retVal != 0:
 		raise _error("Job list failed with return value: " + str(p.returncode) + " \nCommand reported: " +  ','.join(output) )
                 #kinda rough output creation,maybe should find a better one
 
-        output = map(string.strip, output)
+        output_list = []
+        for item in output.split('\r\n'):
+                if len(item) > 0:
+                        output_list.append(item)
 
-        return output
+        return output_list
 ##############################################################################################################################
 ##############################################################################################################################
 def cancel_job(job_id):
@@ -1953,19 +1962,35 @@ def output_data_jdl(vo, output_dir, gridftp_server=None, lfn_dir=None):
         return (jdl_path,script_path)
 ##############################################################################################################################
 ##############################################################################################################################
-def wait_for_status(jid, status):
+def wait_for_status(jid, status, timeout=3600):
         '''
-                |  Description: |   Wait for the given job to reach the given status.   | \n
-                |  Arguments:   |   jid         |    jod identifier                     |
-                |               |   status      |    the status waiting for             | \n
-                |  Returns:     |   Nothing                                             |
+                |  Description: |   Wait for the given job to reach the given status.                      |\n
+                |  Arguments:   |   jid         |    jod identifier                                        |
+                |               |   status      |    the status waiting for                                |
+                |               |   timeout     |    timeout after which the operation fails (in seconds)  |
+                |               |               |    Defaults in one hour timeout.                         |\n
+                |  Returns:     |   Nothing                                                                |
         '''
 
+        final_states = ['DONE-OK', 'DONE-FAILED', 'ABORTED', 'CANCELLED']
+
+        timeout = int(timeout) #safeguard for non-int input
+        elapsed=0
         while True:
+                if elapsed > timeout:
+                        raise _error('Wanted state: "' + status + '" for job "' + jid + '" wasn\'t found after ' + str(elapsed) + ' seconds.')
+
                 cur_status=get_current_status(jid)
-                #print cur_status
+                print "Current status is: " + cur_status
                 if cur_status == status :
                         return
+                elif cur_status in final_states:
+                        raise _error('Wanted state: "' + status + '" for job "' + jid + '" impossible, due to current status "' + cur_status \
+                                      + '", after ' + str(elapsed) + ' seconds.')
+                else:
+                        time.sleep(10)
+                        elapsed = elapsed + 10
+                        print "Time elapsed: " + str(elapsed)
 
 ##############################################################################################################################
 ##############################################################################################################################
@@ -2393,6 +2418,7 @@ def enable_cream_admin(dn, ce_endpoint, cream_root_pass):
         f.close()
 
         ssh_con.exec_command("touch /etc/grid-security/admin-list")
+        time.sleep(10)
 ##############################################################################################################################
 ##############################################################################################################################
 def disable_cream_admin(dn, ce_endpoint, cream_root_pass):
@@ -2424,7 +2450,7 @@ def disable_cream_admin(dn, ce_endpoint, cream_root_pass):
         # read file and keep only entries not containing the newly added dn
         entries_left=[]
         for line in f.readlines():
-                if dn not in line:
+                if dn not in line and len(line.strip()) != 0 and 'remove me' not in line:
                         entries_left.append(line)
         f.close()
 
@@ -2436,10 +2462,12 @@ def disable_cream_admin(dn, ce_endpoint, cream_root_pass):
         for item in entries_left:
                 f.write(item)
                 f.write('\n')
+
         f.write("remove me\n")
         f.close()
 
         ssh_con.exec_command("touch " + file_path)
+        time.sleep(10)
 ##############################################################################################################################
 ##############################################################################################################################
 def allowed_submission(ce_endpoint):
@@ -2596,15 +2624,14 @@ def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pas
         if thresh_name not in valid_names:
                 raise _error('Invalid threshold name. Must be one of "' + ','.join(valid_names) + '". You entered: ' + thresh_name)
 
+        _enisc("rm -f /usr/bin/glite_cream_load_monitor.orig", cream_host, 'root', cream_root_pass)
+        _enisc("mv /usr/bin/glite_cream_load_monitor /usr/bin/glite_cream_load_monitor.orig", cream_host, 'root', cream_root_pass)
+        _enisc("cp /usr/bin/glite_cream_load_monitor.orig /usr/bin/glite_cream_load_monitor.tmp", cream_host, 'root', cream_root_pass)
+
 
         ssh_con = paramiko.SSHClient()
         ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_con.connect(cream_host,22,'root',cream_root_pass)
-
-        ssh_con.exec_command("rm -f /usr/bin/glite_cream_load_monitor.orig")
-        ssh_con.exec_command("mv /usr/bin/glite_cream_load_monitor /usr/bin/glite_cream_load_monitor.orig")
-        ssh_con.exec_command("cp /usr/bin/glite_cream_load_monitor.orig /usr/bin/glite_cream_load_monitor.tmp")
-
         sftp = ssh_con.open_sftp()
         src = sftp.file('/usr/bin/glite_cream_load_monitor.tmp','r')
         dest = sftp.file('/usr/bin/glite_cream_load_monitor','w')
@@ -2613,7 +2640,7 @@ def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pas
         for line in src.readlines():
                 #print line
                 if thresh_name in line and found == False:
-                        print "FOUND!"
+                        #print "FOUND!"
                         dest.write("$" + thresh_name + " = " + thresh_value + ";\n")
                         found = True
                 else:
@@ -2622,8 +2649,8 @@ def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pas
         src.close()
         dest.close()
 
-        ssh_con.exec_command("rm -f /usr/bin/glite_cream_load_monitor.tmp")
-        ssh_con.exec_command("chmod +x /usr/bin/glite_cream_load_monitor")
+        _enisc("rm -f /usr/bin/glite_cream_load_monitor.tmp", cream_host, 'root', cream_root_pass)
+        _enisc("chmod +x /usr/bin/glite_cream_load_monitor", cream_host, 'root', cream_root_pass)
 ##############################################################################################################################
 ##############################################################################################################################
 def reset_limiter_threshold(ce_endpoint, cream_root_pass):
@@ -2636,12 +2663,8 @@ def reset_limiter_threshold(ce_endpoint, cream_root_pass):
 
         cream_host = ce_endpoint.split(":")[0]
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
-
-        ssh_con.exec_command("mv -f /usr/bin/glite_cream_load_monitor.orig /usr/bin/glite_cream_load_monitor")
-        ssh_con.exec_command("chmod +x /usr/bin/glite_cream_load_monitor")
+        _enisc("cp -f /usr/bin/glite_cream_load_monitor.orig /usr/bin/glite_cream_load_monitor", cream_host, 'root', cream_root_pass)
+        _enisc("chmod +x /usr/bin/glite_cream_load_monitor", cream_host, 'root', cream_root_pass)
 ##############################################################################################################################
 ##############################################################################################################################
 def ban_user_gjaf(dn, ce_endpoint, cream_root_pass):
@@ -2729,12 +2752,15 @@ def change_sandbox_transfer_method(ce_endpoint, cream_root_pass):
 
         cream_host = ce_endpoint.split(":")[0]
         file_path = "/etc/glite-ce-cream/cream-config.xml"
+        timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
+
+        #back up original file, add a distinctive timestamp for clarity
+        com = 'cp ' + file_path + ' ' + file_path + '.bak.at.' + timestamp
+        _enisc(com, cream_host, 'root', cream_root_pass)
 
         ssh_con = paramiko.SSHClient()
         ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_con.connect(cream_host,22,'root',cream_root_pass)
-
-        ssh_con.exec_command("cp /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.orig")
 
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'r')
@@ -2748,7 +2774,7 @@ def change_sandbox_transfer_method(ce_endpoint, cream_root_pass):
                         elif "LRMS" in line:
                                 entries_left.append('    <parameter name="SANDBOX_TRANSFER_METHOD" value="GSIFTP" />\n')
                         else:
-                                raise _error("SANDBOX_TRANSFER_METHOD has an invalide value: " + line)
+                                raise _error("SANDBOX_TRANSFER_METHOD has an invalid value: " + line)
                 else:
                         entries_left.append(line)
         f.close()
@@ -2847,23 +2873,24 @@ def modify_cream_config_xml(ce_endpoint, cream_root_pass, attr, val):
 
         cream_host = ce_endpoint.split(":")[0]
         file_path = "/etc/glite-ce-cream/cream-config.xml"
+        timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
+
+        com = "cp -f /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.creamtesting.orig"
+        _enisc(com , cream_host, 'root', cream_root_pass)
+        com = "cp -f /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.bak.at." + timestamp
+        _enisc(com , cream_host, 'root', cream_root_pass)         #create a second back up just in case
+        _enisc("rm -f /etc/glite-ce-cream/cream-config.xml", cream_host, 'root', cream_root_pass)
+
 
         ssh_con = paramiko.SSHClient()
         ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_con.connect(cream_host,22,'root',cream_root_pass)
         # make a back-up of the original file
-        ssh_con.exec_command("cp /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.orig")
-        ssh_con.exec_command("rm -f /etc/glite-ce-cream/cream-config.xml")
-        #TODO: change the paramiko part with something like the following pexpect part
-        #rem_com = "cp /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.orig ; rm -f /etc/glite-ce-cream/cream-config.xml"
-        #exp_com = 'ssh root@cream_host "' + rem_com + '"'
-        #child = pexpect.spawn(exp_com)
-        #child.expect('password')
-        #child.sendline(cream_root_pass)
-        #child.sendeof()
+        #ssh_con.exec_command("cp /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.orig")
+        #ssh_con.exec_command("rm -f /etc/glite-ce-cream/cream-config.xml")
 
         sftp = ssh_con.open_sftp()
-        src = sftp.file(file_path + '.orig','r')
+        src = sftp.file(file_path + '.creamtesting.orig','r')
         dst = sftp.file(file_path,'w')
 
         for line in src.readlines():
@@ -2888,33 +2915,15 @@ def reset_cream_config_xml(ce_endpoint, cream_root_pass):
         '''
 
         cream_host = ce_endpoint.split(":")[0]
-        file_path = "/etc/glite-ce-cream/cream-config.xml"
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        #ssh_con = paramiko.SSHClient()
+        #ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        #ssh_con.connect(cream_host,22,'root',cream_root_pass)
         # restore the back-up of the original file
-        ssh_con.exec_command("mv -f /etc/glite-ce-cream/cream-config.xml.orig /etc/glite-ce-cream/cream-config.xml")
-##############################################################################################################################
-##############################################################################################################################
-def execute_mysql_query(db_host, dba_user, dba_pass, db_port, database, query):
-        '''
-                |  Description:  |   Reset the cream config xml file to the original                           | \n
-                |  Arguments:    |   db_host           |      cream db host                                    |
-                |                |   db_user           |      the database user                                |
-                |                |   db_pass           |      the aforementioned user's password               |
-                |                |   database          |      the database to connect to                       |
-                |                |   query             |      the query to execute                             | \n
-                |  Returns:      |   All the records found in a tuple                                          |
-        '''
+        #ssh_con.exec_command("mv -f /etc/glite-ce-cream/cream-config.xml.orig /etc/glite-ce-cream/cream-config.xml")
 
-        con = mdb.connect(db_host,dba_user,dba_pass,database,port=db_port)
-        c = con.cursor()
-        c.execute(query)
-
-        con.close()
-
-        return c.fetchall()
+        com = "mv -f /etc/glite-ce-cream/cream-config.xml.creamtesting.orig /etc/glite-ce-cream/cream-config.xml"
+        _enisc(com, cream_host, 'root', cream_root_pass)
 ##############################################################################################################################
 ##############################################################################################################################
 def restart_cream(ce_endpoint, cream_root_pass):
@@ -2926,12 +2935,13 @@ def restart_cream(ce_endpoint, cream_root_pass):
         '''
         cream_host = ce_endpoint.split(":")[0]
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
-        stdin, stdout, stderr = ssh_con.exec_command("/etc/init.d/tomcat5 restart ; echo")
-        print stdout.readlines()
-        ssh_con.close()
+        #ssh_con = paramiko.SSHClient()
+        #ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        #ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        #stdin, stdout, stderr = ssh_con.exec_command("/etc/init.d/tomcat5 restart")
+        #print stdout.readlines()
+        #ssh_con.close()
+        _enisc('/etc/init.d/tomcat5 restart', cream_host, 'root', cream_root_pass)
 ##############################################################################################################################
 ##############################################################################################################################
 def get_deleg_id_from_status(status):
@@ -3113,7 +3123,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 1:
                                 #	Status        = [DONE-OK]
                                 # match spaces - 'Status' - spaces - '=' - spaces - '[' - status string - ']'
@@ -3122,7 +3133,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 2:
                                 #	ExitCode        = [0]
                                 # match spaces - 'ExitCode' - spaces - '=' - spaces - '[' - 0~9 digit - ']'
@@ -3131,7 +3143,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
         elif str(verbosity) == '1' : # -L 1
                 for i in range(len(k)):
                         if i == 0:
@@ -3142,7 +3155,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 1:
                                 #	Status        = [DONE-OK]
                                 # match spaces - 'Status' - spaces - '=' - spaces - '[' - status string - ']'
@@ -3151,7 +3165,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 2:
                                 #	ExitCode        = [0]
                                 # match spaces - 'ExitCode' - spaces - '=' - spaces - '[' - 0~9 digit - ']'
@@ -3160,7 +3175,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 3:
                                 #	Grid JobID        = [N/A]
                                 # match spaces - 'Grid' - space - 'JobID' - spaces - '=' - spaces - '[' - string - ']'
@@ -3169,7 +3185,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 4:
                                 #	Job status changes:
                                 # match spaces - 'Job' - space - 'status' - space - 'changes' - ':'
@@ -3178,7 +3195,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 5:
                                 #	-------------------
                                 # match spaces - dashes
@@ -3187,7 +3205,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 6:
                                 #	Status         = [REGISTERED] - [Fri 09 Dec 2011 15:38:36] (1323437916)
                                 # match spaces - 'Status' - spaces - '=' - spaces - '[' - string - ']' - etc etc
@@ -3196,7 +3215,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
 
                                 while match: # if one line matches, skip the rest of "Status..." lines
                                         i=i+1
@@ -3207,7 +3227,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
 
                                 i=i+1
 
@@ -3216,7 +3237,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
 
                                 i=i+1
 
@@ -3225,7 +3247,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
         elif str(verbosity) == '2' : # -L 2
                 for i in range(len(k)):
                         if i == 0:
@@ -3236,7 +3259,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 1:
                                 #	Status        = [DONE-OK]
                                 # match spaces - 'Status' - spaces - '=' - spaces - '[' - status string - ']'
@@ -3245,7 +3269,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 2:
                                 #	Working Dir    = [[reserved]]
                                 # match spaces - 'Working Dir' - spaces - '=' - spaces - '[' - any string - ']'
@@ -3254,7 +3279,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 3:
                                 #	ExitCode        = [0]
                                 # match spaces - 'ExitCode' - spaces - '=' - spaces - '[' - 0~9 digit - ']'
@@ -3263,7 +3289,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 4:
                                 #	Grid JobID        = [N/A]
                                 # match spaces - 'Grid' - space - 'JobID' - spaces - '=' - spaces - '[' - string - ']'
@@ -3272,7 +3299,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 5:
                                 #	LRMS Abs JobID = [[reserved]]
                                 pattern = "\s+LRMS\sAbs\sJobID\s+=\s+\[.*\]"
@@ -3280,7 +3308,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 6:
                                 #	LRMS JobID     = [[reserved]]
                                 pattern = "\s+LRMS\sJobID\s+=\s+\[.*\]"
@@ -3288,7 +3317,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 7:
                                 #	Deleg Proxy ID = [94d476234d799ca066d108c7f9d4d82838dcc8a1]
                                 pattern = "\s+Deleg\sProxy\sID\s+=\s+\[.*\]"
@@ -3296,7 +3326,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 8:
                                 #	DelegProxyInfo = [Valid From      : 12/9/11 1:35 PM (GMT)
                                 pattern = "\s+DelegProxyInfo\s+=\s+\[.*"
@@ -3304,7 +3335,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 9:
                                 #			  Valid To       : 12/10/11 1:37 AM (GMT)
                                 pattern = "\s+Valid\sTo\s+\:.*"
@@ -3312,7 +3344,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 10:
                                 #			  Holder Subject : /C=GR/O=HellasGrid/OU=uoa.gr/CN=Dimosthenis Fioretos
                                 pattern = "\s+Holder\sSubject\s+\:.*"
@@ -3320,7 +3353,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 11:
                                 #			  Holder CA      : /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid CA 2006
                                 pattern = "\s+Holder\sCA\s+\:.*"
@@ -3328,7 +3362,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 12:
                                 #			  VO              : see
                                 pattern = "\s+VO\s+\:.*"
@@ -3336,7 +3371,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 13:
                                 #			  AC Issuer       : CN=voms.grid.auth.gr,OU=auth.gr,O=HellasGrid,C=GR
                                 pattern = "\s+AC\sIssuer\s+\:.*"
@@ -3344,7 +3380,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 14:
                                 #			  Attribute       : /see/Role=NULL/Capability=NULL 
                                 pattern = "\s+Attribute\s+\:.*"
@@ -3352,7 +3389,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 15:
                                 #			  ]
                                 pattern = "\s+\].*"
@@ -3360,7 +3398,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 16:
                                 #	Worker Node    = [ctb05.gridctb.uoa.gr]
                                 pattern = "\s+Worker\sNode\s+=\s+\[.*\]"
@@ -3368,7 +3407,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 17:
                                 #	Local User     = [see136]
                                 pattern = "\s+Local\sUser\s+=\s+\[.*\]"
@@ -3376,7 +3416,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 18:
                                 #	CREAM ISB URI  = [gsiftp://...]
                                 pattern = "\s+CREAM\sISB\sURI\s+=\s+\[.*\]"
@@ -3384,7 +3425,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 19:
                                 #	CREAM OSB URI  = [gsiftp://...]
                                 pattern = "\s+CREAM\sOSB\sURI\s+=\s+\[.*\]"
@@ -3392,7 +3434,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 20:
                                 #	JDL            = [[ ... ]]
                                 pattern = "\s+JDL\s+=\s+\[.*\]"
@@ -3400,7 +3443,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 21:
                                 #	Type           = [normal]
                                 pattern = "\s+Type\s+=\s+\[.*\]"
@@ -3408,7 +3452,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 22:
                                 #	Job status changes:
                                 # match spaces - 'Job' - space - 'status' - space - 'changes' - ':'
@@ -3417,7 +3462,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 23:
                                 #	-------------------
                                 # match spaces - dashes
@@ -3426,7 +3472,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
                         if i == 24:
                                 #	Status         = [REGISTERED] - [Fri 09 Dec 2011 15:38:36] (1323437916)
                                 # match spaces - 'Status' - spaces - '=' - spaces - '[' - string - ']' - etc etc
@@ -3435,7 +3482,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
 
                                 while match: # if one line matches, skip the rest of "Status..." lines
                                         i=i+1
@@ -3446,7 +3494,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
 
                                 i=i+1
 
@@ -3455,7 +3504,8 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
 
                                 i=i+1
 
@@ -3464,15 +3514,17 @@ def validate_job_status(output, verbosity):
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] + '\nRegular expression: "' + pattern + '"')
-        elif str(verbosity) == '3' : # --from
-                pass
-        elif str(verbosity) == '4' : # --to
-                pass
-        elif str(verbosity) == '5' : # --from --to
-                pass
-        elif str(verbosity) == '6' : # --status
-                pass
+                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
+                                        + '\nRegular expression: "' + pattern + '"')
+
+#        elif str(verbosity) == '3' : # --from
+#                pass
+#        elif str(verbosity) == '4' : # --to
+#                pass
+#        elif str(verbosity) == '5' : # --from --to
+#                pass
+#        elif str(verbosity) == '6' : # --status
+#                pass
 ##############################################################################################################################
 ##############################################################################################################################
 def get_time_in_status_format():
@@ -3533,41 +3585,49 @@ def get_status_with_filter(ce_endpoint, filter_type1, filter_data1, filter_type2
 
         if filter_type1 == "status":
                 if filter_data1 not in running_states and filter_data1 not in final_states:
-                        raise _error("Invalid filter_data1 status argument: " + filter_data1 + " . Should be one of: " + repr(running_states) + " " + repr(final_states))
+                        raise _error("Invalid filter_data1 status argument: " + filter_data1 + " . Should be one of: " \
+                        + repr(running_states) + " " + repr(final_states))
 
         if filter_type2 == "status":
                 if filter_data2 not in running_states and filter_data2 not in final_states:
-                        raise _error("Invalid filter_data1 status argument: " + filter_data2 + " . Should be one of: " + repr(running_states) + " " + repr(final_states))
+                        raise _error("Invalid filter_data1 status argument: " + filter_data2 + " . Should be one of: " \
+                        + repr(running_states) + " " + repr(final_states))
 
         if filter_type1 == "to" or filter_type1 == "from":
                 pattern = "\d\d\d\d\-\d\d\-\d\d\s\d\d\:\d\d\:\d\d"
                 match = re.search(pattern,filter_data1)
                 if not match:
-                        raise _error("Invalid filter_data1 datetime argument: " + filter_data1 + " .Should have format: YYYY-MM-DD hh:mm:ss")
+                        raise _error("Invalid filter_data1 datetime argument: " + filter_data1 \
+                        + " .Should have format: YYYY-MM-DD hh:mm:ss")
 
         if filter_type2 == "to" or filter_type2 == "from":
                 pattern = "\d\d\d\d\-\d\d\-\d\d\s\d\d\:\d\d\:\d\d"
                 match = re.search(pattern,filter_data2)
                 if not match:
-                        raise _error("Invalid filter_data2 datetime argument: " + filter_data2 + " .Should have format: YYYY-MM-DD hh:mm:ss")
+                        raise _error("Invalid filter_data2 datetime argument: " + filter_data2 \
+                        + " .Should have format: YYYY-MM-DD hh:mm:ss")
 
         old_status=""
-        com = "glite-ce-job-status --all -e " + ce_endpoint + " --" + filter_type1 + " \'" + filter_data1 + "\'"
+        com = "/usr/bin/glite-ce-job-status --all -e " + ce_endpoint + " --" + filter_type1 + " \'" + filter_data1 + "\'"
         if filter_type2 != None and filter_data2 != None:
                 com = com + " --" + filter_type2 + " \'" + filter_data2 + "\'"
         args = shlex.split(com.encode('ascii'))
 
         print com
 
-        p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
-        fPtr=p.stdout
+        (output,retVal) = pexpect.run(com, timeout=30, withexitstatus=True)
 
-        retVal=p.wait()
-
-        output=fPtr.read()
+        
+        # "to" filter hangs in the p.wait() step, due to stdout pipe buffer being unable to accept more data (known issue).
+        #  Replaced with pexpect.run() which seems to be running without any problems.
+        #p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        #fPtr=p.stdout
+        #retVal=p.wait()
+        #output=fPtr.read()
 
         if retVal != 0 or ("FaultCause" in output and "ErrorCode" in output):
-                raise _error("Job status polling command: " + com + " failed with return value: " + str(p.returncode) + "\nCommand reported: " + output)
+                raise _error("Job status polling command: " + com + " failed with return value: " \
+                + str(p.returncode) + "\nCommand reported: " + output)
 
         print output
 
@@ -3629,7 +3689,8 @@ def get_guid(file_path,prefix=None):
                         contents += "File \"" + fpath + "\" contents follow:\n"
                         contents += open(fpath).read()
                         contents += '\n\n'
-                raise _error("No guids found in file(s): \"" + repr(files) + "\". Relevant file(s) contents follow." + contents)
+                print "No guids found in file(s): \"" + repr(files) + "\". Relevant file(s) contents follow." + contents
+                raise _error("No guids found in file(s): \"" + repr(files) + "\". Check the report for the relevant file names and contents.")
         return guids
 ##############################################################################################################################
 ##############################################################################################################################
@@ -3738,66 +3799,6 @@ def bkill_job(jid, lsf_host, lsf_admin_user, lsf_admin_pass):
         print "Cream job with jid " + jid + " and lsf jid " + lsf_jid + " has been deleted!"
 ##############################################################################################################################
 ##############################################################################################################################
-def create_ssh_tunnel(remHost, remUser, remPass, locPort, remPort):
-        '''
-                |  Description: |   Create an ssh tunnel and return the tunnel's process pid.                                   | \n
-                |  Arguments:   |   remHost            |     the remote host for the ssh tunnel                                 |
-                |               |   remUser            |     the user connecting to the remote host through ssh                 |
-                |               |   remPass            |     the aformenetioned users password                                  |
-                |               |   locPort            |     local tunnel port                                                  |
-                |               |   remPort            |     remote tunnel port                                                 |\n
-                |  Returns:     |   pid of the tunnel (used to blow it up later)                                                |
-        '''
-
-        # Spawn the pexpect child within a method, in order for it to exit and leave behind only the spawned process, not the spawn process.
-        salt = _create_ssh_tunnel_internal(remHost, remUser, remPass, locPort, remPort)
-
-        # Search for the relevant process in the /proc fs. Presumably better than parsing `ps` output.
-        # The added "random" salt, makes each tunnel uniquely identifiable.
-        retVal = ''
-        pids= [pid for pid in os.listdir('/proc') if pid.isdigit()]
-        for pid in pids:
-                contents =  open(os.path.join('/proc', pid, 'cmdline'), 'rb').read()
-                if 'ssh' in contents and remUser in contents and 'StrictHostKeyChecking' in contents and '127.0.0.1' in contents \
-                and locPort in contents and remHost in contents and salt in contents:
-                        #print contents
-                        #print os.path.join('/proc',pid,'cmdline')
-                        retVal = pid
-
-        if retVal == '':
-                raise _error("The pid of the created ssh tunnel could not be found in the /proc fs. Please shut it down manually. The\
-                           relevant command ran is \"" + com + "\"")
-
-        return retVal
-##############################################################################################################################
-##############################################################################################################################
-def _create_ssh_tunnel_internal(remHost, remUser, remPass, locPort, remPort):
-        '''
-                |  Description: |   Create an ssh tunnel. This method is used in order to collect the actual ssh tunnel pid,    |
-                |               |   after the pexpect.spawn-ed child exits.                                                     | \n
-                |  Arguments:   |   remHost            |     the remote host for the ssh tunnel                                 |
-                |               |   remUser            |     the user connecting to the remote host through ssh                 |
-                |               |   remPass            |     the aformenetioned users password                                  |
-                |               |   locPort            |     local tunnel port                                                  |
-                |               |   remPort            |     remote tunnel port                                                 |\n
-                |  Returns:     |   salt of the tunnel (used to uniquely identify it later)                                     |
-        '''
-
-        salt=''.join(random.choice(string.letters) for i in xrange(10))
-        com = 'ssh -o StrictHostKeyChecking=no -N -f -L ' + locPort + ':127.0.0.1:' + remPort + ' ' + remUser + '@' + remHost + ' salt=' + salt
-        #com = 'bash -c "ssh -o StrictHostKeyChecking=no -N -f -L ' + locPort + ':127.0.0.1:' + remPort + ' ' + remUser + '@' + remHost + ' salt=' + salt + '"'
-        print 'Spawned proc: ' + com
-
-        child = pexpect.spawn(com)
-        child.expect('password')
-        child.sendline(remPass)
-        child.sendeof()
-
-        #print child.pid
-
-        return salt
-##############################################################################################################################
-##############################################################################################################################
 def send_signal_to_process(pid, sigNo):
         '''
                 |  Description: |   Send a process a certain signal.                             |\n
@@ -3809,36 +3810,615 @@ def send_signal_to_process(pid, sigNo):
         os.kill(int(pid),int(sigNo))
 ##############################################################################################################################
 ##############################################################################################################################
-def jobdbadminpurger(jid, db_host, user, user_pass, db_user, db_pass):
+def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass):
         '''
                 |  Description: |   Purge a job using the JobDBAdminPurger.sh script, run on cream host                                | \n
                 |  Arguments:   |   jid               |     the job to purge job id as returned by glite-ce-job-submit                 |
-                |               |   db_host           |     the host of the cream db                                                   |
-                |               |   user              |     a user with ssh access to the cream host and also able to run the script   |
-                |               |   user_pass         |     aforementioned user's ssh password                                         |
+                |               |   ce_endpoint       |     the host of the cream service                                              |
+                |               |   user_pass         |     cream host root user password                                              |
                 |               |   db_user           |     cream's db user                                                            |
                 |               |   db_pass           |     aforementioned user's db pass                                              |\n
                 |  Returns:     |   nothing                                                                                            |
         '''
 
+        cream_host = ce_endpoint.split(":")[0]
         job_id = jid.split('/')[-1]
+        user = 'root'
 
-        com = '/usr/bin/JobDBAdminPurger.sh -u ' + db_user + ' -p ' + db_pass + ' -j ' + job_id
+        com = '/usr/sbin/JobDBAdminPurger.sh -u ' + db_user + ' -p ' + db_pass + ' -j ' + job_id
 
 
         ssh_con = paramiko.SSHClient()
         ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())  #don't ask for acceptance of foreign host key (auto accept)
-        ssh_con.connect(db_host, username=user, password=user_pass)
+        ssh_con.connect(cream_host, username=user, password=user_pass)
         stdin, stdout, stderr = ssh_con.exec_command(com)
 
-        print "Command \"" + com + "\" ran on host \"" + db_host + "\". Output streams follow:"
+        print "Command \"" + com + "\" ran on host \"" + cream_host + "\". Output streams follow:"
         print "stdout:"
         output = stdout.read()
-        for item in output:
-                print item
+        print output
         print "stderr:"
-        error = stderr.readlines()
-        for item in error:
-                print item
+        error = stderr.read()
+        print error
+        if "error" in output.lower():
+                raise _error("JobDBAdminPurger error occured! Check report file.")
+        if "error" in error.lower():
+                raise _error("JobDBAdminPurger error occured! Check report file.")
+##############################################################################################################################
+##############################################################################################################################
+def execute_noninteractive_ssh_com(command,host,user,passwd,port=22):
+        '''
+                |  Description: |   Execute a non interactive command through ssh on another host                                      |
+                |               |   NOTE: Shell metacharacters are NOT recognized. Call them through 'bash -c'.                        |
+                |               |   Example: '/bin/bash -c "ls -l | grep LOG > log_list.txt"'                                          |\n
+                |  Arguments:   |   host              |     ssh host                                                                   |
+                |               |   port              |     ssh port, 22 by default                                                    |
+                |               |   user              |     the user name to use for the ssh connection                                |
+                |               |   passwd            |     the aforementioned user's password                                         |
+                |               |   command           |     the command to execute                                                     |\n
+                |  Returns:     |   the command's output                                                                               |
+        '''
+        '''     # can't find initial shell prompt at RHEL derivatives due to a bug
+                # (easily fixed, but it ain't too canonical to release my own fixed RPMS for external packages)
+                try:
+                        con = pxssh.pxssh()
+                        con.login(host,user,passwd,port=port)
+                        con.sendline(command)
+                        con.prompt()
+                        retVal = con.before
+                        print 'Command "' + command + '" ran on host ' + host + '. Output stream follows:'
+                        print retVal
+                except pxssh.ExceptionPxssh, e:
+                        raise _error('Pxssh reported a failure: "' + str(e) + '"')
+        '''
+        port=int(port)  #safeguard
+
+        ssh_com = 'ssh -p ' + str(port) + ' ' + user + '@' + host + ' "' + command + '"'
+        expect_key = 'Are you sure you want to continue connecting'
+        expect_pass = 'password:'
+        expect_eof = pexpect.EOF
+        ikey = 0
+        ipasswd = 1
+        ieof = 2
+
+        print 'Command: "' + command + '"'
+
+        child = pexpect.spawn(ssh_com, timeout=300) #wait for 5 minutes at most for each command to finish
+        index = child.expect([expect_key, expect_pass, expect_eof])
+        if index == ikey:
+                print 'Added foreign host key fingerprint...'
+                child.sendline('yes')
+                child.sendeof()
+                index = child.expect([expect_key, expect_pass, expect_eof])
+                if index == ipasswd:
+                        print 'Authenticating and executing...'
+                        child.sendline(passwd)
+                        child.sendeof()
+                        index = child.expect([expect_key, expect_pass, expect_eof])
+                        if index == ieof:
+                                print 'Connection terminated normally...'
+                        else:
+                                raise _error('Pexpect couldn\'t find a proper or right match for "' + ssh_com + '" in "' + \
+                                              expect_key + '" "' + expect_pass + '" "EOF"')
+                elif index == ieof:
+                        raise _error('SSH has prematurely ended. The following output might contain usefull information: \
+                                     "' + str(child.before) + '", "' + str(child.after) + '"')
+                else:
+                        raise _error('Pexpect couldn\'t find a proper or right match for "' + ssh_com + '" in "' + \
+                                      expect_key + '" "' + expect_pass + '" "EOF"')
+        elif index == ipasswd:
+                print 'Authenticating and executing...'
+                child.sendline(passwd)
+                child.sendeof()
+                index = child.expect([expect_key, expect_pass, expect_eof])
+                if index == ieof:
+                        print 'Connection terminated normally...'
+                else:
+                        raise _error('Pexpect couldn\'t find a proper or right match for "' + ssh_com + '" in "' + \
+                                      expect_key + '" "' + expect_pass + '" "EOF"')
+        elif index == ieof:
+                raise _error('SSH has prematurely ended. The following output might contain usefull information: \
+                             "' + str(child.before) + '", "' + str(child.after) + '"')
+        else:
+                raise _error('Pexpect couldn\'t find a proper or right match for "' + ssh_com + '" in "' + \
+                              expect_key + '" "' + expect_pass + '" "EOF"')
+
+        retVal = str(child.before)
+        print 'Output: ' + retVal
+        return retVal
+##############################################################################################################################
+##############################################################################################################################
+def _enisc(command,host,user,passwd,port=22):
+        # short name wrapper-wannabe. I hate long function names :P
+        return execute_noninteractive_ssh_com(command,host,user,passwd,port)
+##############################################################################################################################
+##############################################################################################################################
+def get_delegation_id(jid):
+        '''
+                |  Description: |   Get the delegation id in use by a job                                      |\n
+                |  Arguments:   |   jid              |     CREAM job identifier                                |\n
+                |  Returns:     |   the delegation id string                                                   |
+        '''
+        status = get_current_status_verbose(jid)
+
+        for line in status.split('\n'):
+                if "Deleg Proxy ID" in line:
+                        deleg_id = line.split('[')[1].split(']')[0]
+                        return deleg_id
+
+        raise _error('Delegation ID not found in "' + status + '"')
+##############################################################################################################################
+##############################################################################################################################
+def renew_proxy(ce_endpoint, deleg_id):
+        '''
+                |  Description: |   Renew a delegated proxy in a CREAM endpoint                                      |\n
+                |  Arguments:   |   ce_endpoint              |     the CREAM endpoint                                |
+                |               |   deleg_id                 |     delegation id to renew                            |\n
+                |  Returns:     |   nothing                                                                          |
+        '''
+        com='/usr/bin/glite-ce-proxy-renew -d -e ' + ce_endpoint + ' ' + deleg_id
+	args = shlex.split(com.encode('ascii'))
+        p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        fPtr=p.stdout
+        output=fPtr.read()
+        p.wait()
+        if p.returncode != 0:
+                raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  output)
+        else:
+                print 'Command "' + com + '" output follows:'
+                print output
+##############################################################################################################################
+##############################################################################################################################
+def save_batch_job_submission_script_on(ce_endpoint, version, cream_root_pass):
+        '''
+                |  Description:  |   Modify blah_common_submit_functions.sh in order to save the job submission script         | \n
+                |  Arguments:    |   ce_endpoint       |      the cream endpoint                                               |
+                |                |   version           |      EMI1 or EMI2 (to determine the path of the script file)          |
+                |                |   cream_root_pass   |      cream host root user's password                                  | \n
+                |  Returns:      |   Nothing (raises exception upon error)                                                     |
+        '''
+
+
+        if version.lower() == "emi1":
+                file_path = "/usr/bin/blah_common_submit_functions.sh"
+        elif version.lower() == "emi2":
+                file_path = "/usr/libexec/blah_common_submit_functions.sh"
+        else:
+                raise _error('Please enter either EMI1 or EMI2 as version. You entered: "' + version + '"')
+
+        cream_host = ce_endpoint.split(":")[0]
+        timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
+
+        com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
+        _enisc(com , cream_host, 'root', cream_root_pass)
+        com = 'cp -f ' + file_path + ' ' + file_path + '.save-on.bak.at.' + timestamp
+        _enisc(com , cream_host, 'root', cream_root_pass)
+        com = 'rm -f ' + file_path
+        _enisc(com, cream_host, 'root', cream_root_pass)
+
+
+        ssh_con = paramiko.SSHClient()
+        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+
+        sftp = ssh_con.open_sftp()
+        src = sftp.file(file_path + '.creamtesting.orig','r')
+        dst = sftp.file(file_path,'w')
+
+        for line in src.readlines():
+                if '# DEBUG: cp $bls_tmp_file /tmp' in line:
+                        to_write = 'cp $bls_tmp_file /tmp\n'
+                        dst.write(to_write)
+                elif 'rm -f $bls_tmp_file' in line and '#' not in line:
+                        to_write = '#rm -f $bls_tmp_file\n'
+                        dst.write(to_write)
+                else:
+                        dst.write(line)
+
+        src.close()
+        dst.close()
+
+        print 'New script written, save of the batch job submission script turned ON.'
+##############################################################################################################################
+##############################################################################################################################
+def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
+        '''
+                |  Description:  |   Modify blah_common_submit_functions.sh in order to NOT save the job submission script         | \n
+                |  Arguments:    |   ce_endpoint       |      the cream endpoint                                                   |
+                |                |   version           |      EMI1 or EMI2 (to determine the path of the script file)              |
+                |                |   cream_root_pass   |      cream host root user's password                                      | \n
+                |  Returns:      |   Nothing (raises exception upon error)                                                         |
+        '''
+
+        if version.lower() == "emi1":
+                file_path = "/usr/bin/blah_common_submit_functions.sh"
+        elif version.lower() == "emi2":
+                file_path = "/usr/libexec/blah_common_submit_functions.sh"
+        else:
+                raise _error('Please enter either EMI1 or EMI2 as version. You entered: "' + version + '"')
+
+
+        cream_host = ce_endpoint.split(":")[0]
+        timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
+
+        com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
+        _enisc(com , cream_host, 'root', cream_root_pass)
+        com = 'cp -f ' + file_path + ' ' + file_path + '.save-off.bak.at.' + timestamp
+        _enisc(com , cream_host, 'root', cream_root_pass)         #create a second back up just in case
+        com = 'rm -f ' + file_path
+        _enisc(com, cream_host, 'root', cream_root_pass)
+
+
+        ssh_con = paramiko.SSHClient()
+        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+
+        sftp = ssh_con.open_sftp()
+        src = sftp.file(file_path + '.creamtesting.orig','r')
+        dst = sftp.file(file_path,'w')
+
+        for line in src.readlines():
+                if 'cp $bls_tmp_file /tmp' in line:
+                        to_write = '# DEBUG: cp $bls_tmp_file /tmp\n'
+                        dst.write(to_write)
+                elif 'rm -f $bls_tmp_file' in line and '#' in line:
+                        to_write = 'rm -f $bls_tmp_file\n'
+                        dst.write(to_write)
+                else:
+                        dst.write(line)
+
+        src.close()
+        dst.close()
+
+        print 'New script written, save of the batch job submission script turned OFF.'
+##############################################################################################################################
+##############################################################################################################################
+def cpu_allocation_jdl(output_dir, vo, wholenodes=None, hostnumber=None, smpgranularity=None, cpunumber=None):
+        '''
+                |  Description:  |  Attribute checking jdl file.Sets the jdl attributes "WholeNodes","HostNumber" and "SMPGranularity"          |
+                |                |  to the given numbers/values. If a value isn't given, then it is ignored in the final jdl file.              | \n
+                |  Arguments:    |  output_dir      |  the directory to put the file in                                                         |
+                |                |  vo              |  virtual organisation                                                                     |
+                |                |  smpgranularity  |  jdl attribute                                                                            |
+                |                |  hostnumber      |  jdl attribute                                                                            |
+                |                |  wholenodes      |  jdl attribute                                                                            |
+                |                |  cpunumber       |  jdl attribute                                                                            | \n
+                |  Returns:      |  Temporary file name.                                                                                        |
+        '''
+
+        wnodes = str(wholenodes)
+        hnum = str(hostnumber)
+        smpgran = str(smpgranularity)
+        cpunum = str(cpunumber)
+
+        folder = output_dir
+        identifier = 'cpu_allocation'
+        name = 'cream_testing-' + str(time.time()) + '-' + identifier + '.jdl'
+        path = folder + '/' + name
+
+        jdl_file = open(path,'w')
+
+        jdl_contents = []
+        jdl_contents.append('[\n')
+        jdl_contents.append('Type="job";\n')
+        jdl_contents.append('JobType="normal";\n')
+        jdl_contents.append('VirtualOrganisation="' + vo + '";\n')
+        jdl_contents.append('Executable="/bin/uname";\n')
+        jdl_contents.append('Arguments="-a";\n')
+        if smpgran != "None":
+                jdl_contents.append('SMPGranularity=' + smpgran + ';\n')
+        if hnum != "None":
+                jdl_contents.append('HostNumber=' + hnum + ';\n')
+        if wnodes != "None":
+                jdl_contents.append('WholeNodes=' + wnodes + ';\n')
+        if cpunum != "None":
+                jdl_contents.append('CPUNumber=' + cpunum + ';\n')
+        jdl_contents.append('StdOutput="job.out";\n')
+        jdl_contents.append('StdError="job.err";\n')
+        jdl_contents.append(']\n')
+
+        for item in jdl_contents:
+                jdl_file.write(item)
+
+        jdl_file.close()
+
+        return path
+##############################################################################################################################
+##############################################################################################################################
+def get_arch_smp_size(ce_endpoint, ldap_port):
+        '''
+                |  Description:  |  Get the published value of the GlueHostArchitectureSMPSize attribute          | \n
+                |  Arguments:    |  ce_endpoint      |  the CREAM endpoint                                        |
+                |                |  ldap_port        |  the ldap port to use                                      | \n
+                |  Returns:      |  the value of the attribute                                                    |
+        '''
+
+        cream_host = ce_endpoint.split(":")[0]
+        ldap_port = str(ldap_port)
+
+        com='/usr/bin/ldapsearch -x -H ldap://' + cream_host + ':' + ldap_port + ' -b o=grid'
+	args = shlex.split(com.encode('ascii'))
+        p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        fPtr=p.stdout
+        output=fPtr.read()
+        p.wait()
+        if p.returncode != 0:
+                raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  output)
+        else:
+                print 'Command "' + com + '" executed succesfully'
+                #print output
+
+        found = False
+        for line in output.split('\n'):
+                if 'GlueHostArchitectureSMPSize' in line:
+                        found = True
+                        smp_size = line.split(':')[1].strip()
+                        if len(smp_size) > 0:
+                                return smp_size
+                        else:
+                                raise _error('Invalid GlueHostArchitectureSMPSize value: "' + smp_size + '"')
+
+        raise _error('GlueHostArchitectureSMPSize not found in: ' + output)
+
+        print "Under construction"
+##############################################################################################################################
+##############################################################################################################################
+def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenodes=0, cpunumber=0, \
+                        smpgranularity=0, hostnumber=0, smpsize=0, batch_system=0):
+        '''
+                |  Description:  |  Validate the contents of the batch job submission script, according to:           |
+                |                |  https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan                |
+                |                |  cpu allocation test specifications. Per test information follows:                 |
+                |                |  Wherever it appears,S is the value published as GlueHostArchitectureSMPSize       |
+                |                |  Test type 1                                                                       |
+                |                |  Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H>1                |
+                |                |  Verification for LSF:  BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x              |
+                |                |  Verification for PBS:  PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB     |
+                |                |  Test type 2                                                                       |
+                |                |  JDL Attributes: WholeNodes=true SMPGranularity=G                                  |
+                |                |  Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x                 |
+                |                |  Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB      |
+                |                |  Test type 3                                                                       |
+                |                |  JDL Attributes: WholeNodes=true, HostNumber=H                                     |
+                |                |  Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x              |
+                |                |  Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB      |
+                |                |  Test type 4                                                                       |
+                |                |  JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C                   |
+                |                |  Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"                          |
+                |                |  Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r>0 }                  |
+                |                |  Test type 5                                                                       |
+                |                |  JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H>1                  |
+                |                |  Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R>0 }]"  |
+                |                |  Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R>0 }              |
+                |                |  Test type 6                                                                       |
+                |                |  JDL Attributes: WholeNodes=false, CPUNumber=C                                     |
+                |                |  Verification for LSF: BSUB -n C                                                   |
+                |                |  Verification for PBS: PBS -L nodes=C                                              |
+                |                |  NOTE: Default values are used due to robot framework limitations for named        |
+                |                |        arguments. These default values serve no other purpose.                     |
+                |  Arguments:    |  jid              |  CREAM job identifier                                          |
+                |                |  ce_endpoint      |  the CREAM endpoint                                            |
+                |                |  cream_root_pass  |  CREAM root password                                           |
+                |                |  test_type        |  one of the aforementioned test types, as an integer           |
+                |                |  wholenodes       |  jdl attribute in use (either true or false!)                  |
+                |                |  cpunumber        |  jdl attribute in use                                          |
+                |                |  smpgranularity   |  jdl attribute in use                                          |
+                |                |  hostnumber       |  jdl attribute in use                                          |
+                |                |  smpsize          |  the value published as GlueHostArchitectureSMPSize            |
+                |                |  batch_system     |  the underlying lrms system                                    | \n
+                |  Returns:      |  Nothing (raises exception if anything is out of order)                            |
+        '''
+
+        ttype = int(test_type)
+        if ttype < 1 or ttype > 6:
+                raise _error('Test type must be between 1 and 6, you entered: "' + str(test_type) + '"')
+
+        if str(wholenodes).lower() != 'true' and str(wholenodes).lower() != 'false':
+                raise _error('The WholeNodes attribute must be either True or False, but you entered: "' + wholenodes + '"')
+
+        if str(batch_system).lower() != 'pbs' and str(batch_system).lower() != 'lsf':
+                raise _error('The Batch System attribute must be either "PBS" or "LSF", but you entered: "' + batch_system + '"')
+
+        lrms = batch_system.encode('ascii').lower()
+
+        batch_subm_file_path = '/tmp/cream_' + jid.split('/')[-1].split('CREAM')[1]
+
+        print "Batch job submission file is: \"" + batch_subm_file_path + "\""
+
+        cream_host = ce_endpoint.split(":")[0]
+
+        ssh_con = paramiko.SSHClient()
+        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        sftp = ssh_con.open_sftp()
+        fPtr = sftp.file(batch_subm_file_path,'r')
+        contents = fPtr.read()
+
+        print "Batch job submission file contents follow:"
+        print contents
+
+        if ttype == 1: # Jdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H>1
+                # Verification for LSF:  BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x
+                # Verification for PBS:  PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB
+                if lrms == 'pbs':
+                        search_str = 'PBS -l nodes=' + str(hostnumber) + ':ppn=' + str(smpsize)
+                        string_should_contain(contents, search_str)
+                        search_str = 'PBS -W x=NACCESSPOLICY:SINGLEJOB'
+                        string_should_contain(contents, search_str)
+                elif lrms == 'lsf':
+                        search_str = 'BSUB -n ' + str(smpsize*hostnumber)
+                        string_should_contain(contents, search_str)
+                        search_str = 'BSUB -R "span[ptile=' + smpsize + ']"'
+                        string_should_contain(contents, search_str)
+                        search_str = 'BSUB -x'
+                        string_should_contain(contents, search_str)
+                else:
+                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+        elif ttype == 2: # JDL Attributes: WholeNodes=true SMPGranularity=G
+                # Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x
+                # Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB
+                if lrms == 'pbs':
+                        search_str = 'PBS -l nodes=1:ppn=' + str(smpsize)
+                        string_should_contain(contents, search_str)
+                        search_str = 'PBS -W x=NACCESSPOLICY:SINGLEJOB'
+                        string_should_contain(contents, search_str)
+                elif lrms == 'lsf':
+                        search_str = 'BSUB -n ' + str(smpsize)
+                        string_should_contain(contents, search_str)
+                        search_str = 'BSUB -R "span[jpsts=1]"'
+                        string_should_contain(contents, search_str)
+                        search_str = 'BSUB -x'
+                        string_should_contain(contents, search_str)
+                else:
+                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+        elif ttype == 3: # JDL Attributes: WholeNodes=true, HostNumber=H
+                # Verification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x
+                # Verification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB
+                if lrms == 'pbs':
+                        search_str = 'PBS -l nodes=' + str(hostnumber) + ':ppn=' + str(smpsize)
+                        string_should_contain(contents, search_str)
+                        search_str = 'PBS -W x=NACCESSPOLICY:SINGLEJOB'
+                        string_should_contain(contents, search_str)
+                elif lrms == 'lsf':
+                        search_str = 'BSUB -n ' + str(smpsize*hostnumber)
+                        string_should_contain(contents, search_str)
+                        search_str = 'BSUB -R "span[ptile=' + smpsize + ']"'
+                        string_should_contain(contents, search_str)
+                        search_str = 'BSUB -x'
+                        string_should_contain(contents, search_str)
+                else:
+                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+        elif ttype == 4: # JDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C
+                # Verification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"
+                # Verification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r>0 }
+                # N = C / G , R = C % G
+                if lrms == 'pbs':
+                        n = int(cpunumber) / int(smpgranularity)
+                        r = int(cpunumber) % int(smpgranularity)
+                        search_str = 'PBS -l nodes=' + str(n) + ':ppn=' + str(smpgranularity)
+                        if r > 0:
+                                search_str = search_str + '+1:ppn=' + str(r)
+                        string_should_contain(contents, search_str)
+                elif lrms == 'lsf':
+                        search_string = 'BSUB -n ' + str(cpunuber)
+                        string_should_contain(contents, search_str)
+                        search_string = 'BSUB -R "span[ptile=' + str(smpgranularity) + ']"'
+                        string_should_contain(contents, search_str)
+                else:
+                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+        elif ttype == 5: # JDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H>1
+                # Verification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R>0 }]"
+                # Verification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R>0 }
+                # N = C / H , R = C % H
+                n = int(cpunumber) / int(hostnumber)
+                r = int(cpunumber) % int(hostnumber)
+                if lrms == 'pbs':
+                        search_str = 'PBS -l nodes=' + str(int(hostnumber)-r) + ':ppn=' + str(n)
+                        if r > 0:
+                                search_str = search_str + '+' + str(r) + ':ppn=' + str(n+1)
+                        string_should_contain(contents, search_str)
+                elif lrms == 'lsf':
+                        if r > 0:
+                                n = n+1
+                        search_str = 'BSUB -n ' + str(cpunumber)
+                        string_should_contain(contents, search_str)
+                        search_str = 'BSUB -R "span[ptile=' + n + ']"'
+                        string_should_contain(contents, search_str)
+                else:
+                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+        elif ttype == 6: # JDL Attributes: WholeNodes=false, CPUNumber=C
+                # Verification for LSF: BSUB -n C
+                # Verification for PBS: PBS -l nodes=C
+                if lrms == 'pbs':
+                        search_str = 'PBS -l nodes=' + str(cpunumber)
+                        string_should_contain(contents, search_str)
+                elif lrms == 'lsf':
+                        search_str = 'BSUB -n ' + str(cpunumber)
+                        string_should_contain(contents, search_str)
+                else:
+                        raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
+
+##############################################################################################################################
+##############################################################################################################################
+def string_should_contain(string, search_string):
+        '''
+                |  Description:  |  Check whether the given string contains the given substring.                        | \n
+                |  Arguments:    |  string              |    string haystack                                            |
+                |                |  search_string       |    string needle                                              | \n
+                |  Returns:      |  True or raise error                                                                 |
+        '''
+
+        if search_string in string:
+                print 'Search string "' + search_string + '" found in haystack!'
+                return True
+
+        print 'Search string "' + search_string + '" not found in: ' + string
+
+        raise _error('Search string "' + search_string + '" not found. Check report for further details!' )
+##############################################################################################################################
+##############################################################################################################################
+def _log_to_screen(string, status, bold):
+        '''
+                |  Description:  |  Log a message directly to screen, bypassing Robot Framework's buffers               | \n
+                |  Arguments:    |  string              |    a string                                                   |
+                |                |  status              |    color to use                                               |
+                |                |  bold                |    boolean, blold or not                                      | \n
+                |  Returns:      |  True or raise error                                                                 |
+        '''
+        attr = []
+        if status:
+                # green
+                attr.append('32')
+        else:
+                # red
+                attr.append('31')
+        if bold:
+                attr.append('1')
+
+        output = '\n\x1b[%sm%s\x1b[0m\n' % (';'.join(attr), string)
+        sys.__stderr__.write(output)
+##############################################################################################################################
+##############################################################################################################################
+def execute_remote_mysql_query(db_host, db_host_user, db_host_pass, db_user, db_pass, db_name, query):
+        '''
+                |  Description:  |  Execute a mysql query on a remote host through ssh                          | \n
+                |  Arguments:    |  db_host              | the database's host                                  |
+                |                |  db_host_user         | the database's host user                             |
+                |                |  db_host_pass         | the database's host user password                    |
+                |                |  db_user              | the database user                                    |
+                |                |  db_pass              | the database user password                           |
+                |                |  db_name              | the database to use                                  |
+                |                |  query                | the actual mysql query                               | \n
+                |  Returns:      |  List with the query's results.                                              |
+                |                |  Each line represents a list item. Fields are seperated by tabs.             |
+        '''
+
+        mysql_com = 'mysql -B -u ' + db_user + ' -p ' + db_name + ' -e "' + query + '"'
+        com = 'ssh ' + db_host_user + '@' + db_host + ' \'' + mysql_com + '\''
+
+        print com
+
+        child = pexpect.spawn(com)
+        child.expect('password')
+        child.sendline(db_host_pass)
+        child.expect('password')
+        child.sendline(db_pass)
+        child.expect(pexpect.EOF)
+        child.close(force=False)
+
+        (output,retVal) = pexpect.run(com, timeout=30, withexitstatus=True)
+
+        print "Exit status: " + str(child.exitstatus)
+        if child.exitstatus != 0:
+                raise _error("Job status polling command: " + com + " failed with return value: " \
+                + str(p.returncode) + "\nCommand reported: " + output)
+
+        results = []
+        for line in child.before.split('\n')[2:]:
+                if len(line.strip()) > 0:
+                        results.append(line)
+
+        #print repr(results)
+        return results
 ##############################################################################################################################
 ##############################################################################################################################

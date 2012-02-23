@@ -40,13 +40,13 @@ deleg_id=""
 
 # The log level used during the test.Default is INFO.For extra output,set to DEBUG or TRACE.
 # (possible values: NONE FAIL WARN INFO DEBUG TRACE)
-log_level="TRACE"
+log_level="DEBUG"
 
 #The underlying batch system of the CREAM endpoint.Either pbs or lsf.
 batch_system=""
 
 # A directory in the gridftp server.This directory has to allready exist and your vo have write access to it. Used for OSB file storage. Example: /tmp
-gridftp_dir="/tmp"
+gridftp_dir=""
 
 # The hostname where the lrms is running. Example: ctb07.gridctb.uoa.gr
 lrms_host=""
@@ -66,7 +66,7 @@ lrms_admin_pass=""
 tmp_dir=""
 
 # Delete temporary files (jdl and script files created during the test) or not. Possible values: True False. Defaults to "True"
-delete_files="False"
+delete_files="True"
 
 # The cream host's root user's ssh password. Example: p4sSw0rD
 cream_root_pass=""
@@ -89,18 +89,29 @@ creamdb_port=""
 # The user to read the cream db
 creamdb_user=""
 
-# The aforementioned user's db pass
+# The db pass
 creamdb_pass=""
+
+# Database host user with ssh access
+creamdb_ssh_user=""
+
+# Database host ssh password
+creamdb_ssh_pass=""
 
 # The authorization model in use. Either gjaf or argus
 authz_model=""
 
-# The host of the argus service, if applicable
+# The host of the argus service
 argus_host=""
 
 # Root user password for ssh access on argus host
 argus_root_pass=""
 
+# The version of the middleware being tested. Either EMI1 or EMI2.
+middleware_version=""
+
+# The ldap port for the CREAM resource bdii. Defaults to 2170.
+cream_ldap_port="2170"
 
 #########################################
 #
@@ -121,19 +132,44 @@ class _error(Exception):
 	def __str__(self):
 		return str(self.string)
 
-if batch_system != "pbs" and batch_system != "lsf":
-        raise _error('Batch system must be either "pbs" or "lsf". You entered: ' + batch_system)
-
-if log_level != "NONE" and log_level != "FAIL" and log_level != "WARN" and log_level != "INFO" and log_level != "DEBUG" and log_level != "TRACE":
-        raise _error('Log level must be one of: NONE FAIL WARN INFO DEBUG TRACE. You entered: ' + log_level)
-
 if tmp_dir == "" or tmp_dir[0] != '/' or tmp_dir == "/tmp" or tmp_dir == "/tmp/":
         tmp_dir = _tf.mkdtemp(suffix=".cream_testing", dir="/tmp/") + '/'
 else:
         if tmp_dir[-1] != '/':
                 tmp_dir += '/'
         _os.system("mkdir -p " + tmp_dir) #this should work under normal circumstances, the code here is kept minimal after all.
-print "The files of this testsuite will be stored under: " + tmp_dir
+print "INFO: The files of this testsuite will be stored under: " + tmp_dir
 
-if delete_files != "True" and delete_files != "False":
-        delete_files = "True"
+all_vars = { "ce_endpoint":ce_endpoint, "cream_queue":cream_queue, "deleg_endpoint":deleg_endpoint, "vo":vo, "proxy_pass":proxy_pass,
+             "gridftp_server":gridftp_server, "lfn_dir":lfn_dir, "deleg_id":deleg_id, "log_level":log_level, "batch_system":batch_system,
+             "gridftp_dir":gridftp_dir, "lrms_host":lrms_host, "lrms_admin_user":lrms_admin_user, "lrms_admin_pass":lrms_admin_pass,
+             "tmp_dir":tmp_dir, "delete_files":delete_files, "cream_root_pass":cream_root_pass, "sec_cert":sec_cert, "sec_key":sec_key,
+             "sec_proxy_pass":sec_proxy_pass, "creamdb_host":creamdb_host, "creamdb_port":creamdb_port, "creamdb_user":creamdb_user,
+             "creamdb_pass":creamdb_pass, "authz_model":authz_model, "argus_host":argus_host, "argus_root_pass":argus_root_pass,
+             "middleware_version":middleware_version, "cream_ldap_port":cream_ldap_port, "tmp_dir":tmp_dir }
+
+for key, value in all_vars.iteritems():
+        #print key + '=' + value
+        if value == "":
+                if key in "ce_endpoint cream_queue vo proxy_pass":
+                        raise _error('Mandatory variable "' + key + '" not set! Aborting...')
+                else:
+                        print 'INFO: Non-mandatory variable "' + key + '" has not been set.'
+        if key == "middleware_version":
+                if value.lower() != 'emi1' and value.lower() != 'emi2':
+                        raise _error('Middleware version variable must be either "EMI1" or "EMI2"')
+        if key == "authz_model":
+                if value != 'argus' and value != 'gjaf':
+                        raise _error('Authorization model variable must be either "argus" or "gjaf"')
+        if key == "delete_files":
+                if value.lower() != "true" and value.lower() != "false":
+                        delete_files = "True"
+        if key == "log_level":
+                valid_loglevels = ["NONE", "FAIL", "WARN", "INFO", "DEBUG", "TRACE"]
+                if value not in valid_loglevels:
+                        print 'INFO: Log level must be one of: NONE FAIL WARN INFO DEBUG TRACE. You entered: ' + log_level
+                        print '      Log level is auto-corrected to DEBUG'
+                        log_level = 'DEBUG'
+        if key == "batch_system":
+                if value != "pbs" and value != "lsf":
+                        raise _error('Batch system must be either "pbs" or "lsf". You entered: ' + batch_system)

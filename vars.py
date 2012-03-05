@@ -66,7 +66,7 @@ lrms_admin_pass=""
 tmp_dir=""
 
 # Delete temporary files (jdl and script files created during the test) or not. Possible values: True False. Defaults to "True"
-delete_files="True"
+delete_files="False"
 
 # The cream host's root user's ssh password. Example: p4sSw0rD
 cream_root_pass=""
@@ -83,20 +83,14 @@ sec_proxy_pass=""
 # The cream db host
 creamdb_host=""
 
-#The cream db port
-creamdb_port=""
+#The cream db port. Defaults to 3306.
+creamdb_port="3306"
 
 # The user to read the cream db
 creamdb_user=""
 
 # The db pass
 creamdb_pass=""
-
-# Database host user with ssh access
-creamdb_ssh_user=""
-
-# Database host ssh password
-creamdb_ssh_pass=""
 
 # The authorization model in use. Either gjaf or argus
 authz_model=""

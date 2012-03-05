@@ -60,7 +60,7 @@ CREAM Administrator's Guide: \n<br>
 CREAM Test Suite Guide: \n<br>
 <a href="https://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests">https://twiki.cern.ch/twiki/bin/view/EMI/CREAMRobotFuncTests</a> \n<br>
 EMI Robot Framework Quickstart Guide: \n<br>
-<a href="https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide">https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide</a> </td>
+<a href="https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide">https://twiki.cern.ch/twiki/bin/view/EMI/RobotFrameworkQuickstartGuide</a></td>
 </tr>
 <tr>
 <td class="name">Suite Teardown</td>
@@ -4640,7 +4640,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Automatic Proxy Purging">Automatic Proxy Purging</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case checks the automatic proxy purging functionality. Test case algorithm:\n1) Modify the cream config xml file to set the delegation purge rate to value 1\n2) Submit a simple job and wait for it to finish\n3) Read the delegation ids from the credentials table of the db (before the purger runs)\n4) List the proxy in the job's sandbox (before the purger runs)\n5) Wait 6 minutes for the purger to run\n6) Read the delegation ids from the credentials table of the db (the purger now has ran)\n7) List the proxy in the job's sandbox (the purger now has ran)\n8) Reset the cream config xml to its original value\n9) Check that the delegation id of the job exists in the contents of the db before the purger ran and doesn't exist after the purger ran\n10) Check tha the delegation id of the job exists in the contents of the job's sandbox before the purger ran and doesn't exist after the purger ran\n\nNOTE:In a next release, the test case will support mysql connections through ssh tunneling. As it is now, it may or may not work, depending on the setup of the cream database (allow connection from remote hosts for certain users).</td>
+<td colspan="3">This test case checks the automatic proxy purging functionality. Test case algorithm:\n1) Modify the cream config xml file to set the delegation purge rate to value 1\n2) Submit a simple job and wait for it to finish\n3) Read the delegation id info from the CREAM service's delegation endpoint (before the purger runs)\n4) List the proxy in the job's sandbox (before the purger runs)\n5) Wait 6 minutes for the purger to run\n6) Read the delegation ids info from the CREAM service's delegation endpoint (the purger now has ran)\n7) List the proxy in the job's sandbox (the purger now has ran)\n8) Reset the cream config xml to its original value\n9) Check that the info about the delegation id is valid before the purger has ran and it isn't in storage after the purger has ran.\n10) Check tha the delegation id of the job exists in the contents of the job's sandbox before the purger ran and doesn't exist after the purger ran</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4654,41 +4654,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td># Setup</td>
 <td></td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
-<td>${creamdb_user}</td>
-<td>Mandatory variable creamdb_user is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
-<td>${creamdb_pass}</td>
-<td>Mandatory variable creamdb_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
-<td>${creamdb_host}</td>
-<td>Mandatory variable creamdb_host is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
-<td>${creamdb_port}</td>
-<td>Mandatory variable creamdb_port is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -4736,7 +4701,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>15 seconds</td>
+<td>1 minute</td>
 <td># wait for cream to be restarted</td>
 <td></td>
 </tr>
@@ -4763,36 +4728,29 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>Log Many</td>
+<td>${delegation_id}=</td>
+<td>Get Deleg Id From Status</td>
 <td>${job_log}</td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>@{db_before_purger}=</td>
-<td>Execute Remote MySQL Query</td>
-<td>${creamdb_host}</td>
-<td>${creamdb_ssh_user}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${creamdb_ssh_pass}</td>
-<td>${creamdb_user}</td>
-<td>${creamdb_pass}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>delegationdb</td>
-<td>select dlg_id from t_credential</td>
-<td></td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>Log Many</td>
-<td>@{db_before_purger}</td>
+<td>${job_log}</td>
+<td>${delegation_id}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${dlg_info_before_purger}=</td>
+<td>Delegation Info</td>
+<td>${deleg_endpoint}</td>
+<td>${delegation_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${dlg_info_before_purger}=</td>
 <td></td>
 <td></td>
 </tr>
@@ -4826,29 +4784,22 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>@{db_after_purger}=</td>
-<td>Execute Remote MySQL Query</td>
-<td>${creamdb_host}</td>
-<td>${creamdb_ssh_user}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${creamdb_ssh_pass}</td>
-<td>${creamdb_user}</td>
-<td>${creamdb_pass}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>delegationdb</td>
-<td>select dlg_id from t_credential</td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
 <td></td>
 </tr>
 <tr>
 <td class="name"></td>
+<td>${dlg_info_after_purger}=</td>
+<td>Delegation Info</td>
+<td>${deleg_endpoint}</td>
+<td>${delegation_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Log Many</td>
-<td>@{db_after_purger}</td>
+<td>${dlg_info_after_purger}=</td>
 <td></td>
 <td></td>
 </tr>
@@ -4897,23 +4848,23 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>15 seconds</td>
+<td>1 minute</td>
 <td># wait for cream to be restarted</td>
 <td></td>
 </tr>
 <tr>
 <td class="name"></td>
-<td>${delegation_id}=</td>
-<td>Get Deleg Id From Status</td>
-<td>${job_log}</td>
+<td>Should Not Be Equal</td>
+<td>${dlg_info_before_purger}</td>
+<td>NOT IN STORAGE</td>
 <td></td>
 </tr>
 <tr>
 <td class="name"></td>
-<td>Check Delegation ID in DB</td>
-<td>${db_before_purger}</td>
-<td>${db_after_purger}</td>
-<td>${delegation_id}</td>
+<td>Should Be Equal</td>
+<td>${dlg_info_after_purger}</td>
+<td>NOT IN STORAGE</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5689,7 +5640,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Proxy Renewal">Proxy Renewal</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Submit a job lasting 1 hour using a proxy valid 30 minutes.\nAfter 15 minutes renew the proxy with the glite-ce-proxy-renew command.\nVerify the final job status which should eventually be DONE-OK</td>
+<td colspan="3">Submit a job lasting 20 minutes using a proxy valid for 10 minutes.\nAfter 5 minutes renew the proxy with the glite-ce-proxy-renew command.\nVerify the final job status which should eventually be DONE-OK</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5710,20 +5661,20 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
-<td>time=00:30</td>
+<td>time=00:10</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>${jdl}=</td>
 <td>Sleep JDL</td>
 <td>${vo}</td>
-<td>3600</td>
+<td>1200</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
 <td>${tmp_dir}</td>
-<td># one hour sleep</td>
+<td># twenty minute sleep</td>
 <td></td>
 </tr>
 <tr>
@@ -5750,8 +5701,15 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>15 minutes</td>
+<td>5 minutes</td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
 <td></td>
 </tr>
 <tr>
@@ -5771,15 +5729,8 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>47 minutes</td>
+<td>11 minutes</td>
 <td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Create Proxy</td>
-<td>${proxy_pass}</td>
-<td>${vo}</td>
 <td></td>
 </tr>
 <tr>
@@ -5923,7 +5874,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>10</td>
+<td>10 seconds</td>
 <td># wait for the batch script to be copied</td>
 <td></td>
 </tr>
@@ -6068,7 +6019,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>10</td>
+<td>10 seconds</td>
 <td># wait for the batch script to be copied</td>
 <td></td>
 </tr>
@@ -6213,7 +6164,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>10</td>
+<td>10 seconds</td>
 <td># wait for the batch script to be copied</td>
 <td></td>
 </tr>
@@ -6358,7 +6309,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>10</td>
+<td>10 seconds</td>
 <td># wait for the batch script to be copied</td>
 <td></td>
 </tr>
@@ -6503,7 +6454,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>10</td>
+<td>10 seconds</td>
 <td># wait for the batch script to be copied</td>
 <td></td>
 </tr>
@@ -6648,7 +6599,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Sleep</td>
-<td>10</td>
+<td>10 seconds</td>
 <td># wait for the batch script to be copied</td>
 <td></td>
 </tr>
@@ -6836,7 +6787,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="keyword_Ban User Teardown">Ban User Teardown</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Remove the current user (i.e.: the user whose cert/key pair is in the standard location ~/.globus) from the CREAM administrator list.\n(note: the user's proxy is re-created here, just in case it doesn't exist for any reason, though at this point of execution, the user should have an active proxy)</td>
+<td colspan="3">Remove the current user (i.e.: the user whose cert/key pair is in the standard location ~/.globus) from the CREAM ban list.\nAlternatively, if Argus is in use, remove him from the Argus ban list.\n(note: the user's proxy is re-created here, just in case it doesn't exist for any reason, though at this point of execution, the user should have an active proxy)</td>
 </tr>
 <tr>
 <td class="name"></td>

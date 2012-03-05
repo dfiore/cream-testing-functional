@@ -29,7 +29,7 @@ qdel_job() bkill_job
 Proxy Handling
 --
 create_proxy() check_proxy() destroy_proxy() proxy_info()
-create_delegation() destroy_delegation()
+create_delegation() destroy_delegation() delegation_info()
 
 Data Manipulation
 --
@@ -45,25 +45,17 @@ cpu_allocation_jdl()
 
 Utils
 --
-file_should_contain()
-create_dummy_script()
-get_osb() fetch_output_files()
+file_should_contain() create_dummy_script() get_osb() fetch_output_files()
 check_osb_basedesturi_files() check_osb_desturi_files()
 delete_osb_basedesturi_files() delete_osb_desturi_files()
-validate_ce_service_info() get_proxy_dn()
-get_job_sb() validate_glue()
-set_limiter_threshold() reset_limiter_threshold()
-ban_user_gjaf() unban_user_gjaf()
-change_sandbox_transfer_method()
-modify_cream_config_xml() reset_cream_config_xml() restart_cream()
-get_deleg_id_from_status() check_delegation_id_in_db()
-list_proxy_sandbox() check_delegation_id_in_filesystem()
-ban_user_argus() unban_user_argus()
-validate_job_status() get_time_in_status_format()
-get_status_with_filter() files_should_not_be_empty()
-create_ssh_tunnel() send_signal_to_process()
-execute_noninteractive_ssh_com()
-string_should_contain() _log_to_screen()
+validate_ce_service_info() get_proxy_dn() get_job_sb() validate_glue()
+set_limiter_threshold() reset_limiter_threshold() ban_user_gjaf() unban_user_gjaf()
+change_sandbox_transfer_method() modify_cream_config_xml() reset_cream_config_xml()
+restart_cream() get_deleg_id_from_status() execute_remote_mysql_query()
+list_proxy_sandbox() check_delegation_id_in_filesystem() ban_user_argus()
+unban_user_argus() validate_job_status() get_time_in_status_format()
+get_status_with_filter() files_should_not_be_empty() send_signal_to_process()
+execute_noninteractive_ssh_com() string_should_contain() _log_to_screen()
 
 CREAM Utils
 --
@@ -2954,31 +2946,6 @@ def get_deleg_id_from_status(status):
         return status.split('Deleg Proxy ID')[1].split('[')[1].split(']')[0]
 ##############################################################################################################################
 ##############################################################################################################################
-def check_delegation_id_in_db(contents_before, contents_after, deleg_id):
-        '''
-                |  Description:  |   Check the presense (or not) of a delegation id in db queries contents     | \n
-                |  Arguments:    |   contents_before       |    db contents before running the purger          |
-                |                |   contents_after        |    db contents after running the purger           |
-                |                |   deleg_id              |    the delegation id searched for                 | \n
-                |  Returns:      |   nothing (raises exception if the desired outcome isn't met)               |
-        '''
-        found_before = False
-        found_after = False
-
-        for item in contents_before:
-                if deleg_id in item:
-                        found_before = True
-
-        for item in contents_after:
-                if deleg_id in item:
-                        found_after = True
-
-        if found_before == False:
-                raise _error("Delegation id " + deleg_id + " not found in " + contents_before + " but should be found")
-        elif found_after == True:
-                raise _error("Delegation id " + deleg_id + " found in " + contents_before + " but should not be found")
-##############################################################################################################################
-##############################################################################################################################
 def list_proxy_sandbox(ce_endpoint, cream_root_pass, job_status):
         '''
                 |  Description:  |   Check the presense (or not) of a delegation id in db queries contents     | \n
@@ -3096,7 +3063,7 @@ def validate_job_status(output, verbosity):
         '''
                 |  Description:   |  Validates the output of a glite-ce-job-status command       | \n
                 |  Arguments:     |  output     |  the output of a job status command            |
-                |                 |  verbosity  |  the verbosity of the status command           |
+                |                 |  verbosity  |  the verbosity of the status command           | \n
                 |  Returns:       |  Nothing (raises exception uppon non-validation)             |
         '''
 
@@ -3117,8 +3084,7 @@ def validate_job_status(output, verbosity):
                 for i in range(len(k)):
                         if i == 0:
                                 #******  JobID=[https://ctb04.gridctb.uoa.gr:8443/CREAM208464768]
-                                # match stars - spaces - 'JobID' - '=' - '[' - jid string - ']'
-                                pattern = "\*\*\*\*\*\*\s+JobID=\[.*\]"
+                                pattern = "\*+\s+JobID=\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3127,7 +3093,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 1:
                                 #	Status        = [DONE-OK]
-                                # match spaces - 'Status' - spaces - '=' - spaces - '[' - status string - ']'
                                 pattern = "\s*Status\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3137,7 +3102,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 2:
                                 #	ExitCode        = [0]
-                                # match spaces - 'ExitCode' - spaces - '=' - spaces - '[' - 0~9 digit - ']'
                                 pattern = "\s+ExitCode\s+=\s+\[\d\]"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3149,8 +3113,7 @@ def validate_job_status(output, verbosity):
                 for i in range(len(k)):
                         if i == 0:
                                 #******  JobID=[https://ctb04.gridctb.uoa.gr:8443/CREAM208464768]
-                                # match stars - spaces - 'JobID' - '=' - '[' - jid string - ']'
-                                pattern = "\*\*\*\*\*\*\s+JobID=\[.*\]"
+                                pattern = "\*+\s+JobID=\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3158,9 +3121,8 @@ def validate_job_status(output, verbosity):
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 1:
-                                #	Status        = [DONE-OK]
-                                # match spaces - 'Status' - spaces - '=' - spaces - '[' - status string - ']'
-                                pattern = "\s+Status\s+=\s+\[.*\]"
+                                #	Current Status = [DONE-OK]
+                                pattern = "\s+Current Status\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3169,7 +3131,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 2:
                                 #	ExitCode        = [0]
-                                # match spaces - 'ExitCode' - spaces - '=' - spaces - '[' - 0~9 digit - ']'
                                 pattern = "\s+ExitCode\s+=\s+\[\d\]"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3179,7 +3140,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 3:
                                 #	Grid JobID        = [N/A]
-                                # match spaces - 'Grid' - space - 'JobID' - spaces - '=' - spaces - '[' - string - ']'
                                 pattern = "\s+Grid\sJobID\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3189,7 +3149,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 4:
                                 #	Job status changes:
-                                # match spaces - 'Job' - space - 'status' - space - 'changes' - ':'
                                 pattern = "\s+Job\sstatus\schanges\:"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3199,7 +3158,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 5:
                                 #	-------------------
-                                # match spaces - dashes
                                 pattern = "\s+\-+"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3209,7 +3167,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 6:
                                 #	Status         = [REGISTERED] - [Fri 09 Dec 2011 15:38:36] (1323437916)
-                                # match spaces - 'Status' - spaces - '=' - spaces - '[' - string - ']' - etc etc
                                 pattern = "\s+Status\s+=\s+\[.*\]\s+\-\s+\[.*\]\s+\(\d+\)"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3222,7 +3179,8 @@ def validate_job_status(output, verbosity):
                                         i=i+1
                                         match = re.search(pattern,k[i])
 
-                                pattern = "\s+Issued\sCommands\:" #	Issued Commands:
+                                #	Issued Commands:
+                                pattern = "\s+Issued\sCommands\:"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3232,7 +3190,8 @@ def validate_job_status(output, verbosity):
 
                                 i=i+1
 
-                                pattern = "\s+\-+" #	-------------------
+                                #	-------------------
+                                pattern = "\s+\-+"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3242,7 +3201,8 @@ def validate_job_status(output, verbosity):
 
                                 i=i+1
 
-                                pattern = "\s+\*+\s+Command\sName\s+=\s*\[.*\]" #	*** Command Name              = [JOB_REGISTER]
+                                #	*** Command Name              = [JOB_REGISTER]
+                                pattern = "\s+\*+\s+Command\sName\s+=\s*\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3253,8 +3213,7 @@ def validate_job_status(output, verbosity):
                 for i in range(len(k)):
                         if i == 0:
                                 #******  JobID=[https://ctb04.gridctb.uoa.gr:8443/CREAM208464768]
-                                # match stars - spaces - 'JobID' - '=' - '[' - jid string - ']'
-                                pattern = "\*\*\*\*\*\*\s+JobID=\[.*\]"
+                                pattern = "\*+\s+JobID=\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3262,9 +3221,8 @@ def validate_job_status(output, verbosity):
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 1:
-                                #	Status        = [DONE-OK]
-                                # match spaces - 'Status' - spaces - '=' - spaces - '[' - status string - ']'
-                                pattern = "\s+Status\s+=\s+\[.*\]"
+                                #	Current Status        = [DONE-OK]
+                                pattern = "\s+Current Status\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3273,7 +3231,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 2:
                                 #	Working Dir    = [[reserved]]
-                                # match spaces - 'Working Dir' - spaces - '=' - spaces - '[' - any string - ']'
                                 pattern = "\s+Working\sDir\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3283,7 +3240,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 3:
                                 #	ExitCode        = [0]
-                                # match spaces - 'ExitCode' - spaces - '=' - spaces - '[' - 0~9 digit - ']'
                                 pattern = "\s+ExitCode\s+=\s+\[\d\]"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3293,7 +3249,6 @@ def validate_job_status(output, verbosity):
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 4:
                                 #	Grid JobID        = [N/A]
-                                # match spaces - 'Grid' - space - 'JobID' - spaces - '=' - spaces - '[' - string - ']'
                                 pattern = "\s+Grid\sJobID\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3338,8 +3293,8 @@ def validate_job_status(output, verbosity):
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 9:
-                                #			  Valid To       : 12/10/11 1:37 AM (GMT)
-                                pattern = "\s+Valid\sTo\s+\:.*"
+                                #  	Worker Node    = [cream-43.pd.infn.it]
+                                pattern = "\s+Worker Node\s+=\s\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3347,8 +3302,8 @@ def validate_job_status(output, verbosity):
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 10:
-                                #			  Holder Subject : /C=GR/O=HellasGrid/OU=uoa.gr/CN=Dimosthenis Fioretos
-                                pattern = "\s+Holder\sSubject\s+\:.*"
+                                #  	Local User     = [dteam042]
+                                pattern = "\s+Local User\s+=\s\[.*\]"
                                 match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
@@ -3356,69 +3311,6 @@ def validate_job_status(output, verbosity):
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
                         if i == 11:
-                                #			  Holder CA      : /C=GR/O=HellasGrid/OU=Certification Authorities/CN=HellasGrid CA 2006
-                                pattern = "\s+Holder\sCA\s+\:.*"
-                                match = re.search(pattern,k[i])
-                                if match:
-                                        print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
-                                else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
-                                        + '\nRegular expression: "' + pattern + '"')
-                        if i == 12:
-                                #			  VO              : see
-                                pattern = "\s+VO\s+\:.*"
-                                match = re.search(pattern,k[i])
-                                if match:
-                                        print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
-                                else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
-                                        + '\nRegular expression: "' + pattern + '"')
-                        if i == 13:
-                                #			  AC Issuer       : CN=voms.grid.auth.gr,OU=auth.gr,O=HellasGrid,C=GR
-                                pattern = "\s+AC\sIssuer\s+\:.*"
-                                match = re.search(pattern,k[i])
-                                if match:
-                                        print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
-                                else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
-                                        + '\nRegular expression: "' + pattern + '"')
-                        if i == 14:
-                                #			  Attribute       : /see/Role=NULL/Capability=NULL 
-                                pattern = "\s+Attribute\s+\:.*"
-                                match = re.search(pattern,k[i])
-                                if match:
-                                        print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
-                                else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
-                                        + '\nRegular expression: "' + pattern + '"')
-                        if i == 15:
-                                #			  ]
-                                pattern = "\s+\].*"
-                                match = re.search(pattern,k[i])
-                                if match:
-                                        print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
-                                else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
-                                        + '\nRegular expression: "' + pattern + '"')
-                        if i == 16:
-                                #	Worker Node    = [ctb05.gridctb.uoa.gr]
-                                pattern = "\s+Worker\sNode\s+=\s+\[.*\]"
-                                match = re.search(pattern,k[i])
-                                if match:
-                                        print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
-                                else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
-                                        + '\nRegular expression: "' + pattern + '"')
-                        if i == 17:
-                                #	Local User     = [see136]
-                                pattern = "\s+Local\sUser\s+=\s+\[.*\]"
-                                match = re.search(pattern,k[i])
-                                if match:
-                                        print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
-                                else:
-                                        raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
-                                        + '\nRegular expression: "' + pattern + '"')
-                        if i == 18:
                                 #	CREAM ISB URI  = [gsiftp://...]
                                 pattern = "\s+CREAM\sISB\sURI\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
@@ -3427,7 +3319,7 @@ def validate_job_status(output, verbosity):
                                 else:
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
-                        if i == 19:
+                        if i == 12:
                                 #	CREAM OSB URI  = [gsiftp://...]
                                 pattern = "\s+CREAM\sOSB\sURI\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
@@ -3436,7 +3328,7 @@ def validate_job_status(output, verbosity):
                                 else:
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
-                        if i == 20:
+                        if i == 13:
                                 #	JDL            = [[ ... ]]
                                 pattern = "\s+JDL\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
@@ -3445,7 +3337,7 @@ def validate_job_status(output, verbosity):
                                 else:
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
-                        if i == 21:
+                        if i == 14:
                                 #	Type           = [normal]
                                 pattern = "\s+Type\s+=\s+\[.*\]"
                                 match = re.search(pattern,k[i])
@@ -3454,19 +3346,16 @@ def validate_job_status(output, verbosity):
                                 else:
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
-                        if i == 22:
+                        if i == 15:
                                 #	Job status changes:
-                                # match spaces - 'Job' - space - 'status' - space - 'changes' - ':'
                                 pattern = "\s+Job\sstatus\schanges\:"
-                                match = re.search(pattern,k[i])
                                 if match:
                                         print 'Line ' + str(i) + ' did match.\nContents: "' + k[i] + '"'
                                 else:
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
-                        if i == 23:
+                        if i == 16:
                                 #	-------------------
-                                # match spaces - dashes
                                 pattern = "\s+\-+"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3474,9 +3363,8 @@ def validate_job_status(output, verbosity):
                                 else:
                                         raise _error('Line ' + str(i) + ' did not match.\nContents:  ' + k[i] \
                                         + '\nRegular expression: "' + pattern + '"')
-                        if i == 24:
+                        if i == 17:
                                 #	Status         = [REGISTERED] - [Fri 09 Dec 2011 15:38:36] (1323437916)
-                                # match spaces - 'Status' - spaces - '=' - spaces - '[' - string - ']' - etc etc
                                 pattern = "\s+Status\s+=\s+\[.*\]\s+\-\s+\[.*\]\s+\(\d+\)"
                                 match = re.search(pattern,k[i])
                                 if match:
@@ -3831,7 +3719,7 @@ def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass):
         ssh_con = paramiko.SSHClient()
         ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())  #don't ask for acceptance of foreign host key (auto accept)
         ssh_con.connect(cream_host, username=user, password=user_pass)
-        stdin, stdout, stderr = ssh_con.exec_command(com)
+        stdin, stdout, stderr = ssh_con.exec_command(com + ' ; echo "Return code is :$?:"')
 
         print "Command \"" + com + "\" ran on host \"" + cream_host + "\". Output streams follow:"
         print "stdout:"
@@ -3840,6 +3728,9 @@ def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass):
         print "stderr:"
         error = stderr.read()
         print error
+
+        if "return code is :0:" not in output.lower():
+                raise _error("JobDBAdminPurger non-zero return value detected! Check report file.")
         if "error" in output.lower():
                 raise _error("JobDBAdminPurger error occured! Check report file.")
         if "error" in error.lower():
@@ -4018,7 +3909,53 @@ def save_batch_job_submission_script_on(ce_endpoint, version, cream_root_pass):
         src.close()
         dst.close()
 
-        print 'New script written, save of the batch job submission script turned ON.'
+        com = 'chmod +x ' + file_path
+        _enisc(com, cream_host, 'root', cream_root_pass)
+
+###
+###
+        for lrms in "condor lsf pbs sge".split(' '):
+                if version.lower() == "emi1":
+                        file_path = "/usr/bin/" + lrms + "_submit.sh"
+                elif version.lower() == "emi2":
+                        file_path = "/usr/libexec/" + lrms + "_submit.sh"
+                else:
+                        raise _error('Please enter either EMI1 or EMI2 as version. You entered: "' + version + '"')
+
+                cream_host = ce_endpoint.split(":")[0]
+                timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
+
+                com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
+                _enisc(com , cream_host, 'root', cream_root_pass)
+                com = 'cp -f ' + file_path + ' ' + file_path + '.save-on.bak.at.' + timestamp
+                _enisc(com , cream_host, 'root', cream_root_pass)
+                com = 'rm -f ' + file_path
+                _enisc(com, cream_host, 'root', cream_root_pass)
+
+                ssh_con = paramiko.SSHClient()
+                ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                ssh_con.connect(cream_host,22,'root',cream_root_pass)
+
+                sftp = ssh_con.open_sftp()
+                src = sftp.file(file_path + '.creamtesting.orig','r')
+                dst = sftp.file(file_path,'w')
+
+                for line in src.readlines():
+                        if 'rm -f $bls_tmp_file' in line and '#' not in line:
+                                to_write = '#rm -f $bls_tmp_file\n'
+                                dst.write(to_write)
+                        else:
+                                dst.write(line)
+
+                src.close()
+                dst.close()
+
+                com = 'chmod +x ' + file_path
+                _enisc(com, cream_host, 'root', cream_root_pass)
+###
+###
+
+        print 'New script(s) written, save of the batch job submission script turned ON.'
 ##############################################################################################################################
 ##############################################################################################################################
 def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
@@ -4070,7 +4007,53 @@ def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
         src.close()
         dst.close()
 
-        print 'New script written, save of the batch job submission script turned OFF.'
+        com = 'chmod +x ' + file_path
+        _enisc(com, cream_host, 'root', cream_root_pass)
+
+###
+###
+        for lrms in "condor lsf pbs sge".split(' '):
+                if version.lower() == "emi1":
+                        file_path = "/usr/bin/" + lrms + "_submit.sh"
+                elif version.lower() == "emi2":
+                        file_path = "/usr/libexec/" + lrms + "_submit.sh"
+                else:
+                        raise _error('Please enter either EMI1 or EMI2 as version. You entered: "' + version + '"')
+
+                cream_host = ce_endpoint.split(":")[0]
+                timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
+
+                com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
+                _enisc(com , cream_host, 'root', cream_root_pass)
+                com = 'cp -f ' + file_path + ' ' + file_path + '.save-on.bak.at.' + timestamp
+                _enisc(com , cream_host, 'root', cream_root_pass)
+                com = 'rm -f ' + file_path
+                _enisc(com, cream_host, 'root', cream_root_pass)
+
+                ssh_con = paramiko.SSHClient()
+                ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                ssh_con.connect(cream_host,22,'root',cream_root_pass)
+
+                sftp = ssh_con.open_sftp()
+                src = sftp.file(file_path + '.creamtesting.orig','r')
+                dst = sftp.file(file_path,'w')
+
+                for line in src.readlines():
+                        if 'rm -f $bls_tmp_file' in line and '#' in line:
+                                to_write = 'rm -f $bls_tmp_file\n'
+                                dst.write(to_write)
+                        else:
+                                dst.write(line)
+
+                src.close()
+                dst.close()
+
+                com = 'chmod +x ' + file_path
+                _enisc(com, cream_host, 'root', cream_root_pass)
+###
+###
+
+        print 'New script(s) written, save of the batch job submission script turned OFF.'
 ##############################################################################################################################
 ##############################################################################################################################
 def cpu_allocation_jdl(output_dir, vo, wholenodes=None, hostnumber=None, smpgranularity=None, cpunumber=None):
@@ -4221,11 +4204,28 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
 
         lrms = batch_system.encode('ascii').lower()
 
-        batch_subm_file_path = '/tmp/cream_' + jid.split('/')[-1].split('CREAM')[1]
+        cream_host = ce_endpoint.split(":")[0]
 
+        cream_config_xml = "/etc/glite-ce-cream/cream-config.xml"
+        ssh_con = paramiko.SSHClient()
+        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        sftp = ssh_con.open_sftp()
+        fPtr = sftp.file(cream_config_xml,'r')
+        contents = fPtr.read()
+
+        blah_prefix = 'not set'
+        for line in contents.split('\n'):
+                if "BLAH_JOBID_PREFIX" in line:
+                        blah_prefix = line.split('value="')[1].split('"')[0]
+        if blah_prefix == "not set":
+                raise _error('Could not determine BLAH_JOBID_PREFIX. Are you sure it is set in /etc/glite-ce-cream/cream-config.xml?')
+
+
+        batch_subm_file_path = '/tmp/'+ blah_prefix + jid.split('/')[-1].split('CREAM')[1]
         print "Batch job submission file is: \"" + batch_subm_file_path + "\""
 
-        cream_host = ce_endpoint.split(":")[0]
+
 
         ssh_con = paramiko.SSHClient()
         ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -4420,5 +4420,30 @@ def execute_remote_mysql_query(db_host, db_host_user, db_host_pass, db_user, db_
 
         #print repr(results)
         return results
+##############################################################################################################################
+##############################################################################################################################
+def delegation_info(deleg_endpoint,deleg_id):
+        '''
+                |  Description:  |  Fetch the information regarding a delegation.                               | \ns
+                |  Arguments:    |  deleg_endpoint    |     the delegation endpoint of a cream service          |
+                |                |  deleg_id          |     the delegation id                                   | \n
+                |  Returns:      |  The commands output or the string "NOT IN STORAGE" if the specified         |
+                |                |  delegation id doesn't exist in the specified endpoint                       |
+        '''
+
+        com="/usr/bin/glite-delegation-info -s " + deleg_endpoint + " " + deleg_id
+        args = shlex.split(com.encode('ascii'))
+        p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        fPtr=p.stdout
+
+        retVal=p.wait()
+
+        output=fPtr.readlines()
+        if 'failed to find delegation id' in ','.join(output).lower() and deleg_id in ','.join(output).lower():
+                return 'NOT IN STORAGE'
+        elif "error" in ','.join(output).lower() or "fault" in ','.join(output).lower() or retVal != 0 :
+		raise _error("Delegation destroy failed with return value: " + str(p.returncode) + " \nCommand reported: " +  ','.join(output) )
+
+        return ','.join(output)
 ##############################################################################################################################
 ##############################################################################################################################

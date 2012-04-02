@@ -122,55 +122,54 @@ Implemented methods enumeration:
  51) wait_for_status
  52) job_status_should_be
  53) qdel_job
- 54) test_qdel
- 55) execute_uberftp_command
- 56) uberftp_upload
- 57) ce_service_info
- 58) validate_ce_service_info
- 59) proxy_info
- 60) get_proxy_dn
- 61) enable_cream_admin
- 62) disable_cream_admin
- 63) allowed_submission
- 64) enable_submission
- 65) disable_submission
- 66) purge_job
- 67) get_job_sb
- 68) set_limiter_threshold
- 69) reset_limiter_threshold
- 70) ban_user_gjaf
- 71) unban_user_gjaf
- 72) change_sandbox_transfer_method
- 73) validate_glue
- 74) modify_cream_config_xml
- 75) reset_cream_config_xml
- 76) execute_remote_mysql_query
- 77) restart_cream
- 78) get_deleg_id_from_status
- 79) check_delegation_id_in_db
- 80) list_proxy_sandbox
- 81) check_delegation_id_in_filesystem
- 82) ban_user_argus
- 83) unban_user_argus
- 84) validate_job_status
- 85) get_time_in_status_format
- 86) get_status_with_filter
- 87) get_guid
- 88) multiple_lcg_cp
- 89) files_should_not_be_empty
- 90) bkill_job
- 92) send_signal_to_process
- 93) jobdbadminpurger
- 94) execute_noninteractive_ssh_com
- 95) get_delegation_id
- 96) renew_proxy
- 97) save_batch_job_submission_script_on
- 98) save_batch_job_submission_script_off
- 99) cpu_allocation_jdl
-100) get_arch_smp_size
-101) cpu_allocation_test
-102) string_should_contain
-103) _log_to_screen
+ 54) execute_uberftp_command
+ 55) uberftp_upload
+ 56) ce_service_info
+ 57) validate_ce_service_info
+ 58) proxy_info
+ 59) get_proxy_dn
+ 60) enable_cream_admin
+ 61) disable_cream_admin
+ 62) allowed_submission
+ 63) enable_submission
+ 64) disable_submission
+ 65) purge_job
+ 66) get_job_sb
+ 67) set_limiter_threshold
+ 68) reset_limiter_threshold
+ 69) ban_user_gjaf
+ 70) unban_user_gjaf
+ 71) change_sandbox_transfer_method
+ 72) validate_glue
+ 73) modify_cream_config_xml
+ 74) reset_cream_config_xml
+ 75) execute_remote_mysql_query
+ 76) restart_cream
+ 77) get_deleg_id_from_status
+ 78) check_delegation_id_in_db
+ 79) list_proxy_sandbox
+ 80) check_delegation_id_in_filesystem
+ 81) ban_user_argus
+ 82) unban_user_argus
+ 83) validate_job_status
+ 84) get_time_in_status_format
+ 85) get_status_with_filter
+ 86) get_guid
+ 87) multiple_lcg_cp
+ 88) files_should_not_be_empty
+ 89) bkill_job
+ 90) send_signal_to_process
+ 91) jobdbadminpurger
+ 92) execute_noninteractive_ssh_com
+ 93) get_delegation_id
+ 94) renew_proxy
+ 95) save_batch_job_submission_script_on
+ 96) save_batch_job_submission_script_off
+ 97) cpu_allocation_jdl
+ 98) get_arch_smp_size
+ 99) cpu_allocation_test
+100) string_should_contain
+101) _log_to_screen
 
 '''
 
@@ -242,13 +241,6 @@ def create_proxy(password, vo, cert=None, key=None, time=None):
         if (cert != None and key == None) or (cert == None and key != None):
                 raise _error("Wrong arguments for proxy creation: " + password + " " + vo + " " + cert + " " + key)
 
-#        if cert == None and key == None and time == None:
-#                com = "/usr/bin/voms-proxy-init -pwstdin --voms %s" % vo
-#        elif cert != None and key != None:
-#                com = "/usr/bin/voms-proxy-init -pwstdin -cert " + cert + " -key " + key + " --voms " + vo
-#        else:
-#                raise _error("Wrong arguments for proxy creation: " + password + " " + vo + " " + cert + " " + key)
-
         args = shlex.split(com.encode('ascii'))
         p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE , stdin=subprocess.PIPE)
         (outData,inData)=p.communicate(input=password)
@@ -277,7 +269,7 @@ def create_delegation(cream_endpoint,delegId):
                 |  Returns:     |   nothing                                                                 |
         '''
 
-        com="/usr/bin/glite-ce-delegate-proxy -e %s %s" % (cream_endpoint,delegId)
+        com="/usr/bin/glite-ce-delegate-proxy -d -e %s %s" % (cream_endpoint,delegId)
         args = shlex.split(com.encode('ascii'))
         p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
         fPtr=p.stdout
@@ -285,6 +277,9 @@ def create_delegation(cream_endpoint,delegId):
         retVal=p.wait()
 
         output=fPtr.readlines()
+        print 'Command "' + com + '" ran. Output follows: '
+        for item in output:
+                print item
 
         if retVal != 0 :
                 raise _error("Delegation failed.Command output:\n %s" % output)
@@ -349,7 +344,7 @@ def get_final_status(job_id):
                 output=fPtr.readlines()
 
                 if retVal != 0 or ("FaultCause" in output and "ErrorCode" in output):
-                        raise _error("Job status polling failed with return value: " + str(p.returncode) + "\nCommand reported: " + output)
+                        raise _error("Job status polling failed with return value: " + str(p.returncode) + "\nCommand reported: " + repr(output))
 
 
                 found=False
@@ -470,8 +465,8 @@ def fetch_output_files(dest_dir,job_id,timeout=0):
              |  Description: |  Gather the files from a certain job,store them in the specified directory and return the list of files transfered |
              |               |  as they exist on the disk after the transfer operation.                                                           |
              |               |  Note: Target directory must be empty!Any existing output files with the same name are overwritten!                | \n
-             |  Arguments:   |  dest_dir     |   directory to store the files locally                                                                |
-             |               |  job_id       |   the job's cream job id                                                                              |
+             |  Arguments:   |  dest_dir     |   directory to store the files locally                                                             |
+             |               |  job_id       |   the job's cream job id                                                                           |
           |               |  timeout      |   time to wait before fetching output (used to wait until files are uploaded to CE's gridftp server)  | \n
              |  Returns:     |  a list with the files transfered                                                                                  |
         '''
@@ -489,7 +484,6 @@ def fetch_output_files(dest_dir,job_id,timeout=0):
 
 	if retVal != 0:
 		raise _error("Output file transfer failed with return value: " + str(p.returncode) + " \nCommand reported: " +  repr(output) )
-                #kinda rough output creation,maybe should find a better one
 
         cream_output_dir=output[1].split(' ')[-1].strip()
 
@@ -991,10 +985,14 @@ def destroy_delegation(deleg_endpoint,deleg_id):
         retVal=p.wait()
 
         output=fPtr.readlines()
+        for item in output:
+                print item
 
         #if retVal != 0 :
-        if "error" in ','.join(output) or "fault" in ','.join(output) or retVal != 0 :
-		raise _error("Delegation destroy failed with return value: " + str(p.returncode) + " \nCommand reported: " +  ','.join(output) )
+        if "error" in ','.join(output).lower() or "fault" in ','.join(output).lower() or retVal != 0 :
+		raise _error("Delegation destroy failed with return value: " + str(p.returncode) + " \nCommand reported: " +  ','.join(output) +\
+                             "IMPORTANT NOTE: An authorization failure in glite_delegation_getInterfaceVarsion might point to a simply non\
+                              existant delegation id and nothing more!")
 ##############################################################################################################################
 ##############################################################################################################################
 
@@ -1899,12 +1897,14 @@ def output_data_jdl(vo, output_dir, gridftp_server=None, lfn_dir=None):
 
         folder = output_dir
 
+        salt = ''.join(random.choice(string.letters) for i in xrange(15))
+
         jdl_identifier = 'outputdata'
-        jdl_name = 'cream_testing-' + str(time.time()) + '-' + jdl_identifier + '.jdl'
+        jdl_name = 'cream_testing-' + str(time.time()) + salt + '-' + jdl_identifier + '.jdl'
         jdl_path = folder + '/' + jdl_name
 
         script_identifier = 'outputdata'
-        script_name = 'cream_testing-' + str(time.time()) + '-' + script_identifier + '.sh'
+        script_name = 'cream_testing-' + str(time.time()) + salt + '-' + script_identifier + '.sh'
         script_path = folder + '/' + script_name
 
         script_file = open(script_path,'w')
@@ -2031,8 +2031,10 @@ def qdel_job(jid, torque_host, torque_admin_user, torque_admin_pass):
         torque_jid = "not_set"
         for line in output.split('\n'):
                 if num_jid in line:
-                        torque_jid = line.split(' ')[0]
-                        print "TORQUE jid is: " + torque_jid
+                        torque_jid = line.split(' ')[0]   # <--- this jid was causing problems with munge for some unknown reason
+                        #print "TORQUE jid is: " + torque_jid
+                        torque_jid = torque_jid.split('.')[0]
+                        print "TORQUE jid kept is: " + torque_jid
 
         if torque_jid is "not_set":
                 raise _error("Cream job with jid " + jid + " has not been found on the Torque server! (qstat didn't report it)")
@@ -2045,6 +2047,10 @@ def qdel_job(jid, torque_host, torque_admin_user, torque_admin_pass):
         print output
         error = stderr.readlines()
         print error
+
+        for item in error:
+                if 'error' in item.lower():
+                        raise _error('An error was reported during the qdel operation. Check report!')
 
         print "Cream job with jid " + jid + " and torque jid " + torque_jid + " has been deleted!"
 
@@ -2452,8 +2458,9 @@ def disable_cream_admin(dn, ce_endpoint, cream_root_pass):
         # write the old entries back in the file, after creating it
         f = sftp.file(file_path,'w')
         for item in entries_left:
-                f.write(item)
-                f.write('\n')
+                if len(item) > 2 and "remove me" not in item:
+                        f.write(item)
+                        f.write('\n')
 
         f.write("remove me\n")
         f.close()
@@ -2599,14 +2606,15 @@ def get_job_sb(jid):
         return (server, dir_path)
 ##############################################################################################################################
 ##############################################################################################################################
-def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pass):
+def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pass, middleware_version):
         '''
-                |  Description:  |  Set one threshold of the cream limiter perl script  |\n
-                |  Arguments:    |  thresh_name      |  The threshold's name            |
-                |                |  thresh_value     |  The threshold's value           |
-                |                |  ce_endpoint      |  The cream host                  |
-                |                |  cream_root_pass  |  Cream root password             |\n
-                |  Returns:      |  Nothing                                             |
+                |  Description:  |  Set one threshold of the cream limiter perl script                            |\n
+                |  Arguments:    |  thresh_name          |  The threshold's name                                  |
+                |                |  thresh_value         |  The threshold's value                                 |
+                |                |  ce_endpoint          |  The cream host                                        |
+                |                |  cream_root_pass      |  Cream root password                                   |
+                |                |   middleware_version  |  The middleware version, either "EMI1" or "EMI2"       |\n
+                |  Returns:      |  Nothing                                                                       |
         '''
 
         cream_host = ce_endpoint.split(":")[0]
@@ -2616,6 +2624,45 @@ def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pas
         if thresh_name not in valid_names:
                 raise _error('Invalid threshold name. Must be one of "' + ','.join(valid_names) + '". You entered: ' + thresh_name)
 
+        if middleware_version.lower() == "emi1":
+                fLoc='/usr/bin/glite_cream_load_monitor'
+        elif middleware_version.lower() == "emi2":
+                fLoc='/etc/glite-ce-cream-utils/glite_cream_load_monitor.conf'
+
+        _enisc("rm -f " + fLoc + ".orig", cream_host, 'root', cream_root_pass)
+        _enisc("mv " + fLoc + " " + fLoc + ".orig", cream_host, 'root', cream_root_pass)
+        _enisc("cp " + fLoc + ".orig " + fLoc + ".tmp", cream_host, 'root', cream_root_pass)
+
+
+        ssh_con = paramiko.SSHClient()
+        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        sftp = ssh_con.open_sftp()
+        src = sftp.file(fLoc + '.tmp','r')
+        dest = sftp.file(fLoc,'w')
+
+        found = False
+        for line in src.readlines():
+                if thresh_name in line and found == False:
+                        if middleware_version.lower() == "emi1":
+                                dest.write("$" + thresh_name + " = " + thresh_value + ";\n")
+                        elif middleware_version.lower() == "emi2":
+                                dest.write(thresh_name + " = " + thresh_value + ";\n")
+
+                        found = True
+                else:
+                        dest.write(line)
+
+        src.close()
+        dest.close()
+
+        _enisc("rm -f " + fLoc + ".tmp", cream_host, 'root', cream_root_pass)
+
+        if middleware_version.lower() == "emi1":
+                _enisc("chmod +x " + fLoc , cream_host, 'root', cream_root_pass)
+
+
+'''        
         _enisc("rm -f /usr/bin/glite_cream_load_monitor.orig", cream_host, 'root', cream_root_pass)
         _enisc("mv /usr/bin/glite_cream_load_monitor /usr/bin/glite_cream_load_monitor.orig", cream_host, 'root', cream_root_pass)
         _enisc("cp /usr/bin/glite_cream_load_monitor.orig /usr/bin/glite_cream_load_monitor.tmp", cream_host, 'root', cream_root_pass)
@@ -2643,20 +2690,29 @@ def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pas
 
         _enisc("rm -f /usr/bin/glite_cream_load_monitor.tmp", cream_host, 'root', cream_root_pass)
         _enisc("chmod +x /usr/bin/glite_cream_load_monitor", cream_host, 'root', cream_root_pass)
+'''
 ##############################################################################################################################
 ##############################################################################################################################
-def reset_limiter_threshold(ce_endpoint, cream_root_pass):
+def reset_limiter_threshold(ce_endpoint, cream_root_pass, middleware_version):
         '''
-                |  Description:  |  Reset the cream limiter perl script to the original unmodified one  |\n
-                |  Arguments:    |  ce_endpoint       |  The cream host                                 |
-                |                |  cream_root_pass   |  Cream root password                            |\n
-                |  Returns:      |  Nothing                                                             |
+                |  Description:  |  Reset the cream limiter perl script to the original unmodified one        |\n
+                |  Arguments:    |  ce_endpoint          |  The cream host                                    |
+                |                |  cream_root_pass      |  Cream root password                               |
+                |                |   middleware_version  |  The middleware version, either "EMI1" or "EMI2"   |\n
+                |  Returns:      |  Nothing                                                                   |
         '''
 
         cream_host = ce_endpoint.split(":")[0]
 
-        _enisc("cp -f /usr/bin/glite_cream_load_monitor.orig /usr/bin/glite_cream_load_monitor", cream_host, 'root', cream_root_pass)
-        _enisc("chmod +x /usr/bin/glite_cream_load_monitor", cream_host, 'root', cream_root_pass)
+        if middleware_version.lower() == "emi1":
+                fLoc='/usr/bin/glite_cream_load_monitor'
+        elif middleware_version.lower() == "emi2":
+                fLoc='/etc/glite-ce-cream-utils/glite_cream_load_monitor.conf'
+
+        _enisc("cp -f " + fLoc + ".orig " + fLoc, cream_host, 'root', cream_root_pass)
+
+        if middleware_version.lower() == "emi1":
+                _enisc("chmod +x " + fLoc , cream_host, 'root', cream_root_pass)
 ##############################################################################################################################
 ##############################################################################################################################
 def ban_user_gjaf(dn, ce_endpoint, cream_root_pass):
@@ -2687,6 +2743,9 @@ def ban_user_gjaf(dn, ce_endpoint, cream_root_pass):
 
         f.write('"' + dn + '"\n')
         f.close()
+
+        #f2 = sftp.file(file_path,'r')
+        #print f2.read()
 ##############################################################################################################################
 ##############################################################################################################################
 def unban_user_gjaf(dn, ce_endpoint, cream_root_pass):
@@ -2728,8 +2787,9 @@ def unban_user_gjaf(dn, ce_endpoint, cream_root_pass):
         # write the old entries back in the file, after creating it
         f = sftp.file(file_path,'w')
         for item in entries_left:
-                f.write(item)
-                f.write('\n')
+                if len(item) > 2 and "remove me" not in item:
+                        f.write(item)
+                        f.write('\n')
         f.write("remove me\n")
         f.close()
 ##############################################################################################################################
@@ -2885,24 +2945,33 @@ def modify_cream_config_xml(ce_endpoint, cream_root_pass, attr, val):
         src = sftp.file(file_path + '.creamtesting.orig','r')
         dst = sftp.file(file_path,'w')
 
+        found=False
         for line in src.readlines():
-                if attr+'="' in line:
-                        print line
-                        to_write=line.split('=')[0] + '="' + val + '"\n'
-                        print to_write
+                if 'name="'+attr+'"' in line:
+                        found=True
+                        #print line
+                        to_write='<parameter name="' + attr + '" value="' + val + '" />\n'
+                        #print to_write
                         dst.write(to_write)
                 else:
                         dst.write(line)
 
         src.close()
         dst.close()
+
+        print "In the following output, the attribute \"" + attr + "\" must have the value: \"" + val + "\""
+        com = "cat /etc/glite-ce-cream/cream-config.xml"
+        _enisc(com , cream_host, 'root', cream_root_pass)
+
+        if found == False:
+                raise _error('The attribute "' + attr + '" specified wasn\' t found!')
 ##############################################################################################################################
 ##############################################################################################################################
 def reset_cream_config_xml(ce_endpoint, cream_root_pass):
         '''
                 |  Description:  |   Reset the cream config xml file to the original                           | \n
                 |  Arguments:    |   ce_endpoint       |      the cream endpoint                               |
-                |                |   cream_root_pass   |      cream host root user's password                  |\n
+                |                |   cream_root_pass   |      cream host root user's password                  | \n
                 |  Returns:      |   Nothing                                                                   |
         '''
 
@@ -2916,6 +2985,9 @@ def reset_cream_config_xml(ce_endpoint, cream_root_pass):
 
         com = "mv -f /etc/glite-ce-cream/cream-config.xml.creamtesting.orig /etc/glite-ce-cream/cream-config.xml"
         _enisc(com, cream_host, 'root', cream_root_pass)
+
+        com = "cat /etc/glite-ce-cream/cream-config.xml"
+        _enisc(com , cream_host, 'root', cream_root_pass)
 ##############################################################################################################################
 ##############################################################################################################################
 def restart_cream(ce_endpoint, cream_root_pass):
@@ -3023,6 +3095,7 @@ def ban_user_argus(dn, argus_host, argus_root_pass):
 
         for command in 'pap-admin ban subject "' + dn +'"' , "/etc/init.d/argus-pdp reloadpolicy" , "/etc/init.d/argus-pepd clearcache":
                 stdin, stdout, stderr = ssh_con.exec_command(command)
+                print "Command's \"" + command + "\" output streams follow:"
                 print "stdout: " + stdout.read()
                 print "stderr: " + stderr.read()
 
@@ -3552,7 +3625,8 @@ def get_guid(file_path,prefix=None):
                                              "but you entered a list of: " + str(type(item)) + " for item: "\
                                              + str(item))
         elif (type(file_path) is str) or (type(file_path) is unicode):
-                files.append(file_path)
+                if "DSU" in item:
+                        files.append(item)
         else:
                 raise _error("The argument should be either string or list of strings, but you entered:" + str(type(file_path)))
 
@@ -3698,23 +3772,28 @@ def send_signal_to_process(pid, sigNo):
         os.kill(int(pid),int(sigNo))
 ##############################################################################################################################
 ##############################################################################################################################
-def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass):
+def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass, middleware_version):
         '''
-                |  Description: |   Purge a job using the JobDBAdminPurger.sh script, run on cream host                                | \n
-                |  Arguments:   |   jid               |     the job to purge job id as returned by glite-ce-job-submit                 |
-                |               |   ce_endpoint       |     the host of the cream service                                              |
-                |               |   user_pass         |     cream host root user password                                              |
-                |               |   db_user           |     cream's db user                                                            |
-                |               |   db_pass           |     aforementioned user's db pass                                              |\n
-                |  Returns:     |   nothing                                                                                            |
+                |  Description: |   Purge a job using the JobDBAdminPurger.sh script, run on cream host                                  | \n
+                |  Arguments:   |   jid                 |     the job to purge job id as returned by glite-ce-job-submit                 |
+                |               |   ce_endpoint         |     the host of the cream service                                              |
+                |               |   user_pass           |     cream host root user password                                              |
+                |               |   db_user             |     cream's db user                                                            |
+                |               |   db_pass             |     aforementioned user's db pass                                              |
+                |               |   middleware_version  |     the middleware version, either "EMI1" or "EMI2"                            |\n
+                |  Returns:     |   nothing                                                                                              |
         '''
 
         cream_host = ce_endpoint.split(":")[0]
         job_id = jid.split('/')[-1]
         user = 'root'
 
-        com = '/usr/sbin/JobDBAdminPurger.sh -u ' + db_user + ' -p ' + db_pass + ' -j ' + job_id
-
+        if middleware_version.lower() == "emi1":
+                com = '/usr/sbin/JobDBAdminPurger.sh -u ' + db_user + ' -p ' + db_pass + ' -j ' + job_id
+        elif middleware_version.lower() == "emi2":
+                com = '/usr/sbin/JobDBAdminPurger.sh -j ' + job_id
+        else:
+                raise _error('Invalid middleware version provided. Should be either "EMI1" or "EMI2", but you entered:"' + middleware_version + '"')
 
         ssh_con = paramiko.SSHClient()
         ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())  #don't ask for acceptance of foreign host key (auto accept)
@@ -4246,7 +4325,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
                         search_str = 'PBS -W x=NACCESSPOLICY:SINGLEJOB'
                         string_should_contain(contents, search_str)
                 elif lrms == 'lsf':
-                        search_str = 'BSUB -n ' + str(smpsize*hostnumber)
+                        search_str = 'BSUB -n ' + str(int(smpsize)*int(hostnumber))
                         string_should_contain(contents, search_str)
                         search_str = 'BSUB -R "span[ptile=' + smpsize + ']"'
                         string_should_contain(contents, search_str)
@@ -4255,7 +4334,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
         elif ttype == 2: # JDL Attributes: WholeNodes=true SMPGranularity=G
-                # Verification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x
+                # Verification for LSF: BSUB -n S, BSUB -R "span[hosts=1]", BSUB -x
                 # Verification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB
                 if lrms == 'pbs':
                         search_str = 'PBS -l nodes=1:ppn=' + str(smpsize)
@@ -4265,7 +4344,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
                 elif lrms == 'lsf':
                         search_str = 'BSUB -n ' + str(smpsize)
                         string_should_contain(contents, search_str)
-                        search_str = 'BSUB -R "span[jpsts=1]"'
+                        search_str = 'BSUB -R "span[hosts=1]"'
                         string_should_contain(contents, search_str)
                         search_str = 'BSUB -x'
                         string_should_contain(contents, search_str)
@@ -4280,7 +4359,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
                         search_str = 'PBS -W x=NACCESSPOLICY:SINGLEJOB'
                         string_should_contain(contents, search_str)
                 elif lrms == 'lsf':
-                        search_str = 'BSUB -n ' + str(smpsize*hostnumber)
+                        search_str = 'BSUB -n ' + str(int(smpsize)*int(hostnumber))
                         string_should_contain(contents, search_str)
                         search_str = 'BSUB -R "span[ptile=' + smpsize + ']"'
                         string_should_contain(contents, search_str)
@@ -4300,7 +4379,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
                                 search_str = search_str + '+1:ppn=' + str(r)
                         string_should_contain(contents, search_str)
                 elif lrms == 'lsf':
-                        search_string = 'BSUB -n ' + str(cpunuber)
+                        search_str = 'BSUB -n ' + str(cpunumber)
                         string_should_contain(contents, search_str)
                         search_string = 'BSUB -R "span[ptile=' + str(smpgranularity) + ']"'
                         string_should_contain(contents, search_str)
@@ -4322,7 +4401,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
                                 n = n+1
                         search_str = 'BSUB -n ' + str(cpunumber)
                         string_should_contain(contents, search_str)
-                        search_str = 'BSUB -R "span[ptile=' + n + ']"'
+                        search_str = 'BSUB -R "span[ptile=' + str(n) + ']"'
                         string_should_contain(contents, search_str)
                 else:
                         raise _error('Batch system must be either PBS or LSF but you entered: "' + batch_system + '" (' + lrms + ')')
@@ -4424,14 +4503,14 @@ def execute_remote_mysql_query(db_host, db_host_user, db_host_pass, db_user, db_
 ##############################################################################################################################
 def delegation_info(deleg_endpoint,deleg_id):
         '''
-                |  Description:  |  Fetch the information regarding a delegation.                               | \ns
+                |  Description:  |  Fetch the information regarding a delegation.                               | \n
                 |  Arguments:    |  deleg_endpoint    |     the delegation endpoint of a cream service          |
                 |                |  deleg_id          |     the delegation id                                   | \n
                 |  Returns:      |  The commands output or the string "NOT IN STORAGE" if the specified         |
                 |                |  delegation id doesn't exist in the specified endpoint                       |
         '''
 
-        com="/usr/bin/glite-delegation-info -s " + deleg_endpoint + " " + deleg_id
+        com="/usr/bin/glite-delegation-info -v -s " + deleg_endpoint + " " + deleg_id
         args = shlex.split(com.encode('ascii'))
         p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
         fPtr=p.stdout
@@ -4439,10 +4518,38 @@ def delegation_info(deleg_endpoint,deleg_id):
         retVal=p.wait()
 
         output=fPtr.readlines()
-        if 'failed to find delegation id' in ','.join(output).lower() and deleg_id in ','.join(output).lower():
+
+        print 'Command "' + com + '" ran. Output follows:'
+        for item in output:
+                print item
+
+        com="/usr/bin/glite-delegation-info -s " + deleg_endpoint + " " + deleg_id
+        args = shlex.split(com.encode('ascii'))
+        p2 = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        fPtr2=p2.stdout
+
+        retVal2=p2.wait()
+
+        output2=fPtr2.readlines()
+
+        print 'Command "' + com + '" ran. Output follows:'
+        for item in output2:
+                print item
+
+        if 'failed to find delegation id' in ','.join(output2).lower() and deleg_id in ','.join(output2).lower():
+                return 'NOT IN STORAGE'
+        elif 'not found' in ','.join(output2).lower() and deleg_id in ','.join(output2).lower():
+                return 'NOT IN STORAGE'
+        elif 'failed to find delegation id' in ','.join(output).lower() and deleg_id in ','.join(output).lower():
+                return 'NOT IN STORAGE'
+        elif 'not found' in ','.join(output).lower() and deleg_id in ','.join(output).lower():
                 return 'NOT IN STORAGE'
         elif "error" in ','.join(output).lower() or "fault" in ','.join(output).lower() or retVal != 0 :
-		raise _error("Delegation destroy failed with return value: " + str(p.returncode) + " \nCommand reported: " +  ','.join(output) )
+		raise _error("Delegation info failed with return value: " + str(p.returncode) + " \n")
+        elif "error" in ','.join(output2).lower() or "fault" in ','.join(output2).lower() or retVal2 != 0 :
+		raise _error("Delegation info failed with return value: " + str(p.returncode) + " \n")
+        elif "authorization failure" in ','.join(output).lower() or "not allowed" in ','.join(output).lower():
+		raise _error("Delegation info failed with return value: " + str(p.returncode) + " \n")
 
         return ','.join(output)
 ##############################################################################################################################

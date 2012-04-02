@@ -66,7 +66,7 @@ lrms_admin_pass=""
 tmp_dir=""
 
 # Delete temporary files (jdl and script files created during the test) or not. Possible values: True False. Defaults to "True"
-delete_files="False"
+delete_files="True"
 
 # The cream host's root user's ssh password. Example: p4sSw0rD
 cream_root_pass=""

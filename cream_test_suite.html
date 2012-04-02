@@ -1,10 +1,7 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="RIDE" /> 
-<meta name="rf-template" content="False" /> 
 <style type="text/css">
 html {
   font-family: Arial,Helvetica,sans-serif;
@@ -22,6 +19,15 @@ th, td {
   padding: 0.1em 0.2em;
   height: 1.5em;
   width: 12em;
+}
+td.colspan4, th.colspan4 {
+    width: 48em;
+}
+td.colspan3, th.colspan3 {
+    width: 36em;
+}
+td.colspan2, th.colspan2 {
+    width: 24em;
 }
 th {
   background-color: rgb(192, 192, 192);
@@ -43,14 +49,13 @@ td.name, th.name {
 </head>
 <body>
 <h1>Cream Test Suite</h1>
-<table id="settings" border="1">
+<table border="1" id="setting">
 <tr>
-<th class="name">Setting</th>
-<th colspan="4">Value</th>
+<th class="name" colspan="5">Setting</th>
 </tr>
 <tr>
 <td class="name">Documentation</td>
-<td colspan="4">This is the main testing module,needed for testing the CREAM functionality.For more information check these urls: \n<br>
+<td class="colspan4" colspan="4">This is the main testing module,needed for testing the CREAM functionality.For more information check these urls: \n<br>
 CREAM User's Guide: \n<br>
 <a href="http://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide">http://wiki.italiangrid.org/twiki/bin/view/CREAM/UserGuide</a> \n<br>
 JDL Guide: \n<br>
@@ -112,17 +117,14 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td></td>
 </tr>
 </table>
-<table id="variables" border="1"></table>
-<table id="testcases" border="1">
+<table border="1" id="testcase">
 <tr>
-<th class="name">Test Case</th>
-<th>Action</th>
-<th colspan="3">Arguments</th>
+<th class="name" colspan="5">Test Case</th>
 </tr>
 <tr>
 <td class="name"><a name="test_Set Log Level">Set Log Level</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Set the log level used for the test suite. This changes the verbosity of the final test suite log files.</td>
+<td class="colspan3" colspan="3">Set the log level used for the test suite. This changes the verbosity of the final test suite log files.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -148,7 +150,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Check Executables">Check Executables</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Check whether the needed executables for the test are available in the underlying system.</td>
+<td class="colspan3" colspan="3">Check whether the needed executables for the test are available in the underlying system.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -321,7 +323,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Simple Submit">Simple Submit</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Submit the jdl and wait for final job status to be done-ok.</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Submit the jdl and wait for final job status to be done-ok.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -410,7 +412,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_ISB Base URI">ISB Base URI</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandboxBaseURI is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td>
+<td class="colspan3" colspan="3">Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandboxBaseURI is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -576,7 +578,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_ISB Client to CE">ISB Client to CE</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute a bash shell script.The script is stored on the UI.The jdl attribute InputSandbox is used.Firstly submit the jdl and then wait for final job state to be done-ok.</td>
+<td class="colspan3" colspan="3">Execute a bash shell script.The script is stored on the UI.The jdl attribute InputSandbox is used.Firstly submit the jdl and then wait for final job state to be done-ok.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -672,7 +674,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_ISB gsiftp to CE">ISB gsiftp to CE</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandbox is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td>
+<td class="colspan3" colspan="3">Execute a bash shell script.The script is stored in a gridftp server.The jdl attribute InputSandbox is used.First upload the executable script,then submit the jdl and the final state should be done-ok.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -831,7 +833,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_OSB localhost">OSB localhost</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Store std out and error streams on "<a href="gsiftp://localhost">gsiftp://localhost</a>" .Firstly submit the jdl,wait for final job state done-ok,download the produced files,get the output file list from the jdl file and compare the two file lists.</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Store std out and error streams on "<a href="gsiftp://localhost">gsiftp://localhost</a>" .Firstly submit the jdl,wait for final job state done-ok,download the produced files,get the output file list from the jdl file and compare the two file lists.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -990,7 +992,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_OSB gsiftp BaseDestURI">OSB gsiftp BaseDestURI</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxBaseDestURI is used.\n2) Get output file list from jdl,base dest uri.\n3) lcg-ls base dest uri and files shouldn't exist\n4) Execute jdl\n5) lcg-ls base dest uri and files should exist\n6) Delete files (cleanup)\n7) lcg-ls base dest uri and files shouldn't exist</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxBaseDestURI is used.\n2) Get output file list from jdl,base dest uri.\n3) lcg-ls base dest uri and files shouldn't exist\n4) Execute jdl\n5) lcg-ls base dest uri and files should exist\n6) Delete files (cleanup)\n7) lcg-ls base dest uri and files shouldn't exist</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -1191,7 +1193,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_OSB gsiftp DestURI">OSB gsiftp DestURI</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxDestURI is used.\n2) Get output file list from jdl,base dest uri.\n3) lcg-ls base dest uri and files shouldn't exist\n4) Execute jdl\n5) lcg-ls base dest uri and files should exist\n6) Delete files (cleanup)\n7) lcg-ls base dest uri and files shouldn't exist</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Store std out and error streams on a gridftp server.The jdl attribute OutputSandboxDestURI is used.\n2) Get output file list from jdl,base dest uri.\n3) lcg-ls base dest uri and files shouldn't exist\n4) Execute jdl\n5) lcg-ls base dest uri and files should exist\n6) Delete files (cleanup)\n7) lcg-ls base dest uri and files shouldn't exist</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -1385,7 +1387,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Environment">Environment</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute a bash shell script.The script is stored locally.The jdl sets an environmental variable.The script prints the value of that variable.\nSubmit the jdl,the final state should be done-ok and the output file should have the designated variable.</td>
+<td class="colspan3" colspan="3">Execute a bash shell script.The script is stored locally.The jdl sets an environmental variable.The script prints the value of that variable.\nSubmit the jdl,the final state should be done-ok and the output file should have the designated variable.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -1523,7 +1525,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Epilogue">Epilogue</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute two bash shell scripts,one for the job and the other as an epilogue.The epilogue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td>
+<td class="colspan3" colspan="3">Execute two bash shell scripts,one for the job and the other as an epilogue.The epilogue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -1661,7 +1663,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Prologue">Prologue</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute two bash shell scripts,one for the job and the other as a prologue.The prologue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td>
+<td class="colspan3" colspan="3">Execute two bash shell scripts,one for the job and the other as a prologue.The prologue script creates a file with a certain string,which is collected by CREAM as an output file.Submit the jdl,the final state should be done ok,and the output file should have the designated string.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -1799,7 +1801,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_CPUNumber">CPUNumber</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Set the jdl attribute CPUNumber to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM918215196)</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Set the jdl attribute CPUNumber to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM918215196)</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -1972,7 +1974,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_HostNumber">HostNumber</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Set the jdl attribute HostNumber to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: [BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM150008664)]</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Set the jdl attribute HostNumber to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: [BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM150008664)]</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2145,7 +2147,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_SMPGranularity">SMPGranularity</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Set the jdl attribute SMPGranularity to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: [BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM348964588)]</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Set the jdl attribute SMPGranularity to a certain number.\nThe submission is expected to fail for a value of 0 (this is treated as the corect behaviour).On the other hand,it is expected to succeed and the final job state should be done-ok,if it has any other &gt;=1 value.\nNOTE: The glite-ce-job-submit will succeed for an unsupported value (e.g. not enough cpus available on site) but will fail eventually and the final state of the job will be aborted (with a message such as: [BLAH error: submission command failed (exit code = 1) (stdout:) (stderr:qsub: Job exceeds queue resource limits MSG=cannot locate feasible nodes-) N/A (jobId = CREAM348964588)]</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2318,7 +2320,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_WholeNodes">WholeNodes</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Set the jdl attribute WholeNodes to True and False.\nThe submission is expected to succeed for both values and the final job state should be done-ok.</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Set the jdl attribute WholeNodes to True and False.\nThe submission is expected to succeed for both values and the final job state should be done-ok.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2463,7 +2465,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_HostNumber SMPGranularity and WholeNodes">HostNumber SMPGranularity and WholeNodes</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Execute /bin/uname -a.Set the jdl attributes HostNumber and SMPGranularity to a random -correct- value and WholeNodes to True and False.Job submission should fail for "False" and succeed for "True",the latter with a final job state of done-ok.</td>
+<td class="colspan3" colspan="3">Execute /bin/uname -a.Set the jdl attributes HostNumber and SMPGranularity to a random -correct- value and WholeNodes to True and False.Job submission should fail for "False" and succeed for "True",the latter with a final job state of done-ok.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2587,7 +2589,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Explicit Delegation">Explicit Delegation</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Test job submission with explicit delegation.Three cases are tested:\n1) Delegate a proxy and submit a job (job final state should be done-ok)\n2) Create an allready existing delegation id (failure is treated as correct behaviour)\n3) Submit job with explicit delegation of a non existant delegation id (failure is treated as correct behaviour)</td>
+<td class="colspan3" colspan="3">Test job submission with explicit delegation.Three cases are tested:\n1) Delegate a proxy and submit a job (job final state should be done-ok)\n2) Create an allready existing delegation id (failure is treated as correct behaviour)\n3) Submit job with explicit delegation of a non existant delegation id (failure is treated as correct behaviour)</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2732,7 +2734,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Job Cancel">Job Cancel</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Test job cancellation.Two cases are tested:\n1) Submit and then cancel a job.The final state should be cancelled.\n2) Cancel the aforementioned job again (failure is treated as correct behaviour).</td>
+<td class="colspan3" colspan="3">Test job cancellation.Two cases are tested:\n1) Submit and then cancel a job.The final state should be cancelled.\n2) Cancel the aforementioned job again (failure is treated as correct behaviour).</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2856,7 +2858,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Job List">Job List</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Test the job listing cli utility.Store the list of the user's jobs,before and after a job submission.The returned job id shouldn't exist in the job list command output before the submission and should exist afterwards.</td>
+<td class="colspan3" colspan="3">Test the job listing cli utility.Store the list of the user's jobs,before and after a job submission.The returned job id shouldn't exist in the job list command output before the submission and should exist afterwards.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2952,7 +2954,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Job Suspend - Resume">Job Suspend - Resume</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Submit a job and suspend it.Wait until it's state is REALLY-RUNNING.\nCase LSF batch system:\nIt's state should be HELD.Then resume the same job.It's status should be REALLY-RUNNING.The final status should be DONE-OK.\nCase Torque batch system:\nIt's state should still be REALLY-RUNNING.Resume the job and expect an error.It's status should be REALLY-RUNNING.The final status should be DONE-OK.</td>
+<td class="colspan3" colspan="3">Submit a job and suspend it.Wait until it's state is REALLY-RUNNING.\nCase LSF batch system:\nIt's state should be HELD.Then resume the same job.It's status should be REALLY-RUNNING.The final status should be DONE-OK.\nCase Torque batch system:\nIt's state should still be REALLY-RUNNING.Resume the job and expect an error.It's status should be REALLY-RUNNING.The final status should be DONE-OK.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2987,7 +2989,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>${jdl}=</td>
 <td>Sleep JDL</td>
 <td>${vo}</td>
-<td>60</td>
+<td>180</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3125,7 +3127,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Manually Cancel Job">Manually Cancel Job</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Submit a job and then manually cancel it on the LRMS host.\nThe final status should be either "DONE-FAILED" or "CANCELLED"\nInternally, ssh is used to connect and execute qstat and qdel on the Torque host by a torque admin user.</td>
+<td class="colspan3" colspan="3">Submit a job and then manually cancel it on the LRMS host.\nThe final status should be either "DONE-FAILED" or "CANCELLED"\nInternally, ssh is used to connect and execute qstat and qdel on the Torque host by a torque admin user.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3277,7 +3279,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Verify CE service info">Verify CE service info</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case verifies the output of the glite-ce-service-info command for both verbosity levels.\n</td>
+<td class="colspan3" colspan="3">This test case verifies the output of the glite-ce-service-info command for both verbosity levels.\n</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3366,7 +3368,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Enable - Disable Submission">Enable - Disable Submission</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case tests the proper functionality of the glite-ce-allowed-submission and glite-ce-enable/disable-submission commands, for admin and non-admin users.\nThe test executes the following steps:\n1) Checks if initially the submission is allowed (it should)\n2) Executes a simple job (it should succeed)\n3) Disables submission (the current user executing the test case is considered to NOT be a CREAM admin, thus this step should fail)\n4) Add the current user as a CREAM admin\n5) Disable submission (this time it should succeed)\n6) Check if submission is allowed (it shouldn't)\n7) Execute a simple job submission (it should fail)\n8) Enable submission\n9) Execute a simple job (it should succeed)\n10) Remove current user from CREAM admin\n11) Disable submission (should fail, since the user isn't a CREAM admin anymore)\nThis test case internally uses root ssh access to the cream host, in order to add/remove a cream administrator.</td>
+<td class="colspan3" colspan="3">This test case tests the proper functionality of the glite-ce-allowed-submission and glite-ce-enable/disable-submission commands, for admin and non-admin users.\nThe test executes the following steps:\n1) Checks if initially the submission is allowed (it should)\n2) Executes a simple job (it should succeed)\n3) Disables submission (the current user executing the test case is considered to NOT be a CREAM admin, thus this step should fail)\n4) Add the current user as a CREAM admin\n5) Disable submission (this time it should succeed)\n6) Check if submission is allowed (it shouldn't)\n7) Execute a simple job submission (it should fail)\n8) Enable submission\n9) Execute a simple job (it should succeed)\n10) Remove current user from CREAM admin\n11) Disable submission (should fail, since the user isn't a CREAM admin anymore)\nThis test case internally uses root ssh access to the cream host, in order to add/remove a cream administrator.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3588,7 +3590,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>[Teardown]</td>
-<td>Simple Teardown</td>
+<td>Enable - Disable Submission Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -3602,7 +3604,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Job Purge">Job Purge</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case verifies the proper functionality of the glite-ce-job-purge command. In order to do that, it purges a job and then searches for its status and its sandbox dirs on the cream node. The job shouldn't be found by the status command and the sandbox dirs shouldn't exist.</td>
+<td class="colspan3" colspan="3">This test case verifies the proper functionality of the glite-ce-job-purge command. In order to do that, it purges a job and then searches for its status and its sandbox dirs on the cream node. The job shouldn't be found by the status command and the sandbox dirs shouldn't exist.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3726,7 +3728,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Admin Manage Job">Admin Manage Job</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case checks whether a user can manage other people's jobs when being or not being an admin. Test case algorithm:\n1) Submit a sleep job and wait until it reaches the REALLY-RUNNING state\n2) Create a new proxy with different credentials that the default (a second cert and key are required for this, pointed to by the relevant variables)\n3) Try to cancel the job (should fail, since the user with the second proxy isn't an admin)\n4) Make the user with the second proxy a cream admin\n5) Try to cancel the job (should succeed, since the user with the second proxy is an admin now)\n6) Remove the user with the second proxy from the admin list.</td>
+<td class="colspan3" colspan="3">This test case checks whether a user can manage other people's jobs when being or not being an admin. Test case algorithm:\n1) Submit a sleep job and wait until it reaches the REALLY-RUNNING state\n2) Create a new proxy with different credentials that the default (a second cert and key are required for this, pointed to by the relevant variables)\n3) Try to cancel the job (should fail, since the user with the second proxy isn't an admin)\n4) Make the user with the second proxy a cream admin\n5) Try to cancel the job (should succeed, since the user with the second proxy is an admin now)\n6) Remove the user with the second proxy from the admin list.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3747,6 +3749,27 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Should not be empty</td>
 <td>${cream_root_pass}</td>
 <td>Mandatory variable cream_root_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${sec_proxy_pass}</td>
+<td>Mandatory variable sec_proxy_pass is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${sec_cert}</td>
+<td>Mandatory variable sec_cert is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${sec_key}</td>
+<td>Mandatory variable sec_key is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -3837,7 +3860,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>Run Keyword and Expect Error</td>
 <td>*</td>
-<td>Cancel Job</td>
+<td>Get Current Status Verbose</td>
 <td>${job_id}</td>
 </tr>
 <tr>
@@ -3849,7 +3872,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>Cancel Job</td>
+<td>Get Current Status Verbose</td>
 <td>${job_id}</td>
 <td></td>
 <td></td>
@@ -3878,7 +3901,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Limiter">Limiter</a></td>
 <td>[Documentation]</td>
-<td colspan="3">NOTE: This test case is about 25 minutes long!\nThis test case, tests the functionality of the CREAM self limiting behaviour. It has the following logic:\n1) Set a limiter threshold to a value which will triger it\n2) Wait for 11 minutes for the limiter script to be run automatically\n3) Submit and job and expect failure\n4) Reset the limiter to the original values\n5) Wait for 11 minutes for the limiter script to be run automatically\n6) Submit a command and succeed</td>
+<td class="colspan3" colspan="3">NOTE: This test case is about 25 minutes long!\nThis test case, tests the functionality of the CREAM self limiting behaviour. It has the following logic:\n1) Set a limiter threshold to a value which will triger it\n2) Wait for 11 minutes for the limiter script to be run automatically\n3) Submit and job and expect failure\n4) Reset the limiter to the original values\n5) Wait for 11 minutes for the limiter script to be run automatically\n6) Submit a command and succeed</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3933,7 +3956,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${cream_root_pass}</td>
-<td></td>
+<td>${middleware_version}</td>
 <td></td>
 </tr>
 <tr>
@@ -3962,7 +3985,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Reset Limiter Threshold</td>
 <td>${ce_endpoint}</td>
 <td>${cream_root_pass}</td>
-<td></td>
+<td>${middleware_version}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4023,7 +4046,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Ban User">Ban User</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case tests if the banning of user, using lcas, works. The test case has the following logic:\n1) Add the user's DN to /etc/lcas/ban_users.db on the cream host\n2) Submit job and expect failure\n3) Remove DN from the aforementioned file\n4) Submit job and succeed</td>
+<td class="colspan3" colspan="3">This test case tests if the banning of user works. The test case has the following logic:\n1) Add the user's DN to /etc/lcas/ban_users.db on the cream host\n-OR-\n1) Create a ban rule for the user's DN on the Argus host\n2) Submit job and expect failure\n3) Remove DN from the aforementioned file\n4) Submit job and succeed</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4188,6 +4211,13 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
+<td>Sleep</td>
+<td>2 min</td>
+<td># wait for the rule to be reloaded (?)</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>${jid}</td>
 <td>${final_state}=</td>
 <td>Submit And Wait</td>
@@ -4238,7 +4268,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Sandbox Staging">Sandbox Staging</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case tests the two different Sandbox staging operations available for the /etc/glite-ce-cream/cream-config.xml, LRMS and GSIFTP. The test case has the following logic:\n1) Change the setting (if GSIFTP, set to LRMS, if LRMS, set to GSIFTP)\n2) Run the osb_localhost test case (it uses input and output sandboxes)\n3) Reset the setting to its original and rerun the osb_localhost test case.</td>
+<td class="colspan3" colspan="3">This test case tests the two different Sandbox staging operations available for the /etc/glite-ce-cream/cream-config.xml, LRMS and GSIFTP. The test case has the following logic:\n1) Change the setting (if GSIFTP, set to LRMS, if LRMS, set to GSIFTP)\n2) Run the osb_localhost test case (it uses input and output sandboxes)\n3) Reset the setting to its original and rerun the osb_localhost test case.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4551,7 +4581,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Validate Glue Schema">Validate Glue Schema</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Run the glue validator on the cream host.\nThe following two cases are tested:\n1) o=grid glue1\n2) o=glue glue2</td>
+<td class="colspan3" colspan="3">Run the glue validator on the cream host.\nThe following two cases are tested:\n1) o=grid glue1\n2) o=glue glue2</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4640,7 +4670,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Automatic Proxy Purging">Automatic Proxy Purging</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case checks the automatic proxy purging functionality. Test case algorithm:\n1) Modify the cream config xml file to set the delegation purge rate to value 1\n2) Submit a simple job and wait for it to finish\n3) Read the delegation id info from the CREAM service's delegation endpoint (before the purger runs)\n4) List the proxy in the job's sandbox (before the purger runs)\n5) Wait 6 minutes for the purger to run\n6) Read the delegation ids info from the CREAM service's delegation endpoint (the purger now has ran)\n7) List the proxy in the job's sandbox (the purger now has ran)\n8) Reset the cream config xml to its original value\n9) Check that the info about the delegation id is valid before the purger has ran and it isn't in storage after the purger has ran.\n10) Check tha the delegation id of the job exists in the contents of the job's sandbox before the purger ran and doesn't exist after the purger ran</td>
+<td class="colspan3" colspan="3">This test case checks the automatic proxy purging functionality. Test case algorithm:\n1) Modify the cream config xml file to set the delegation purge rate to value 1\n2) Submit a simple job and wait for it to finish\n3) Read the delegation id info from the CREAM service's delegation endpoint (before the purger runs)\n4) List the proxy in the job's sandbox (before the purger runs)\n5) Wait 6 minutes for the purger to run\n6) Read the delegation ids info from the CREAM service's delegation endpoint (the purger now has ran)\n7) List the proxy in the job's sandbox (the purger now has ran)\n8) Reset the cream config xml to its original value\n9) Check that the info about the delegation id is valid before the purger has ran and it isn't in storage after the purger has ran.\n10) Check tha the delegation id of the job exists in the contents of the job's sandbox before the purger ran and doesn't exist after the purger ran</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4661,14 +4691,14 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
-<td>time="00:04"</td>
+<td>time=00:10</td>
 </tr>
 <tr>
 <td class="name"></td>
-<td>${jdl}=</td>
-<td>Simple JDL</td>
-<td>${vo}</td>
-<td>${tmp_dir}</td>
+<td>Create Delegation</td>
+<td>${ce_endpoint}</td>
+<td>${deleg_id}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4679,10 +4709,24 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
+<td>${dlg_info_before_purger}=</td>
+<td>Delegation Info</td>
+<td>${deleg_endpoint}</td>
+<td>${deleg_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>10 minutes</td>
+<td># wait for the proxy to expire and the purger to run</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>Modify Cream Config XML</td>
 <td>${ce_endpoint}</td>
 <td>${cream_root_pass}</td>
-<td>delegation_purge_rate</td>
+<td>DELEGATION_PURGE_RATE</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4707,83 +4751,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>${jid}</td>
-<td>${final_state}=</td>
-<td>Submit And Wait</td>
-<td>${jdl}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${ce}</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>${job_log}=</td>
-<td>Get Current Status Verbose</td>
-<td>${jid}</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>${delegation_id}=</td>
-<td>Get Deleg Id From Status</td>
-<td>${job_log}</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Log Many</td>
-<td>${job_log}</td>
-<td>${delegation_id}</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>${dlg_info_before_purger}=</td>
-<td>Delegation Info</td>
-<td>${deleg_endpoint}</td>
-<td>${delegation_id}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Log Many</td>
-<td>${dlg_info_before_purger}=</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>@{sb_before_purger}=</td>
-<td>List Proxy Sandbox</td>
-<td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${job_log}</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Log Many</td>
-<td>@{sb_before_purger}</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Sleep</td>
-<td>6 minutes</td>
-<td># wait for the proxy to expire and the purger to run</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -4794,63 +4761,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>${dlg_info_after_purger}=</td>
 <td>Delegation Info</td>
 <td>${deleg_endpoint}</td>
-<td>${delegation_id}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Log Many</td>
-<td>${dlg_info_after_purger}=</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>@{sb_after_purger}=</td>
-<td>List Proxy Sandbox</td>
-<td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>${job_log}</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Log Many</td>
-<td>@{sb_after_purger}</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Modify Cream Config XML</td>
-<td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
-<td>delegation_purge_rate</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>720</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Restart Cream</td>
-<td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Sleep</td>
-<td>1 minute</td>
-<td># wait for cream to be restarted</td>
-<td></td>
+<td>${deleg_id}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4865,13 +4776,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>${dlg_info_after_purger}</td>
 <td>NOT IN STORAGE</td>
 <td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Check Delegation ID in Filesystem</td>
-<td>${sb_before_purger}</td>
-<td>${sb_after_purger}</td>
-<td>${delegation_id}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4890,7 +4794,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Verify Job Status Output">Verify Job Status Output</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test is checking the output of the glite-ce-job-status command. It uses the following status cases:\n1) verbosity 0\n2) verbosity 1\n3) verbosity 2\n4) use the "from" filter\n5) use the "from" and "to" filters\n6) use the "to" filter\n7) use the "status" filter\nFor this test it is crucial that the ce host, the ui host and the testing host are time-synced.\nIf the aren't synced, most probably this test case will fail when checking the "from" and "to" filters.</td>
+<td class="colspan3" colspan="3">This test is checking the output of the glite-ce-job-status command. It uses the following status cases:\n1) verbosity 0\n2) verbosity 1\n3) verbosity 2\n4) use the "from" filter\n5) use the "from" and "to" filters\n6) use the "to" filter\n7) use the "status" filter\nFor this test it is crucial that the ce host, the ui host and the testing host are time-synced.\nIf the aren't synced, most probably this test case will fail when checking the "from" and "to" filters.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5140,7 +5044,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_OutputData">OutputData</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case tests the OutputData jdl attribute. The testing algorithm is the following:\n1) Create and submit three jdls containing the output data attribute, in three different combinations (simple, with gridftp server, with gridftp server and lfn directory)\n2) Check the final status of those jobs, which should be DONE-OK\n3) Gather the output DSUpload files for each job and extract from them the relevant guids of the uploaded files\n4) Download the uploaded files and check that they are not empty\n\nNote: The jdl is executing a simple script which runs "/bin/uname -a" and stores its output in a text file "script_output.txt"</td>
+<td class="colspan3" colspan="3">This test case tests the OutputData jdl attribute. The testing algorithm is the following:\n1) Create and submit three jdls containing the output data attribute, in three different combinations (simple, with gridftp server, with gridftp server and lfn directory)\n2) Check the final status of those jobs, which should be DONE-OK\n3) Gather the output DSUpload files for each job and extract from them the relevant guids of the uploaded files\n4) Download the uploaded files and check that they are not empty\n\nNote: The jdl is executing a simple script which runs "/bin/uname -a" and stores its output in a text file "script_output.txt"</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5467,7 +5371,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Automatic Job Purge">Automatic Job Purge</a></td>
 <td>[Documentation]</td>
-<td colspan="3">This test case is testing the functionality of the JobDBAdminPurger script. Test case algo:\n1) Submit a job\n2) Wait for it to finish\n3) Purge it with the use of the JobDBAdmin purger script\n4) Do an uberftp ls operation on its sandbox dir (which should fail)\n5) Do a status request operation (glite-ce-job-status, which should fail)</td>
+<td class="colspan3" colspan="3">This test case is testing the functionality of the JobDBAdminPurger script. Test case algo:\n1) Submit a job\n2) Wait for it to finish\n3) Purge it with the use of the JobDBAdmin purger script\n4) Do an uberftp ls operation on its sandbox dir (which should fail)\n5) Do a status request operation (glite-ce-job-status, which should fail)</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5593,7 +5497,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>...</td>
 <td>${creamdb_user}</td>
 <td>${creamdb_pass}</td>
-<td></td>
+<td>${middleware_version}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5640,7 +5544,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_Proxy Renewal">Proxy Renewal</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Submit a job lasting 20 minutes using a proxy valid for 10 minutes.\nAfter 5 minutes renew the proxy with the glite-ce-proxy-renew command.\nVerify the final job status which should eventually be DONE-OK</td>
+<td class="colspan3" colspan="3">Submit a job lasting 20 minutes using a proxy valid for 10 minutes.\nAfter 5 minutes renew the proxy with the glite-ce-proxy-renew command.\nVerify the final job status which should eventually be DONE-OK</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5778,7 +5682,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_CPU Allocation 1">CPU Allocation 1</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+<td class="colspan3" colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5923,7 +5827,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_CPU Allocation 2">CPU Allocation 2</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+<td class="colspan3" colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6068,7 +5972,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_CPU Allocation 3">CPU Allocation 3</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+<td class="colspan3" colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6213,7 +6117,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_CPU Allocation 4">CPU Allocation 4</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+<td class="colspan3" colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6358,7 +6262,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_CPU Allocation 5">CPU Allocation 5</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+<td class="colspan3" colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6503,7 +6407,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="test_CPU Allocation 6">CPU Allocation 6</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
+<td class="colspan3" colspan="3">Validate the contents of the batch job submission script, according to: <a href="https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan">https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan</a> cpu allocation test specifications. Per test information follows:\nWherever it appears,S is the value published as GlueHostArchitectureSMPSize\nTest type 1\nJdl Attributes: WholeNodes=true SMPGranularity=G HostNumber=H, H&gt;1\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptile=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 2\nJDL Attributes: WholeNodes=true SMPGranularity=G\nVerification for LSF: BSUB -n S, BSUB -R "span[jpsts=1]", BSUB -x\nVerification for PBS: PBS -l nodes=1:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 3\nJDL Attributes: WholeNodes=true, HostNumber=H\nVerification for LSF: BSUB -n S*H, BSUB -R "span[ptiles=S]", BSUB -x\nVerification for PBS: PBS -l nodes=H:ppn=S, PBS -W x=NACCESSPOLICY:SINGLEJOB\nTest type 4\nJDL Attributes: WholeNodes=false, SMPGranularity=G, CPUNumber=C\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile=G]"\nVerification for PBS: PBS -l nodes=N:ppn=G { [+1:ppn=R] if r&gt;0 }\nTest type 5\nJDL Attributes: WholeNodes=false, HostNumber=H, CPUNumber=C, H&gt;1\nVerification for LSF: BSUB -n C, BSUB -R "span[ptile={ N if R=0 ; N+1 if R&gt;0 }]"\nVerification for PBS: PBS -l nodes=H-R:ppn=N { [+R:ppn=N+1] if R&gt;0 }\nTest type 6\nJDL Attributes: WholeNodes=false, CPUNumber=C\nVerification for LSF: BSUB -n C\nVerification for PBS: PBS -L nodes=C</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6646,11 +6550,9 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td></td>
 </tr>
 </table>
-<table id="keywords" border="1">
+<table border="1" id="keyword">
 <tr>
-<th class="name">Keyword</th>
-<th>Action</th>
-<th colspan="3">Arguments</th>
+<th class="name" colspan="5">Keyword</th>
 </tr>
 <tr>
 <td class="name"><a name="keyword_Simple Teardown">Simple Teardown</a></td>
@@ -6669,7 +6571,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="keyword_ISB Base URI Teardown">ISB Base URI Teardown</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Delete files/dirs created on a gridftp server, for usage with ISB jdl attributes.</td>
+<td class="colspan3" colspan="3">Delete files/dirs created on a gridftp server, for usage with ISB jdl attributes.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6702,7 +6604,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="keyword_Clean Up">Clean Up</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Delete any and all leftover files from the test.All the files created are located under /tmp and have the prefix "cream_testing-".</td>
+<td class="colspan3" colspan="3">Delete any and all leftover files from the test.All the files created are located under /tmp and have the prefix "cream_testing-".</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6728,7 +6630,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="keyword_Limiter Teardown">Limiter Teardown</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Reset the CREAM limiter script to the stored default values.</td>
+<td class="colspan3" colspan="3">Reset the CREAM limiter script to the stored default values.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6742,7 +6644,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Reset Limiter Threshold</td>
 <td>${ce_endpoint}</td>
 <td>${cream_root_pass}</td>
-<td></td>
+<td>${middleware_version}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6754,7 +6656,21 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="keyword_Automatic Proxy Purging Teardown">Automatic Proxy Purging Teardown</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Restore the "delegation_purge_rate" to the default value.</td>
+<td class="colspan3" colspan="3">Restore the "delegation_purge_rate" to the default value.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Run Keyword And Ignore Error</td>
+<td>Destroy Delegation</td>
+<td>${deleg_endpoint}</td>
+<td>dlg_id_1924</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6768,13 +6684,27 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Modify Cream Config XML</td>
 <td>${ce_endpoint}</td>
 <td>${cream_root_pass}</td>
-<td>delegation_purge_rate</td>
+<td>DELEGATION_PURGE_RATE</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
 <td>720</td>
 <td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Restart Cream</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>1 minute</td>
+<td># wait for cream to be restarted</td>
 <td></td>
 </tr>
 <tr>
@@ -6787,7 +6717,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="keyword_Ban User Teardown">Ban User Teardown</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Remove the current user (i.e.: the user whose cert/key pair is in the standard location ~/.globus) from the CREAM ban list.\nAlternatively, if Argus is in use, remove him from the Argus ban list.\n(note: the user's proxy is re-created here, just in case it doesn't exist for any reason, though at this point of execution, the user should have an active proxy)</td>
+<td class="colspan3" colspan="3">Remove the current user (i.e.: the user whose cert/key pair is in the standard location ~/.globus) from the CREAM ban list.\nAlternatively, if Argus is in use, remove him from the Argus ban list.\n(note: the user's proxy is re-created here, just in case it doesn't exist for any reason, though at this point of execution, the user should have an active proxy)</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6848,7 +6778,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"><a name="keyword_CPU Allocation Teardown">CPU Allocation Teardown</a></td>
 <td>[Documentation]</td>
-<td colspan="3">Reset CREAM's behavior to not save the batch job submission script.</td>
+<td class="colspan3" colspan="3">Reset CREAM's behavior to not save the batch job submission script.</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -6863,6 +6793,41 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
 <td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="keyword_Enable - Disable Submission Teardown">Enable - Disable Submission Teardown</a></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${dn}=</td>
+<td>Get Proxy DN</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Disable Cream Admin</td>
+<td>${dn}</td>
+<td>${ce_endpoint}</td>
+<td>${cream_root_pass}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Proxy</td>
+<td></td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>

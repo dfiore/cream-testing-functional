@@ -40,13 +40,13 @@ deleg_id=""
 
 # The log level used during the test.Default is INFO.For extra output,set to DEBUG or TRACE.
 # (possible values: NONE FAIL WARN INFO DEBUG TRACE)
-log_level="DEBUG"
+log_level="TRACE"
 
 #The underlying batch system of the CREAM endpoint.Either pbs or lsf.
 batch_system=""
 
 # A directory in the gridftp server.This directory has to allready exist and your vo have write access to it. Used for OSB file storage. Example: /tmp
-gridftp_dir=""
+gridftp_dir="/tmp"
 
 # The hostname where the lrms is running. Example: ctb07.gridctb.uoa.gr
 lrms_host=""
@@ -65,8 +65,8 @@ lrms_admin_pass=""
 # All in all, unless needed for specific reasons, you should leave this variable empty.
 tmp_dir=""
 
-# Delete temporary files (jdl and script files created during the test) or not. Possible values: True False. Defaults to "True"
-delete_files="True"
+# Delete temporary files (jdl and script files created during the test) or not. Possible values: True False. Defaults to "False"
+delete_files="False"
 
 # The cream host's root user's ssh password. Example: p4sSw0rD
 cream_root_pass=""
@@ -107,6 +107,12 @@ middleware_version=""
 # The ldap port for the CREAM resource bdii. Defaults to 2170.
 cream_ldap_port="2170"
 
+# The LFC_HOST env var to be set on the WN for outputdata operations. Example: prod-lfc-shared-central.cern.chs
+lfc_host=''
+
+# The LCG_GFAL_INFOSYS env var to be set on the WN for outputdata operations. Example: prod-bdii.cern.ch:2170
+lcg_gfal_infosys=''
+
 #########################################
 #
 # Variable checking/setting code follows.
@@ -133,6 +139,8 @@ else:
                 tmp_dir += '/'
         _os.system("mkdir -p " + tmp_dir) #this should work under normal circumstances, the code here is kept minimal after all.
 print "INFO: The files of this testsuite will be stored under: " + tmp_dir
+outputdata_dir = tmp_dir + 'outputdata'
+_os.system("mkdir -p " + outputdata_dir) #this should work under normal circumstances, the code here is kept minimal after all.
 
 all_vars = { "ce_endpoint":ce_endpoint, "cream_queue":cream_queue, "deleg_endpoint":deleg_endpoint, "vo":vo, "proxy_pass":proxy_pass,
              "gridftp_server":gridftp_server, "lfn_dir":lfn_dir, "deleg_id":deleg_id, "log_level":log_level, "batch_system":batch_system,

@@ -473,7 +473,7 @@ def fetch_output_files(dest_dir,job_id,timeout=0):
 
         time.sleep(float(timeout))
 
-        com="/usr/bin/glite-ce-job-output -N -D %s %s" % (dest_dir,job_id)
+        com="/usr/bin/glite-ce-job-output -d -N -D %s %s" % (dest_dir,job_id)
         args = shlex.split(com.encode('ascii'))
         p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
 	fPtr=p.stdout
@@ -482,19 +482,25 @@ def fetch_output_files(dest_dir,job_id,timeout=0):
 
         output=fPtr.readlines()
 
+        print 'Command "' + com + '" output and error streams:\n' + ','.join(output)
+
 	if retVal != 0:
 		raise _error("Output file transfer failed with return value: " + str(p.returncode) + " \nCommand reported: " +  repr(output) )
 
-        cream_output_dir=output[1].split(' ')[-1].strip()
+        for line in output:
+                if "INFO" in line and "output" in line and dest_dir in line:
+                        cream_output_dir=dest_dir+line.split(dest_dir)[1].strip()
+
+
 
         #return a list with the files downloaded with the glite-ce-job-output command,in the folder output_dir_name.
         files_transfered_on_disk = os.listdir( cream_output_dir )
 
         #copy to an easier to use place (dest_dir which is fixed,instead of the variable cream output dir)
-        for file in files_transfered_on_disk:
-                os.rename(cream_output_dir+"/"+file,dest_dir+"/"+file)
+        for fname in files_transfered_on_disk:
+                os.rename(cream_output_dir+"/"+fname,dest_dir+"/"+fname)
 
-        #print files_transfered_on_disk
+        print "Transfered files:" + repr(files_transfered_on_disk)
 
         return files_transfered_on_disk
 ##############################################################################################################################
@@ -699,6 +705,7 @@ def submit_and_wait(jdl_path=None,ce_endpoint=None,delegId=None):
 
         jid=submit_job(jdl_path,ce_endpoint,delegId)
         final_status=get_final_status(jid)
+
         return (jid,final_status)
 ##############################################################################################################################
 ##############################################################################################################################
@@ -1088,7 +1095,9 @@ def lcg_del(vo,lfn):
 ##############################################################################################################################
 def lcg_cp(vo,identifier,local_fname):
         '''
-                |  Description:  |  Copy a file from an SE to localhost,using lcg-cp.           | \n
+                |  Description:  |  Copy a file from an SE to localhost,using lcg-cp.           |
+                |                |  Note: without the LCG_GFAL_INFOSYS variable set, this       |
+                |                |  keyword will NOT work.                                      |
                 |  Arguments:    |  vo           |    virtual organisation                      |
                 |                |  identifier   |    lfn or guid to download                   |
                 |                |               |    Must include lfn: or guid: at the start   |
@@ -1096,7 +1105,9 @@ def lcg_cp(vo,identifier,local_fname):
                 |  Returns:      |  Nothing.                                                    |
         '''
 
-        com="/usr/bin/lcg-cp --vo " + vo + " "+ identifier + " file:" + local_fname
+        #os.putenv("LCG_GFAL_INFOSYS","prod-bdii.cern.ch:2170")
+
+        com="/usr/bin/lcg-cp -v -v --vo " + vo + " "+ identifier + " file:" + local_fname
         args = shlex.split(com.encode('ascii'))
         p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
         fPtr=p.stdout
@@ -1887,11 +1898,13 @@ def isb_gsiftp_to_ce_jdl(vo, gridftp_server, gridftp_path, uploaded_file_name, o
         return path
 ##############################################################################################################################
 ##############################################################################################################################
-def output_data_jdl(vo, output_dir, gridftp_server=None, lfn_dir=None):
+def output_data_jdl(vo, output_dir, gridftp_server=None, lfn_dir=None, lfc=None, infosys=None):
         '''
                 |  Description:  |   Attribute checking jdl file. Uses a combination of the output data attributes.                     | \n
                 |  Arguments:    |   vo           |   virtual organisation                                                              |
-                |                |   output_dir   |   the directory to put the file in                                                  | \n
+                |                |   output_dir   |   the directory to put the file in                                                  |
+                |                |   lfc          |   the value to set the environmental variable LFC_HOST on the WN                    |
+                |                |   infosys      |   the value to set the environmental variable LCG_GFAL_INFOSYS on the WN            | \n
                 |  Returns:      |   Temporary jdl file name,temporary shell script file name.                                          |
         '''
 
@@ -1927,8 +1940,22 @@ def output_data_jdl(vo, output_dir, gridftp_server=None, lfn_dir=None):
         else:
                 lfn_dir_str = ' '
 
-        jdl_file = open(jdl_path,'w')
+        if lfc == '':
+                lfc=None
+        if infosys == '':
+                infosys=None
 
+        environment=''
+        if lfc != None or infosys != None:
+                if lfc != None and infosys != None:
+                        environment = 'Environment={"LCG_GFAL_INFOSYS=' + infosys + '"'\
+                                      ', "LFC_HOST=' + lfc + '"};'
+                elif lfc != None and infosys == None:
+                        environment = 'Environment={"LFC_HOST=' + lfc + '"};'
+                elif lfc == None and infosys != None:
+                        environment = 'Environment={"LCG_GFAL_INFOSYS=' + infosys + '"};'
+
+        jdl_file = open(jdl_path,'w')
         jdl_contents =  '[\n'\
                         'Type="job";\n'\
                         'JobType="normal";\n'\
@@ -1936,8 +1963,8 @@ def output_data_jdl(vo, output_dir, gridftp_server=None, lfn_dir=None):
                         'Executable="' + script_name + '";\n'\
                         'StdOutput="job.out";\n'\
                         'StdError="job.err";\n'\
-                        'Environment={"LCG_GFAL_INFOSYS=bdii.egee-see.org:2170"};\n'\
                         'InputSandbox={ "' + script_path + '" };\n'\
+                        + environment + '\n'\
                         'OutputData={\n'\
                         '\t\t[\n'\
                         '\t\t\tOutputfile="script_output.txt";\n'\
@@ -2743,6 +2770,8 @@ def ban_user_gjaf(dn, ce_endpoint, cream_root_pass):
 
         f.write('"' + dn + '"\n')
         f.close()
+
+        _enisc("touch /rtc/lcas/ban_users.db", cream_host, 'root', cream_root_pass)
 
         #f2 = sftp.file(file_path,'r')
         #print f2.read()
@@ -3653,6 +3682,9 @@ def get_guid(file_path,prefix=None):
                         contents += '\n\n'
                 print "No guids found in file(s): \"" + repr(files) + "\". Relevant file(s) contents follow." + contents
                 raise _error("No guids found in file(s): \"" + repr(files) + "\". Check the report for the relevant file names and contents.")
+
+        #_log_to_screen(guids,1,1)
+
         return guids
 ##############################################################################################################################
 ##############################################################################################################################

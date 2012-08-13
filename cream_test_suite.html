@@ -83,7 +83,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name">Library</td>
-<td>/opt/cream_test/lib/cream_testing.py</td>
+<td>./cream_testing.py</td>
 <td># This is the main cream testing robot library,implemented as a python module.For more information,check the accompanied html documention (created with pydoc).</td>
 <td></td>
 <td></td>
@@ -104,7 +104,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name">Variables</td>
-<td>/opt/cream_test/lib/vars.py</td>
+<td>./vars.py</td>
 <td># This is the variables file, containing various needed values for the execution of the test suite.</td>
 <td></td>
 <td></td>
@@ -1932,7 +1932,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>[Teardown]</td>
-<td>Simple Teardown</td>
+<td>Explicit Delegation Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -2364,20 +2364,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>Should not be empty</td>
-<td>${lrms_admin_user}</td>
-<td>Mandatory variable lrms_admin_user is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
-<td>${lrms_admin_pass}</td>
-<td>Mandatory variable lrms_admin_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -2422,8 +2408,8 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${lrms_host}</td>
-<td>${lrms_admin_user}</td>
-<td>${lrms_admin_pass}</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2436,8 +2422,8 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${lrms_host}</td>
-<td>${lrms_admin_user}</td>
-<td>${lrms_admin_pass}</td>
+<td></td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2598,13 +2584,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -2699,7 +2678,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Enable Cream Admin</td>
 <td>${dn}</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2783,7 +2762,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Disable Cream Admin</td>
 <td>${dn}</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -2959,13 +2938,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
 <td>${sec_proxy_pass}</td>
 <td>Mandatory variable sec_proxy_pass is empty!</td>
 <td></td>
@@ -3059,14 +3031,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Disable Cream Admin</td>
 <td>${dn}</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
 <td># disable from admin, in case he allready was</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3080,7 +3045,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Enable Cream Admin</td>
 <td>${dn}</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3094,7 +3059,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Disable Cream Admin</td>
 <td>${dn}</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3131,13 +3096,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -3167,8 +3125,8 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>${middleware_version}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3196,8 +3154,8 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>Reset Limiter Threshold</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
 <td>${middleware_version}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -3284,20 +3242,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Run Keyword If</td>
-<td>'${authz_model}' == 'gjaf'</td>
-<td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Run Keyword If</td>
 <td>'${authz_model}' == 'argus'</td>
 <td>Should not be empty</td>
 <td>${argus_host}</td>
@@ -3306,20 +3250,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>Mandatory variable argus_host is empty!</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Run Keyword If</td>
-<td>'${authz_model}' == 'argus'</td>
-<td>Should not be empty</td>
-<td>${argus_root_pass}</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
-<td>Mandatory variable argus_root_pass is empty!</td>
 <td></td>
 <td></td>
 </tr>
@@ -3362,7 +3292,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3376,7 +3306,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${argus_host}</td>
-<td>${argus_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3404,7 +3334,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3418,7 +3348,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${argus_host}</td>
-<td>${argus_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3498,13 +3428,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
-<td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
 <td>Create Proxy</td>
 <td>${proxy_pass}</td>
 <td>${vo}</td>
@@ -3528,14 +3451,14 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>Change Sandbox Transfer Method</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>Restart Cream</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3654,14 +3577,14 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>Change Sandbox Transfer Method</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>Restart Cream</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -3937,21 +3860,14 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>Modify Cream Config XML</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
 <td>DELEGATION_PURGE_RATE</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
 <td>1</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>Restart Cream</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4505,6 +4421,34 @@ EMI Robot Framework Quickstart Guide: \n<br>
 </tr>
 <tr>
 <td class="name"></td>
+<td>Log Many</td>
+<td>${guids1}</td>
+<td>${guids2}</td>
+<td>${guids3}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Be Empty</td>
+<td>${guids1}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Be Empty</td>
+<td>${guids2}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should Not Be Empty</td>
+<td>${guids3}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
 <td>[Teardown]</td>
 <td>Simple Teardown</td>
 <td></td>
@@ -4562,13 +4506,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Should not be empty</td>
 <td>${creamdb_port}</td>
 <td>Mandatory variable creamdb_port is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
 <td></td>
 </tr>
 <tr>
@@ -4639,14 +4576,14 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>JobDBAdminPurger</td>
 <td>${jid}</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td>${creamdb_user}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${creamdb_user}</td>
 <td>${creamdb_pass}</td>
 <td>${middleware_version}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4850,13 +4787,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
 <td>${middleware_version}</td>
 <td>Mandatory variable middleware_version is empty!</td>
 <td></td>
@@ -4887,7 +4817,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Save Batch Job Submission Script On</td>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -4941,22 +4871,22 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>test_type=1</td>
 <td>wholenodes=True</td>
+<td>cpunumber=-1</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>cpunumber=-1</td>
 <td>smpgranularity=2</td>
 <td>hostnumber=2</td>
+<td>smpsize=${smp_size}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>smpsize=${smp_size}</td>
 <td>batch_system=${batch_system}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -4995,13 +4925,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
 <td>${middleware_version}</td>
 <td>Mandatory variable middleware_version is empty!</td>
 <td></td>
@@ -5032,7 +4955,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Save Batch Job Submission Script On</td>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5086,22 +5009,22 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>test_type=2</td>
 <td>wholenodes=True</td>
+<td>cpunumber=-1</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>cpunumber=-1</td>
 <td>smpgranularity=2</td>
 <td>hostnumber=-1</td>
+<td>smpsize=${smp_size}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>smpsize=${smp_size}</td>
 <td>batch_system=${batch_system}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5140,13 +5063,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
 <td>${middleware_version}</td>
 <td>Mandatory variable middleware_version is empty!</td>
 <td></td>
@@ -5177,7 +5093,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Save Batch Job Submission Script On</td>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5231,22 +5147,22 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>test_type=3</td>
 <td>wholenodes=True</td>
+<td>cpunumber=-1</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>cpunumber=-1</td>
 <td>smpgranularity=-1</td>
 <td>hostnumber=2</td>
+<td>smpsize=${smp_size}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>smpsize=${smp_size}</td>
 <td>batch_system=${batch_system}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5285,13 +5201,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
 <td>${middleware_version}</td>
 <td>Mandatory variable middleware_version is empty!</td>
 <td></td>
@@ -5322,7 +5231,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Save Batch Job Submission Script On</td>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5376,22 +5285,22 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>test_type=4</td>
 <td>wholenodes=False</td>
+<td>cpunumber=2</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>cpunumber=2</td>
 <td>smpgranularity=1</td>
 <td>hostnumber=-1</td>
+<td>smpsize=${smp_size}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>smpsize=${smp_size}</td>
 <td>batch_system=${batch_system}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5430,13 +5339,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
 <td>${middleware_version}</td>
 <td>Mandatory variable middleware_version is empty!</td>
 <td></td>
@@ -5467,7 +5369,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Save Batch Job Submission Script On</td>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5521,22 +5423,22 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>test_type=5</td>
 <td>wholenodes=False</td>
+<td>cpunumber=2</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>cpunumber=2</td>
 <td>smpgranularity=-1</td>
 <td>hostnumber=2</td>
+<td>smpsize=${smp_size}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>smpsize=${smp_size}</td>
 <td>batch_system=${batch_system}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5575,13 +5477,6 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>Should not be empty</td>
-<td>${cream_root_pass}</td>
-<td>Mandatory variable cream_root_pass is empty!</td>
-<td></td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>Should not be empty</td>
 <td>${middleware_version}</td>
 <td>Mandatory variable middleware_version is empty!</td>
 <td></td>
@@ -5612,7 +5507,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Save Batch Job Submission Script On</td>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5666,28 +5561,505 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>${cream_root_pass}</td>
 <td>test_type=6</td>
 <td>wholenodes=False</td>
+<td>cpunumber=2</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>cpunumber=2</td>
 <td>smpgranularity=-1</td>
 <td>hostnumber=-1</td>
+<td>smpsize=${smp_size}</td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>...</td>
-<td>smpsize=${smp_size}</td>
 <td>batch_system=${batch_system}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>[Teardown]</td>
 <td>CPU Allocation Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Resource BDII">Resource BDII</a></td>
+<td>[Documentation]</td>
+<td class="colspan3" colspan="3">Check if the resource bdii publishes all the relevant objectclasses for both glue1 and glue2.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>bdii</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${ce_host}</td>
+<td>Mandatory variable ce_host is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should not be empty</td>
+<td>${cream_ldap_port}</td>
+<td>Mandatory variable cream_ldap_port is empty!</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>@{results} =</td>
+<td>Create List</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GlueCE</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GlueCE</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GlueVOView</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GlueVOView</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GlueCluster</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GlueCluster</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GlueSubCluster</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GlueSubCluster</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GLUE2ComputingService</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GLUE2ComputingService</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>(&amp;(objectclass=GLUE2ComputingEndPoint)(GLUE2EndpointInterfaceName=org.glite.ce.CREAM))</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>(&amp;(objectclass=GLUE2ComputingEndPoint)(GLUE2EndpointInterfaceName=org.glite.ce.CREAM))</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GLUE2Manager</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GLUE2Manager</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GLUE2Share</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GLUE2Share</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>objectclass=GLUE2ExecutionEnvironment</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>objectclass=GLUE2ExecutionEnvironment</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${result}=</td>
+<td>LDAP Search</td>
+<td>${ce_host}</td>
+<td>${cream_ldap_port}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>o=grid</td>
+<td>(&amp;(objectclass=GLUE2ComputingEndPoint)(GLUE2EndpointInterfaceName=org.glite.ce.ApplicationPublisher))</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Append to List</td>
+<td>${results}</td>
+<td>${result}</td>
+<td>(&amp;(objectclass=GLUE2ComputingEndPoint)(GLUE2EndpointInterfaceName=org.glite.ce.ApplicationPublisher))</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Check Resource BDII Published Values</td>
+<td>${results}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Logging and Bookkeeping">Logging and Bookkeeping</a></td>
+<td>[Documentation]</td>
+<td class="colspan3" colspan="3">Check if the logging and bookkeeping service reports 3 events sourcing from LRMS.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>lb</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}=</td>
+<td>WMS Job Submit</td>
+<td>${jdl}</td>
+<td>ce_endpoint=${ce}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${final_state}=</td>
+<td>WMS Get Final Job Status</td>
+<td>${jid}</td>
+<td>verbosity=3</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>Done(Success)</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${logging_info}=</td>
+<td>WMS Job Logging Info</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Check WMS logging info</td>
+<td>${logging_info}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="test_Old BLParser Restart">Old BLParser Restart</a></td>
+<td>[Documentation]</td>
+<td class="colspan3" colspan="3">Configure a CREAM CE using the old blah blparser. Stop the blparser and after a few seconds (e.g. 10) restart it. Wait for 2 minute and try a job submission. The job should run and complete properly.</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Tags]</td>
+<td>old_blah</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Setup</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Create Proxy</td>
+<td>${proxy_pass}</td>
+<td>${vo}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jdl}=</td>
+<td>Simple JDL</td>
+<td>${vo}</td>
+<td>${tmp_dir}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td># Test</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Stop Old BLParser</td>
+<td>${blparser_host}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>30 sec</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Start Old BLParser</td>
+<td>${blparser_host}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Sleep</td>
+<td>3 min</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${jid}</td>
+<td>${final_state}=</td>
+<td>Submit And Wait</td>
+<td>${jdl}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>...</td>
+<td>${ce}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>${job_log}=</td>
+<td>Get Current Status Verbose</td>
+<td>${jid}</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Log Many</td>
+<td>${job_log}</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Should be equal as strings</td>
+<td>${final_state}</td>
+<td>DONE-OK</td>
+<td></td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>[Teardown]</td>
+<td>Simple Teardown</td>
 <td></td>
 <td></td>
 </tr>
@@ -5792,8 +6164,8 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>Reset Limiter Threshold</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
 <td>${middleware_version}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5819,7 +6191,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Run Keyword And Ignore Error</td>
 <td>Destroy Delegation</td>
 <td>${deleg_endpoint}</td>
-<td>dlg_id_1924</td>
+<td>${deleg_id}</td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5832,21 +6204,14 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>Modify Cream Config XML</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
 <td>DELEGATION_PURGE_RATE</td>
-</tr>
-<tr>
-<td class="name"></td>
-<td>...</td>
 <td>720</td>
-<td></td>
-<td></td>
 </tr>
 <tr>
 <td class="name"></td>
 <td>Restart Cream</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5893,7 +6258,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5907,7 +6272,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td class="name"></td>
 <td>...</td>
 <td>${argus_host}</td>
-<td>${argus_root_pass}</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -5941,7 +6306,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Save Batch Job Submission Script Off</td>
 <td>${ce_endpoint}</td>
 <td>${middleware_version}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5969,7 +6334,7 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <td>Disable Cream Admin</td>
 <td>${dn}</td>
 <td>${ce_endpoint}</td>
-<td>${cream_root_pass}</td>
+<td></td>
 </tr>
 <tr>
 <td class="name"></td>
@@ -5981,6 +6346,20 @@ EMI Robot Framework Quickstart Guide: \n<br>
 <tr>
 <td class="name"></td>
 <td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td class="name"><a name="keyword_Explicit Delegation Teardown">Explicit Delegation Teardown</a></td>
+<td>Run Keyword And Ignore Error</td>
+<td>Destroy Delegation</td>
+<td>${deleg_endpoint}</td>
+<td>${deleg_id}</td>
+</tr>
+<tr>
+<td class="name"></td>
+<td>Destroy Proxy</td>
 <td></td>
 <td></td>
 <td></td>

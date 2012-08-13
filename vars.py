@@ -46,16 +46,10 @@ log_level="TRACE"
 batch_system=""
 
 # A directory in the gridftp server.This directory has to allready exist and your vo have write access to it. Used for OSB file storage. Example: /tmp
-gridftp_dir="/tmp"
+gridftp_dir=""
 
 # The hostname where the lrms is running. Example: ctb07.gridctb.uoa.gr
 lrms_host=""
-
-# A user on the lrms host, who has job admin priviledges and ssh access to the machine. Example: root
-lrms_admin_user=""
-
-# The aforementioned user's ssh password. Example: p4sSw0rD
-lrms_admin_pass=""
 
 # The path in which temporary files will reside.
 # They will be automatically cleaned up unless you set the variable delete_files to "False" or explicitely don't run the cleanup test case.
@@ -65,11 +59,8 @@ lrms_admin_pass=""
 # All in all, unless needed for specific reasons, you should leave this variable empty.
 tmp_dir=""
 
-# Delete temporary files (jdl and script files created during the test) or not. Possible values: True False. Defaults to "False"
-delete_files="False"
-
-# The cream host's root user's ssh password. Example: p4sSw0rD
-cream_root_pass=""
+# Delete temporary files (jdl and script files created during the test) or not. Possible values: True False. Defaults to "True"
+delete_files="True"
 
 # Path to a second certificate
 sec_cert=""
@@ -98,20 +89,20 @@ authz_model=""
 # The host of the argus service
 argus_host=""
 
-# Root user password for ssh access on argus host
-argus_root_pass=""
-
 # The version of the middleware being tested. Either EMI1 or EMI2.
 middleware_version=""
 
 # The ldap port for the CREAM resource bdii. Defaults to 2170.
 cream_ldap_port="2170"
 
-# The LFC_HOST env var to be set on the WN for outputdata operations. Example: prod-lfc-shared-central.cern.chs
-lfc_host=''
+# The LFC_HOST env var to be set on the WN for outputdata operations. Example: prod-lfc-shared-central.cern.ch
+lfc_host=""
 
 # The LCG_GFAL_INFOSYS env var to be set on the WN for outputdata operations. Example: prod-bdii.cern.ch:2170
-lcg_gfal_infosys=''
+lcg_gfal_infosys=""
+
+# The (old) blparser host. Defaults to the ce_endpoint. Could also be lrms_host, or a whole different host -extremely rare!-
+blparser_host=ce_endpoint
 
 #########################################
 #
@@ -144,10 +135,10 @@ _os.system("mkdir -p " + outputdata_dir) #this should work under normal circumst
 
 all_vars = { "ce_endpoint":ce_endpoint, "cream_queue":cream_queue, "deleg_endpoint":deleg_endpoint, "vo":vo, "proxy_pass":proxy_pass,
              "gridftp_server":gridftp_server, "lfn_dir":lfn_dir, "deleg_id":deleg_id, "log_level":log_level, "batch_system":batch_system,
-             "gridftp_dir":gridftp_dir, "lrms_host":lrms_host, "lrms_admin_user":lrms_admin_user, "lrms_admin_pass":lrms_admin_pass,
-             "tmp_dir":tmp_dir, "delete_files":delete_files, "cream_root_pass":cream_root_pass, "sec_cert":sec_cert, "sec_key":sec_key,
+             "gridftp_dir":gridftp_dir, "lrms_host":lrms_host,
+             "tmp_dir":tmp_dir, "delete_files":delete_files, "sec_cert":sec_cert, "sec_key":sec_key,
              "sec_proxy_pass":sec_proxy_pass, "creamdb_host":creamdb_host, "creamdb_port":creamdb_port, "creamdb_user":creamdb_user,
-             "creamdb_pass":creamdb_pass, "authz_model":authz_model, "argus_host":argus_host, "argus_root_pass":argus_root_pass,
+             "creamdb_pass":creamdb_pass, "authz_model":authz_model, "argus_host":argus_host,
              "middleware_version":middleware_version, "cream_ldap_port":cream_ldap_port, "tmp_dir":tmp_dir }
 
 for key, value in all_vars.iteritems():
@@ -175,3 +166,6 @@ for key, value in all_vars.iteritems():
         if key == "batch_system":
                 if value != "pbs" and value != "lsf":
                         raise _error('Batch system must be either "pbs" or "lsf". You entered: ' + batch_system)
+
+ce_host=ce_endpoint.split(":")[0] #helper
+blparser_host=blparser_host.split(":")[0] #helper, in case it is set to ce_endpoint

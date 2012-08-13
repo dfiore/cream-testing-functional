@@ -20,156 +20,177 @@
 '''
 Job Handling
 --
-submit_job() cancel_job() suspend_job() resume_job() submit_and_wait()
-cancel_all_jobs() purge_all_jobs() suspend_all_jobs() resume_all_jobs()
-get_final_status() get_current_status() get_current_status_verbose()
-list_jobs() wait_for_status() job_status_should_be()
-qdel_job() bkill_job
+submit_job() get_final_status() get_current_status()
+list_jobs() cancel_job() suspend_job() resume_job()
+cancel_all_jobs() purge_all_jobs() suspend_all_jobs()
+resume_all_jobs() submit_and_wait() get_current_status_verbose()
+wait_for_status() qdel_job() purge_job() get_status_with_filter()
+bkill_job() wms_job_submit() wms_get_job_status() 
+wms_get_final_job_status() wms_job_logging_info()
 
 Proxy Handling
 --
-create_proxy() check_proxy() destroy_proxy() proxy_info()
-create_delegation() destroy_delegation() delegation_info()
+check_proxy() create_proxy() destroy_proxy() proxy_info()
+get_proxy_dn() renew_proxy() 
 
 Data Manipulation
 --
-lfc_mkdir() lcg_cr() lfc_ls() lcg_cp() lcg_del() lfc_rmdir()
-execute_uberftp_command() get_guid() multiple_lcg_cp()
+lfc_ls() lcg_cr() lcg_del() lcg_cp() lfc_mkdir()
+lfc_rmdir() execute_uberftp_command() uberftp_upload()
+multiple_lcg_cp()
 
 JDL Creation
 --
-simple_jdl() sleep_jdl() cpunumber_jdl() hostnumber_jdl() wholenodes_jdl() smpgranularity_jdl()
-combo_jdl() localhost_output_jdl() environment_jdl() osb_basedesturi_jdl() isb_client_to_ce_jdl()
-osb_desturi_jdl() prologue_jdl() epilogue_jdl() isb_baseuri_jdl() isb_gsiftp_to_ce_jdl()
-cpu_allocation_jdl()
+test_jdls() simple_jdl()  sleep_jdl() cpunumber_jdl()
+hostnumber_jdl() wholenodes_jdl() smpgranularity_jdl()
+combo_jdl() localhost_output_jdl() environment_jdl()
+osb_basedesturi_jdl() isb_client_to_ce_jdl() osb_desturi_jdl()
+prologue_jdl() epilogue_jdl() isb_baseuri_jdl()
+create_dummy_script() isb_gsiftp_to_ce_jdl() output_data_jdl()
+cpu_allocation_jdl() 
 
 Utils
 --
-file_should_contain() create_dummy_script() get_osb() fetch_output_files()
-check_osb_basedesturi_files() check_osb_desturi_files()
-delete_osb_basedesturi_files() delete_osb_desturi_files()
-validate_ce_service_info() get_proxy_dn() get_job_sb() validate_glue()
-set_limiter_threshold() reset_limiter_threshold() ban_user_gjaf() unban_user_gjaf()
-change_sandbox_transfer_method() modify_cream_config_xml() reset_cream_config_xml()
-restart_cream() get_deleg_id_from_status() execute_remote_mysql_query()
-list_proxy_sandbox() check_delegation_id_in_filesystem() ban_user_argus()
-unban_user_argus() validate_job_status() get_time_in_status_format()
-get_status_with_filter() files_should_not_be_empty() send_signal_to_process()
-execute_noninteractive_ssh_com() string_should_contain() _log_to_screen()
+_get_ssh_connection() file_should_contain() job_status_should_be()
+test_qdel() validate_ce_service_info() get_job_sb() validate_glue()
+get_deleg_id_from_status() list_proxy_sandbox() 
+check_delegation_id_in_filesystem() get_time_in_status_format()
+get_guid() files_should_not_be_empty() send_signal_to_process()
+execute_noninteractive_ssh_com() _enisc() get_arch_smp_size()
+string_should_contain() _log_to_screen() ldap_search() 
+check_resource_bdii_published_values() check_wms_logging_info()
 
 CREAM Utils
 --
-ce_service_info() allowed_submission()
+create_delegation() destroy_delegation() get_osb()
+fetch_output_files() check_osb_basedesturi_files()
+delete_osb_basedesturi_files() check_osb_desturi_files()
+delete_osb_desturi_files() ce_service_info() 
 enable_cream_admin() disable_cream_admin()
-enable_submission() disable_submission()
-jobdbadminpurger() cpu_allocation_test()
-get_arch_smp_size() renew_proxy()
-save_batch_job_submission_script_on() save_batch_job_submission_script_off()
-get_delegation_id()
+allowed_submission() enable_submission() delegation_info() 
+disable_submission() set_limiter_threshold()
+reset_limiter_threshold() ban_user_gjaf()
+unban_user_gjaf() change_sandbox_transfer_method()
+modify_cream_config_xml() reset_cream_config_xml()
+restart_cream() ban_user_argus() unban_user_argus()
+validate_job_status() jobdbadminpurger() get_delegation_id()
+save_batch_job_submission_script_on() stop_old_blparser() start_old_blparser()
+save_batch_job_submission_script_off() cpu_allocation_test() 
 
 
 Implemented methods enumeration:
- 1) check_proxy
- 2) create_proxy
- 3) create_delegation
- 4) submit_job
- 5) get_final_status
- 6) get_current_status
- 7) get_osb
- 8) fetch_output_files
- 9) list_jobs
- 10) cancel_job
- 11) destroy_proxy
- 12) suspend_job
- 13) resume_job
- 14) cancel_all_jobs
- 15) purge_all_jobs
- 16) suspend_all_jobs
- 17) resume_all_jobs
- 18) submit_and_wait
- 19) get_current_status_verbose
- 20) check_osb_basedesturi_files
- 21) delete_osb_basedesturi_files
- 22) check_osb_desturi_files
- 23) delete_osb_desturi_files
- 24) file_should_contain
- 25) destroy_delegation
- 26) lfc_ls
- 27) lcg_cr
- 28) lcg_del
- 29) lcg_cp
- 30) lfc_mkdir
- 31) lfc_rmdir
- 32) test_jdls
- 33) simple_jdl
- 34) sleep_jdl
- 35) cpunumber_jdl
- 36) hostnumber_jdl
- 37) wholenodes_jdl
- 38) smpgranularity_jdl
- 39) combo_jdl
- 40) localhost_output_jdl
- 41) environment_jdl
- 42) osb_basedesturi_jdl
- 43) isb_client_to_ce_jdl
- 44) osb_desturi_jdl
- 45) prologue_jdl
- 46) epilogue_jdl
- 47) isb_baseuri_jdl
- 48) create_dummy_script
- 49) isb_gsiftp_to_ce_jdl
- 50) output_data_jdl
- 51) wait_for_status
- 52) job_status_should_be
- 53) qdel_job
- 54) execute_uberftp_command
- 55) uberftp_upload
- 56) ce_service_info
- 57) validate_ce_service_info
- 58) proxy_info
- 59) get_proxy_dn
- 60) enable_cream_admin
- 61) disable_cream_admin
- 62) allowed_submission
- 63) enable_submission
- 64) disable_submission
- 65) purge_job
- 66) get_job_sb
- 67) set_limiter_threshold
- 68) reset_limiter_threshold
- 69) ban_user_gjaf
- 70) unban_user_gjaf
- 71) change_sandbox_transfer_method
- 72) validate_glue
- 73) modify_cream_config_xml
- 74) reset_cream_config_xml
- 75) execute_remote_mysql_query
- 76) restart_cream
- 77) get_deleg_id_from_status
- 78) check_delegation_id_in_db
- 79) list_proxy_sandbox
- 80) check_delegation_id_in_filesystem
- 81) ban_user_argus
- 82) unban_user_argus
- 83) validate_job_status
- 84) get_time_in_status_format
- 85) get_status_with_filter
- 86) get_guid
- 87) multiple_lcg_cp
- 88) files_should_not_be_empty
- 89) bkill_job
- 90) send_signal_to_process
- 91) jobdbadminpurger
- 92) execute_noninteractive_ssh_com
- 93) get_delegation_id
- 94) renew_proxy
- 95) save_batch_job_submission_script_on
- 96) save_batch_job_submission_script_off
- 97) cpu_allocation_jdl
- 98) get_arch_smp_size
- 99) cpu_allocation_test
-100) string_should_contain
-101) _log_to_screen
+  1 _get_ssh_connection
+  2 check_proxy
+  3 create_proxy
+  4 create_delegation
+  5 submit_job
+  6 get_final_status
+  7 get_current_status
+  8 get_osb
+  9 fetch_output_files
+ 10 list_jobs
+ 11 cancel_job
+ 12 destroy_proxy
+ 13 suspend_job
+ 14 resume_job
+ 15 cancel_all_jobs
+ 16 purge_all_jobs
+ 17 suspend_all_jobs
+ 18 resume_all_jobs
+ 19 submit_and_wait
+ 20 get_current_status_verbose
+ 21 check_osb_basedesturi_files
+ 22 delete_osb_basedesturi_files
+ 23 check_osb_desturi_files
+ 24 delete_osb_desturi_files
+ 25 file_should_contain
+ 26 destroy_delegation
+ 27 lfc_ls
+ 28 lcg_cr
+ 29 lcg_del
+ 30 lcg_cp
+ 31 lfc_mkdir
+ 32 lfc_rmdir
+ 33 test_jdls
+ 34 simple_jdl
+ 35 sleep_jdl
+ 36 cpunumber_jdl
+ 37 hostnumber_jdl
+ 38 wholenodes_jdl
+ 39 smpgranularity_jdl
+ 40 combo_jdl
+ 41 localhost_output_jdl
+ 42 environment_jdl
+ 43 osb_basedesturi_jdl
+ 44 isb_client_to_ce_jdl
+ 45 osb_desturi_jdl
+ 46 prologue_jdl
+ 47 epilogue_jdl
+ 48 isb_baseuri_jdl
+ 49 create_dummy_script
+ 50 isb_gsiftp_to_ce_jdl
+ 51 output_data_jdl
+ 52 wait_for_status
+ 53 job_status_should_be
+ 54 qdel_job
+ 55 test_qdel
+ 56 execute_uberftp_command
+ 57 uberftp_upload
+ 58 ce_service_info
+ 59 validate_ce_service_info
+ 60 proxy_info
+ 61 get_proxy_dn
+ 62 enable_cream_admin
+ 63 disable_cream_admin
+ 64 allowed_submission
+ 65 enable_submission
+ 66 disable_submission
+ 67 purge_job
+ 68 get_job_sb
+ 69 set_limiter_threshold
+ 70 reset_limiter_threshold
+ 71 ban_user_gjaf
+ 72 unban_user_gjaf
+ 73 change_sandbox_transfer_method
+ 74 validate_glue
+ 75 modify_cream_config_xml
+ 76 reset_cream_config_xml
+ 77 restart_cream
+ 78 get_deleg_id_from_status
+ 79 list_proxy_sandbox
+ 80 check_delegation_id_in_filesystem
+ 81 ban_user_argus
+ 82 unban_user_argus
+ 83 validate_job_status
+ 84 get_time_in_status_format
+ 85 get_status_with_filter
+ 86 get_guid
+ 87 multiple_lcg_cp
+ 88 files_should_not_be_empty
+ 89 bkill_job
+ 90 send_signal_to_process
+ 91 jobdbadminpurger
+ 92 execute_noninteractive_ssh_com
+ 93 _enisc
+ 94 get_delegation_id
+ 95 renew_proxy
+ 96 save_batch_job_submission_script_on
+ 97 save_batch_job_submission_script_off
+ 98 cpu_allocation_jdl
+ 99 get_arch_smp_size
+100 cpu_allocation_test
+101 string_should_contain
+102 _log_to_screen
+103 delegation_info
+104 ldap_search
+105 check_resource_bdii_published_values
+106 wms_job_submit
+107 wms_get_job_status
+108 wms_get_final_job_status
+109 wms_job_logging_info
+110 check_wms_logging_info
+111 stop_old_blparser
+112 start_old_blparser
 
 '''
 
@@ -184,6 +205,24 @@ class _error(Exception):
 		self.string = string
 	def __str__(self):
 		return str(self.string)
+##############################################################################################################################
+##############################################################################################################################
+def _get_ssh_connection(my_host, my_user):
+        '''
+                |  Description:  |  Get an ssh connection as useri using the ssh key pair of the tester user running the testsuite.     |\n
+                |  Arguments:    |  my_host   |  the host to connect to                                                                 | 
+                |                |  my_user   |  the username with which to connect                                                     | \n
+                |  Returns:      |  An ssh connection (paramiko SSHClient object)                                                       |
+        '''
+        print 'Will try to connect as: "' + my_user + '@' + my_host + '"'
+        tester_home = os.environ['HOME']
+        ssh_con = paramiko.SSHClient()
+        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        ssh_con.load_host_keys(os.path.expanduser(os.path.join(tester_home, ".ssh", "known_hosts")))
+        ssh_con.connect(my_host, username=my_user, key_filename=tester_home+"/.ssh/id_rsa")
+        print "Connection successfull!"
+
+        return ssh_con
 ##############################################################################################################################
 ##############################################################################################################################
 def check_proxy(time_left=None):
@@ -978,7 +1017,7 @@ def file_should_contain(file_path,search_string):
 ##############################################################################################################################
 def destroy_delegation(deleg_endpoint,deleg_id):
         '''
-                |  Description:  |  Delete a delegation.                                                        | \ns
+                |  Description:  |  Delete a delegation.                                                        | \n
                 |  Arguments:    |  deleg_endpoint    |     the delegation endpoint of a cream service          |
                 |                |  deleg_id          |     the delegation id                                   | \n
                 |  Returns:      |  nothing.                                                                    |
@@ -1948,12 +1987,12 @@ def output_data_jdl(vo, output_dir, gridftp_server=None, lfn_dir=None, lfc=None,
         environment=''
         if lfc != None or infosys != None:
                 if lfc != None and infosys != None:
-                        environment = 'Environment={"LCG_GFAL_INFOSYS=' + infosys + '"'\
+                        environment = 'Environment={"LCG_GFAL_VO=' + vo + '", "LCG_GFAL_INFOSYS=' + infosys + '"'\
                                       ', "LFC_HOST=' + lfc + '"};'
                 elif lfc != None and infosys == None:
-                        environment = 'Environment={"LFC_HOST=' + lfc + '"};'
+                        environment = 'Environment={"LCG_GFAL_VO=' + vo + '", "LFC_HOST=' + lfc + '"};'
                 elif lfc == None and infosys != None:
-                        environment = 'Environment={"LCG_GFAL_INFOSYS=' + infosys + '"};'
+                        environment = 'Environment={"LCG_GFAL_VO=' + vo + '", "LCG_GFAL_INFOSYS=' + infosys + '"};'
 
         jdl_file = open(jdl_path,'w')
         jdl_contents =  '[\n'\
@@ -2026,13 +2065,12 @@ def job_status_should_be(jid,status):
                 raise _error("Expected status " + status + " for job " + jid + " was actually " + cur_status)
 ##############################################################################################################################
 ##############################################################################################################################
-def qdel_job(jid, torque_host, torque_admin_user, torque_admin_pass):
+def qdel_job(jid, torque_host):
         '''
                 |  Description: |   Manually qdel a job.                                                                        | \n
                 |  Arguments:   |   jid                |     job identifier                                                     |
                 |               |   cream_host         |     the server hosting torque, either ip or name                       |
-                |               |   cream_admin_user   |     a user exiting on the torque host, having admin priviledges        |
-                |               |   cream_admin_pass   |     the aforementioned user's ssh password                             | \n
+                |               |   cream_admin_user   |     a user exiting on the torque host, having admin priviledges        | \n
                 |  Returns:     |   Nothing                                                                                     |
         '''
 
@@ -2040,9 +2078,7 @@ def qdel_job(jid, torque_host, torque_admin_user, torque_admin_pass):
 
         print "Job ID is: " + jid
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())  #don't ask for acceptance of foreign host key (auto accept)
-        ssh_con.connect(torque_host, username=torque_admin_user, password=torque_admin_pass)
+        ssh_con = _get_ssh_connection(torque_host, 'root')
 
         time.sleep(10)  #a "safe" threshold to wait for the job to be registered in torque (i.e.: visible through qstat)
 
@@ -2082,10 +2118,10 @@ def qdel_job(jid, torque_host, torque_admin_user, torque_admin_pass):
         print "Cream job with jid " + jid + " and torque jid " + torque_jid + " has been deleted!"
 
 # Test the qdel_job() with the following method, after creating a proxy: (change cream endpoint and vo to a valid value)
-#def test_qdel(torque_host, torque_admin_user, torque_admin_pass):
+#def test_qdel(torque_host, torque_admin_user):
 #        jdl = sleep_jdl("see","600")
 #        jid = submit_job(jdl, "ctb04.gridctb.uoa.gr:8443/cream-pbs-see")
-#        qdel_job(jid,torque_host,torque_admin_user,torque_admin_pass)
+#        qdel_job(jid,torque_host,torque_admin_user)
 ##############################################################################################################################
 ##############################################################################################################################
 def execute_uberftp_command(uberftp_command, gridftp_server, gridftp_path):
@@ -2412,12 +2448,11 @@ def get_proxy_dn():
                         #print line.split(":")[1].strip()
 ##############################################################################################################################
 ##############################################################################################################################
-def enable_cream_admin(dn, ce_endpoint, cream_root_pass):
+def enable_cream_admin(dn, ce_endpoint):
         '''
                 |  Description: |   Add the specified DN as a CREAM administrator (add it to /etc/grid-security/admin-list) | \n
                 |  Arguments:   |   dn                 |    Distinguished Name to be added                                  |
-                |               |   ce_endpoint        |    the cream endpoint                                              |
-                |               |   cream_root_pass    |    cream host's root user's pass                                   | \n
+                |               |   ce_endpoint        |    the cream endpoint                                              | \n
                 |  Returns:     |   Nothing (raises exception upon error)                                                   |
         '''
 
@@ -2432,9 +2467,7 @@ def enable_cream_admin(dn, ce_endpoint, cream_root_pass):
                 else:
                         print "DN does not end with proxy"
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'a')
 
@@ -2446,12 +2479,11 @@ def enable_cream_admin(dn, ce_endpoint, cream_root_pass):
         time.sleep(10)
 ##############################################################################################################################
 ##############################################################################################################################
-def disable_cream_admin(dn, ce_endpoint, cream_root_pass):
+def disable_cream_admin(dn, ce_endpoint):
         '''
                 |  Description:  |   Remove the specified DN as a CREAM administrator (add it to /etc/grid-security/admin-list)  | \n
                 |  Arguments:    |   dn                |      Distinguished Name to be added                                     |
-                |                |   ce_endpoint       |      the cream endpoint                                                 |
-                |                |   cream_root_pass   |      cream host's root user's pass                                      | \n
+                |                |   ce_endpoint       |      the cream endpoint                                                 | \n
                 |  Returns:      |   Nothing (raises exception upon error)                                                       |
         '''
 
@@ -2466,9 +2498,7 @@ def disable_cream_admin(dn, ce_endpoint, cream_root_pass):
                 else:
                         print "DN does not end with proxy"
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'r')
 
@@ -2633,13 +2663,12 @@ def get_job_sb(jid):
         return (server, dir_path)
 ##############################################################################################################################
 ##############################################################################################################################
-def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pass, middleware_version):
+def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, middleware_version):
         '''
                 |  Description:  |  Set one threshold of the cream limiter perl script                            |\n
                 |  Arguments:    |  thresh_name          |  The threshold's name                                  |
                 |                |  thresh_value         |  The threshold's value                                 |
                 |                |  ce_endpoint          |  The cream host                                        |
-                |                |  cream_root_pass      |  Cream root password                                   |
                 |                |   middleware_version  |  The middleware version, either "EMI1" or "EMI2"       |\n
                 |  Returns:      |  Nothing                                                                       |
         '''
@@ -2656,14 +2685,12 @@ def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pas
         elif middleware_version.lower() == "emi2":
                 fLoc='/etc/glite-ce-cream-utils/glite_cream_load_monitor.conf'
 
-        _enisc("rm -f " + fLoc + ".orig", cream_host, 'root', cream_root_pass)
-        _enisc("mv " + fLoc + " " + fLoc + ".orig", cream_host, 'root', cream_root_pass)
-        _enisc("cp " + fLoc + ".orig " + fLoc + ".tmp", cream_host, 'root', cream_root_pass)
+        _enisc("rm -f " + fLoc + ".orig", cream_host, 'root')
+        _enisc("mv " + fLoc + " " + fLoc + ".orig", cream_host, 'root')
+        _enisc("cp " + fLoc + ".orig " + fLoc + ".tmp", cream_host, 'root')
 
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         src = sftp.file(fLoc + '.tmp','r')
         dest = sftp.file(fLoc,'w')
@@ -2683,48 +2710,16 @@ def set_limiter_threshold(thresh_name, thresh_value, ce_endpoint, cream_root_pas
         src.close()
         dest.close()
 
-        _enisc("rm -f " + fLoc + ".tmp", cream_host, 'root', cream_root_pass)
+        _enisc("rm -f " + fLoc + ".tmp", cream_host, 'root')
 
         if middleware_version.lower() == "emi1":
-                _enisc("chmod +x " + fLoc , cream_host, 'root', cream_root_pass)
-
-
-'''        
-        _enisc("rm -f /usr/bin/glite_cream_load_monitor.orig", cream_host, 'root', cream_root_pass)
-        _enisc("mv /usr/bin/glite_cream_load_monitor /usr/bin/glite_cream_load_monitor.orig", cream_host, 'root', cream_root_pass)
-        _enisc("cp /usr/bin/glite_cream_load_monitor.orig /usr/bin/glite_cream_load_monitor.tmp", cream_host, 'root', cream_root_pass)
-
-
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
-        sftp = ssh_con.open_sftp()
-        src = sftp.file('/usr/bin/glite_cream_load_monitor.tmp','r')
-        dest = sftp.file('/usr/bin/glite_cream_load_monitor','w')
-
-        found = False
-        for line in src.readlines():
-                #print line
-                if thresh_name in line and found == False:
-                        #print "FOUND!"
-                        dest.write("$" + thresh_name + " = " + thresh_value + ";\n")
-                        found = True
-                else:
-                        dest.write(line)
-
-        src.close()
-        dest.close()
-
-        _enisc("rm -f /usr/bin/glite_cream_load_monitor.tmp", cream_host, 'root', cream_root_pass)
-        _enisc("chmod +x /usr/bin/glite_cream_load_monitor", cream_host, 'root', cream_root_pass)
-'''
+                _enisc("chmod +x " + fLoc , cream_host, 'root')
 ##############################################################################################################################
 ##############################################################################################################################
-def reset_limiter_threshold(ce_endpoint, cream_root_pass, middleware_version):
+def reset_limiter_threshold(ce_endpoint, middleware_version):
         '''
                 |  Description:  |  Reset the cream limiter perl script to the original unmodified one        |\n
                 |  Arguments:    |  ce_endpoint          |  The cream host                                    |
-                |                |  cream_root_pass      |  Cream root password                               |
                 |                |   middleware_version  |  The middleware version, either "EMI1" or "EMI2"   |\n
                 |  Returns:      |  Nothing                                                                   |
         '''
@@ -2736,18 +2731,17 @@ def reset_limiter_threshold(ce_endpoint, cream_root_pass, middleware_version):
         elif middleware_version.lower() == "emi2":
                 fLoc='/etc/glite-ce-cream-utils/glite_cream_load_monitor.conf'
 
-        _enisc("cp -f " + fLoc + ".orig " + fLoc, cream_host, 'root', cream_root_pass)
+        _enisc("cp -f " + fLoc + ".orig " + fLoc, cream_host, 'root')
 
         if middleware_version.lower() == "emi1":
-                _enisc("chmod +x " + fLoc , cream_host, 'root', cream_root_pass)
+                _enisc("chmod +x " + fLoc , cream_host, 'root')
 ##############################################################################################################################
 ##############################################################################################################################
-def ban_user_gjaf(dn, ce_endpoint, cream_root_pass):
+def ban_user_gjaf(dn, ce_endpoint):
         '''
                 |  Description: |   Add the specified DN as a CREAM banned user (add it to /etc/lcas/ban_users.db)          | \n
                 |  Arguments:   |   dn                 |    Distinguished Name to be added                                  |
-                |               |   ce_endpoint        |    the cream endpoint                                              |
-                |               |   cream_root_pass    |    cream host's root user's pass                                   | \n
+                |               |   ce_endpoint        |    the cream endpoint                                              | \n
                 |  Returns:     |   Nothing (raises exception upon error)                                                   |
         '''
 
@@ -2762,27 +2756,21 @@ def ban_user_gjaf(dn, ce_endpoint, cream_root_pass):
                 else:
                         print 'DN does not end with "proxy"'
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'a')
 
         f.write('"' + dn + '"\n')
         f.close()
 
-        _enisc("touch /rtc/lcas/ban_users.db", cream_host, 'root', cream_root_pass)
-
-        #f2 = sftp.file(file_path,'r')
-        #print f2.read()
+        _enisc("touch " + file_path, cream_host, 'root')
 ##############################################################################################################################
 ##############################################################################################################################
-def unban_user_gjaf(dn, ce_endpoint, cream_root_pass):
+def unban_user_gjaf(dn, ce_endpoint):
         '''
                 |  Description:  |   Remove the specified DN as a CREAM banned user (remove it from /etc/lcas/ban_users.db)      | \n
                 |  Arguments:    |   dn                |      Distinguished Name to be added                                     |
-                |                |   ce_endpoint       |      the cream endpoint                                                 |
-                |                |   cream_root_pass   |      cream host's root user's pass                                      | \n
+                |                |   ce_endpoint       |      the cream endpoint                                                 | \n
                 |  Returns:      |   Nothing (raises exception upon error)                                                       |
         '''
 
@@ -2797,9 +2785,7 @@ def unban_user_gjaf(dn, ce_endpoint, cream_root_pass):
                 else:
                         print 'DN does not end with "proxy"'
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'r')
 
@@ -2823,11 +2809,10 @@ def unban_user_gjaf(dn, ce_endpoint, cream_root_pass):
         f.close()
 ##############################################################################################################################
 ##############################################################################################################################
-def change_sandbox_transfer_method(ce_endpoint, cream_root_pass):
+def change_sandbox_transfer_method(ce_endpoint):
         '''
                 |  Description:  |   Change the SANDBOX_TRANSFER_METHOD between GSIFTP and LRMS (@ /etc/lcas/ban_users.db)       | \n
-                |  Arguments:    |   ce_endpoint       |      the cream endpoint                                                 |
-                |                |   cream_root_pass   |      cream host's root user's pass                                      | \n
+                |  Arguments:    |   ce_endpoint       |      the cream endpoint                                                 | \n
                 |  Returns:      |   Nothing (raises exception upon error)                                                       |
         '''
 
@@ -2837,11 +2822,9 @@ def change_sandbox_transfer_method(ce_endpoint, cream_root_pass):
 
         #back up original file, add a distinctive timestamp for clarity
         com = 'cp ' + file_path + ' ' + file_path + '.bak.at.' + timestamp
-        _enisc(com, cream_host, 'root', cream_root_pass)
+        _enisc(com, cream_host, 'root')
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
 
         sftp = ssh_con.open_sftp()
         f = sftp.file(file_path,'r')
@@ -2942,11 +2925,10 @@ def validate_glue(ce_endpoint, port, bind, glue_version):
         return retVal
 ##############################################################################################################################
 ##############################################################################################################################
-def modify_cream_config_xml(ce_endpoint, cream_root_pass, attr, val):
+def modify_cream_config_xml(ce_endpoint, attr, val):
         '''
                 |  Description:  |   Modify the given attribute of the cream config xml file                   | \n
                 |  Arguments:    |   ce_endpoint       |      the cream endpoint                               |
-                |                |   cream_root_pass   |      cream host root user's password                  |
                 |                |   attr              |      the option to change it's value                  |
                 |                |   val               |      the value to set it                              |\n
                 |  Returns:      |   Nothing (raises exception upon error or if attr isn't found)              |
@@ -2956,20 +2938,15 @@ def modify_cream_config_xml(ce_endpoint, cream_root_pass, attr, val):
         file_path = "/etc/glite-ce-cream/cream-config.xml"
         timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
 
-        com = "cp -f /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.creamtesting.orig"
-        _enisc(com , cream_host, 'root', cream_root_pass)
-        com = "cp -f /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.bak.at." + timestamp
-        _enisc(com , cream_host, 'root', cream_root_pass)         #create a second back up just in case
-        _enisc("rm -f /etc/glite-ce-cream/cream-config.xml", cream_host, 'root', cream_root_pass)
-
-
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
         # make a back-up of the original file
-        #ssh_con.exec_command("cp /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.orig")
-        #ssh_con.exec_command("rm -f /etc/glite-ce-cream/cream-config.xml")
+        com = "cp -f /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.creamtesting.orig"
+        _enisc(com , cream_host, 'root')
+        com = "cp -f /etc/glite-ce-cream/cream-config.xml /etc/glite-ce-cream/cream-config.xml.bak.at." + timestamp
+        _enisc(com , cream_host, 'root')         #create a second back up just in case
+        _enisc("rm -f /etc/glite-ce-cream/cream-config.xml", cream_host, 'root')
 
+
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         src = sftp.file(file_path + '.creamtesting.orig','r')
         dst = sftp.file(file_path,'w')
@@ -2990,51 +2967,41 @@ def modify_cream_config_xml(ce_endpoint, cream_root_pass, attr, val):
 
         print "In the following output, the attribute \"" + attr + "\" must have the value: \"" + val + "\""
         com = "cat /etc/glite-ce-cream/cream-config.xml"
-        _enisc(com , cream_host, 'root', cream_root_pass)
+        _enisc(com , cream_host, 'root')
 
         if found == False:
                 raise _error('The attribute "' + attr + '" specified wasn\' t found!')
 ##############################################################################################################################
 ##############################################################################################################################
-def reset_cream_config_xml(ce_endpoint, cream_root_pass):
+def reset_cream_config_xml(ce_endpoint):
         '''
                 |  Description:  |   Reset the cream config xml file to the original                           | \n
-                |  Arguments:    |   ce_endpoint       |      the cream endpoint                               |
-                |                |   cream_root_pass   |      cream host root user's password                  | \n
+                |  Arguments:    |   ce_endpoint       |      the cream endpoint                               | \n
                 |  Returns:      |   Nothing                                                                   |
         '''
 
         cream_host = ce_endpoint.split(":")[0]
 
-        #ssh_con = paramiko.SSHClient()
-        #ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        #ssh_con.connect(cream_host,22,'root',cream_root_pass)
-        # restore the back-up of the original file
-        #ssh_con.exec_command("mv -f /etc/glite-ce-cream/cream-config.xml.orig /etc/glite-ce-cream/cream-config.xml")
-
         com = "mv -f /etc/glite-ce-cream/cream-config.xml.creamtesting.orig /etc/glite-ce-cream/cream-config.xml"
-        _enisc(com, cream_host, 'root', cream_root_pass)
+        _enisc(com, cream_host, 'root')
 
         com = "cat /etc/glite-ce-cream/cream-config.xml"
-        _enisc(com , cream_host, 'root', cream_root_pass)
+        _enisc(com , cream_host, 'root')
 ##############################################################################################################################
 ##############################################################################################################################
-def restart_cream(ce_endpoint, cream_root_pass):
+def restart_cream(ce_endpoint):
         '''
                 |  Description:  |   Restart the tomcat service, thus restarting cream                         | \n
-                |  Arguments:    |   ce_endpoint       |      the cream endpoint                               |
-                |                |   cream_root_pass   |      cream host root user's password                  |\n
+                |  Arguments:    |   ce_endpoint       |      the cream endpoint                               | \n
                 |  Returns:      |   Nothing (raises exception upon error or if attr isn't found)              |
         '''
         cream_host = ce_endpoint.split(":")[0]
 
-        #ssh_con = paramiko.SSHClient()
-        #ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        #ssh_con.connect(cream_host,22,'root',cream_root_pass)
-        #stdin, stdout, stderr = ssh_con.exec_command("/etc/init.d/tomcat5 restart")
-        #print stdout.readlines()
-        #ssh_con.close()
-        _enisc('/etc/init.d/tomcat5 restart', cream_host, 'root', cream_root_pass)
+        os_version=_enisc("cat /etc/redhat-release", cream_host, 'root')
+        if "boron" in os_version.lower(): #boron (or even lower version possibly?)
+                _enisc('/etc/init.d/tomcat5 restart', cream_host, 'root')
+        else: #either SL6 or Debian6, thus tomcat6 (most probably)
+                _enisc('/etc/init.d/tomcat6 restart', cream_host, 'root')
 ##############################################################################################################################
 ##############################################################################################################################
 def get_deleg_id_from_status(status):
@@ -3047,11 +3014,10 @@ def get_deleg_id_from_status(status):
         return status.split('Deleg Proxy ID')[1].split('[')[1].split(']')[0]
 ##############################################################################################################################
 ##############################################################################################################################
-def list_proxy_sandbox(ce_endpoint, cream_root_pass, job_status):
+def list_proxy_sandbox(ce_endpoint, job_status):
         '''
                 |  Description:  |   Check the presense (or not) of a delegation id in db queries contents     | \n
                 |  Arguments:    |   ce_endpoint       |    the cream endpoint                                 |
-                |                |   cream_root_pass   |    cream host root user's password                    |
                 |                |   job_status        |    a job's verbose status                             | \n
                 |  Returns:      |   a list with the contents of the directory                                 |
         '''
@@ -3060,9 +3026,7 @@ def list_proxy_sandbox(ce_endpoint, cream_root_pass, job_status):
 
         cream_host = ce_endpoint.split(":")[0]
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         stdin, stdout, stderr = ssh_con.exec_command("ls " + path)
         res = stdout.readlines()
         ssh_con.close()
@@ -3100,12 +3064,11 @@ def check_delegation_id_in_filesystem(contents_before, contents_after, deleg_id)
                 raise _error("Delegation id " + deleg_id + " found in " + contents_before + " but should not be found")
 ##############################################################################################################################
 ##############################################################################################################################
-def ban_user_argus(dn, argus_host, argus_root_pass):
+def ban_user_argus(dn, argus_host):
         '''
                 |  Description: |   Ban the specified DN using pap-admin cli on the argus host                              | \n
                 |  Arguments:   |   dn                 |    Distinguished Name to be added                                  |
-                |               |   argus_host         |    the argus host                                                  |
-                |               |   argus_root_pass    |    argus host's root user's pass                                   | \n
+                |               |   argus_host         |    the argus host                                                  | \n
                 |  Returns:     |   Nothing (raises exception upon error)                                                   |
         '''
 
@@ -3118,9 +3081,7 @@ def ban_user_argus(dn, argus_host, argus_root_pass):
                 else:
                         print 'DN does not end with "proxy"'
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(argus_host,22,'root',argus_root_pass)
+        ssh_con = _get_ssh_connection(argus_host, 'root')
 
         for command in 'pap-admin ban subject "' + dn +'"' , "/etc/init.d/argus-pdp reloadpolicy" , "/etc/init.d/argus-pepd clearcache":
                 stdin, stdout, stderr = ssh_con.exec_command(command)
@@ -3131,12 +3092,11 @@ def ban_user_argus(dn, argus_host, argus_root_pass):
         ssh_con.close()
 ##############################################################################################################################
 ##############################################################################################################################
-def unban_user_argus(dn, argus_host, argus_root_pass):
+def unban_user_argus(dn, argus_host):
         '''
                 |  Description: |   Un-Ban the specified DN using pap-admin cli on the argus host                           | \n
                 |  Arguments:   |   dn                 |    Distinguished Name to be added                                  |
-                |               |   argus_host         |    the argus host                                                  |
-                |               |   argus_root_pass    |    argus host's root user's pass                                   | \n
+                |               |   argus_host         |    the argus host                                                  | \n
                 |  Returns:     |   Nothing (raises exception upon error)                                                   |
         '''
 
@@ -3149,9 +3109,7 @@ def unban_user_argus(dn, argus_host, argus_root_pass):
                 else:
                         print 'DN does not end with "proxy"'
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(argus_host,22,'root',argus_root_pass)
+        ssh_con = _get_ssh_connection(argus_host, 'root')
 
         for command in 'pap-admin un-ban subject "' + dn +'"' , "/etc/init.d/argus-pdp reloadpolicy" , "/etc/init.d/argus-pepd clearcache":
                 stdin, stdout, stderr = ssh_con.exec_command(command)
@@ -3681,7 +3639,7 @@ def get_guid(file_path,prefix=None):
                         contents += open(fpath).read()
                         contents += '\n\n'
                 print "No guids found in file(s): \"" + repr(files) + "\". Relevant file(s) contents follow." + contents
-                raise _error("No guids found in file(s): \"" + repr(files) + "\". Check the report for the relevant file names and contents.")
+                #raise _error("No guids found in file(s): \"" + repr(files) + "\". Check the report for the relevant file names and contents.")
 
         #_log_to_screen(guids,1,1)
 
@@ -3740,13 +3698,11 @@ def files_should_not_be_empty(input_files):
                         print 'File "' + item + '" is not empty, as it should!'
 ##############################################################################################################################
 ##############################################################################################################################
-def bkill_job(jid, lsf_host, lsf_admin_user, lsf_admin_pass):
+def bkill_job(jid, lsf_host):
         '''
-                |  Description: |   Manually bkill a job.                                                                        | \n
+                |  Description: |   Manually bkill a job.                                                                       | \n
                 |  Arguments:   |   jid                |     job identifier                                                     |
-                |               |   cream_host         |     the server hosting torque, either ip or name                       |
-                |               |   cream_admin_user   |     a user exiting on the torque host, having admin priviledges        |
-                |               |   cream_admin_pass   |     the aforementioned user's ssh password                             | \n
+                |               |   lsf_host           |     the server hosting lsf, either ip or name                          | \n
                 |  Returns:     |   Nothing                                                                                     |
         '''
         #return None
@@ -3757,9 +3713,7 @@ def bkill_job(jid, lsf_host, lsf_admin_user, lsf_admin_pass):
 
         num_jid = jid.split("CREAM")[1]
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())  #don't ask for acceptance of foreign host key (auto accept)
-        ssh_con.connect(lsf_host, username=lsf_admin_user, password=lsf_admin_pass)
+        ssh_con = _get_ssh_connection(lsf_host, 'root')
 
         time.sleep(10)  #a "safe" threshold to wait for the job to be registered in lsf (i.e.: visible through bjobs)
 
@@ -3804,12 +3758,11 @@ def send_signal_to_process(pid, sigNo):
         os.kill(int(pid),int(sigNo))
 ##############################################################################################################################
 ##############################################################################################################################
-def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass, middleware_version):
+def jobdbadminpurger(jid, ce_endpoint, db_user, db_pass, middleware_version):
         '''
                 |  Description: |   Purge a job using the JobDBAdminPurger.sh script, run on cream host                                  | \n
                 |  Arguments:   |   jid                 |     the job to purge job id as returned by glite-ce-job-submit                 |
                 |               |   ce_endpoint         |     the host of the cream service                                              |
-                |               |   user_pass           |     cream host root user password                                              |
                 |               |   db_user             |     cream's db user                                                            |
                 |               |   db_pass             |     aforementioned user's db pass                                              |
                 |               |   middleware_version  |     the middleware version, either "EMI1" or "EMI2"                            |\n
@@ -3827,9 +3780,7 @@ def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass, middleware_v
         else:
                 raise _error('Invalid middleware version provided. Should be either "EMI1" or "EMI2", but you entered:"' + middleware_version + '"')
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())  #don't ask for acceptance of foreign host key (auto accept)
-        ssh_con.connect(cream_host, username=user, password=user_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         stdin, stdout, stderr = ssh_con.exec_command(com + ' ; echo "Return code is :$?:"')
 
         print "Command \"" + com + "\" ran on host \"" + cream_host + "\". Output streams follow:"
@@ -3848,7 +3799,7 @@ def jobdbadminpurger(jid, ce_endpoint, user_pass, db_user, db_pass, middleware_v
                 raise _error("JobDBAdminPurger error occured! Check report file.")
 ##############################################################################################################################
 ##############################################################################################################################
-def execute_noninteractive_ssh_com(command,host,user,passwd,port=22):
+def execute_noninteractive_ssh_com(command,host,user,port=22):
         '''
                 |  Description: |   Execute a non interactive command through ssh on another host                                      |
                 |               |   NOTE: Shell metacharacters are NOT recognized. Call them through 'bash -c'.                        |
@@ -3856,7 +3807,6 @@ def execute_noninteractive_ssh_com(command,host,user,passwd,port=22):
                 |  Arguments:   |   host              |     ssh host                                                                   |
                 |               |   port              |     ssh port, 22 by default                                                    |
                 |               |   user              |     the user name to use for the ssh connection                                |
-                |               |   passwd            |     the aforementioned user's password                                         |
                 |               |   command           |     the command to execute                                                     |\n
                 |  Returns:     |   the command's output                                                                               |
         '''
@@ -3875,28 +3825,31 @@ def execute_noninteractive_ssh_com(command,host,user,passwd,port=22):
         '''
         port=int(port)  #safeguard
 
-        ssh_com = 'ssh -p ' + str(port) + ' ' + user + '@' + host + ' "' + command + '"'
+        ssh_com = 'ssh -p ' + str(port) + ' ' + user + '@' + host + ' "echo \"authenticated:\" ; ' + command + '"'
         expect_key = 'Are you sure you want to continue connecting'
         expect_pass = 'password:'
         expect_eof = pexpect.EOF
+        expect_auth = "authenticated:"
         ikey = 0
         ipasswd = 1
         ieof = 2
+        iauth = 3
 
         print 'Command: "' + command + '"'
 
         child = pexpect.spawn(ssh_com, timeout=300) #wait for 5 minutes at most for each command to finish
-        index = child.expect([expect_key, expect_pass, expect_eof])
+        index = child.expect([expect_key, expect_pass, expect_eof, expect_auth])
         if index == ikey:
                 print 'Added foreign host key fingerprint...'
                 child.sendline('yes')
                 child.sendeof()
-                index = child.expect([expect_key, expect_pass, expect_eof])
+                index = child.expect([expect_key, expect_pass, expect_eof, expect_auth])
                 if index == ipasswd:
+                        raise _error('Pexpect couldn\'t find a proper or right match for "' + ssh_com + '" in "' + \
+                                      expect_key + '" "' + expect_pass + '" "EOF"')
+                elif index == iauth:
                         print 'Authenticating and executing...'
-                        child.sendline(passwd)
-                        child.sendeof()
-                        index = child.expect([expect_key, expect_pass, expect_eof])
+                        index = child.expect([expect_key, expect_pass, expect_eof, expect_auth])
                         if index == ieof:
                                 print 'Connection terminated normally...'
                         else:
@@ -3909,10 +3862,11 @@ def execute_noninteractive_ssh_com(command,host,user,passwd,port=22):
                         raise _error('Pexpect couldn\'t find a proper or right match for "' + ssh_com + '" in "' + \
                                       expect_key + '" "' + expect_pass + '" "EOF"')
         elif index == ipasswd:
+                raise _error('Pexpect couldn\'t find a proper or right match for "' + ssh_com + '" in "' + \
+                              expect_key + '" "' + expect_pass + '" "EOF"')
+        elif index == iauth:
                 print 'Authenticating and executing...'
-                child.sendline(passwd)
-                child.sendeof()
-                index = child.expect([expect_key, expect_pass, expect_eof])
+                index = child.expect([expect_key, expect_pass, expect_eof, expect_auth])
                 if index == ieof:
                         print 'Connection terminated normally...'
                 else:
@@ -3930,9 +3884,9 @@ def execute_noninteractive_ssh_com(command,host,user,passwd,port=22):
         return retVal
 ##############################################################################################################################
 ##############################################################################################################################
-def _enisc(command,host,user,passwd,port=22):
+def _enisc(command,host,user,port=22):
         # short name wrapper-wannabe. I hate long function names :P
-        return execute_noninteractive_ssh_com(command,host,user,passwd,port)
+        return execute_noninteractive_ssh_com(command,host,user,port)
 ##############################################################################################################################
 ##############################################################################################################################
 def get_delegation_id(jid):
@@ -3971,12 +3925,11 @@ def renew_proxy(ce_endpoint, deleg_id):
                 print output
 ##############################################################################################################################
 ##############################################################################################################################
-def save_batch_job_submission_script_on(ce_endpoint, version, cream_root_pass):
+def save_batch_job_submission_script_on(ce_endpoint, version):
         '''
                 |  Description:  |   Modify blah_common_submit_functions.sh in order to save the job submission script         | \n
                 |  Arguments:    |   ce_endpoint       |      the cream endpoint                                               |
-                |                |   version           |      EMI1 or EMI2 (to determine the path of the script file)          |
-                |                |   cream_root_pass   |      cream host root user's password                                  | \n
+                |                |   version           |      EMI1 or EMI2 (to determine the path of the script file)          | \n
                 |  Returns:      |   Nothing (raises exception upon error)                                                     |
         '''
 
@@ -3992,17 +3945,14 @@ def save_batch_job_submission_script_on(ce_endpoint, version, cream_root_pass):
         timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
 
         com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
-        _enisc(com , cream_host, 'root', cream_root_pass)
+        _enisc(com , cream_host, 'root')
         com = 'cp -f ' + file_path + ' ' + file_path + '.save-on.bak.at.' + timestamp
-        _enisc(com , cream_host, 'root', cream_root_pass)
+        _enisc(com , cream_host, 'root')
         com = 'rm -f ' + file_path
-        _enisc(com, cream_host, 'root', cream_root_pass)
+        _enisc(com, cream_host, 'root')
 
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
-
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         src = sftp.file(file_path + '.creamtesting.orig','r')
         dst = sftp.file(file_path,'w')
@@ -4021,7 +3971,7 @@ def save_batch_job_submission_script_on(ce_endpoint, version, cream_root_pass):
         dst.close()
 
         com = 'chmod +x ' + file_path
-        _enisc(com, cream_host, 'root', cream_root_pass)
+        _enisc(com, cream_host, 'root')
 
 ###
 ###
@@ -4037,16 +3987,13 @@ def save_batch_job_submission_script_on(ce_endpoint, version, cream_root_pass):
                 timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
 
                 com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
-                _enisc(com , cream_host, 'root', cream_root_pass)
+                _enisc(com , cream_host, 'root')
                 com = 'cp -f ' + file_path + ' ' + file_path + '.save-on.bak.at.' + timestamp
-                _enisc(com , cream_host, 'root', cream_root_pass)
+                _enisc(com , cream_host, 'root')
                 com = 'rm -f ' + file_path
-                _enisc(com, cream_host, 'root', cream_root_pass)
+                _enisc(com, cream_host, 'root')
 
-                ssh_con = paramiko.SSHClient()
-                ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                ssh_con.connect(cream_host,22,'root',cream_root_pass)
-
+                ssh_con = _get_ssh_connection(cream_host, 'root')
                 sftp = ssh_con.open_sftp()
                 src = sftp.file(file_path + '.creamtesting.orig','r')
                 dst = sftp.file(file_path,'w')
@@ -4062,19 +4009,18 @@ def save_batch_job_submission_script_on(ce_endpoint, version, cream_root_pass):
                 dst.close()
 
                 com = 'chmod +x ' + file_path
-                _enisc(com, cream_host, 'root', cream_root_pass)
+                _enisc(com, cream_host, 'root')
 ###
 ###
 
         print 'New script(s) written, save of the batch job submission script turned ON.'
 ##############################################################################################################################
 ##############################################################################################################################
-def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
+def save_batch_job_submission_script_off(ce_endpoint, version):
         '''
                 |  Description:  |   Modify blah_common_submit_functions.sh in order to NOT save the job submission script         | \n
                 |  Arguments:    |   ce_endpoint       |      the cream endpoint                                                   |
-                |                |   version           |      EMI1 or EMI2 (to determine the path of the script file)              |
-                |                |   cream_root_pass   |      cream host root user's password                                      | \n
+                |                |   version           |      EMI1 or EMI2 (to determine the path of the script file)              | \n
                 |  Returns:      |   Nothing (raises exception upon error)                                                         |
         '''
 
@@ -4090,17 +4036,14 @@ def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
         timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
 
         com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
-        _enisc(com , cream_host, 'root', cream_root_pass)
+        _enisc(com , cream_host, 'root')
         com = 'cp -f ' + file_path + ' ' + file_path + '.save-off.bak.at.' + timestamp
-        _enisc(com , cream_host, 'root', cream_root_pass)         #create a second back up just in case
+        _enisc(com , cream_host, 'root')         #create a second back up just in case
         com = 'rm -f ' + file_path
-        _enisc(com, cream_host, 'root', cream_root_pass)
+        _enisc(com, cream_host, 'root')
 
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
-
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         src = sftp.file(file_path + '.creamtesting.orig','r')
         dst = sftp.file(file_path,'w')
@@ -4119,7 +4062,7 @@ def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
         dst.close()
 
         com = 'chmod +x ' + file_path
-        _enisc(com, cream_host, 'root', cream_root_pass)
+        _enisc(com, cream_host, 'root')
 
 ###
 ###
@@ -4135,16 +4078,13 @@ def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
                 timestamp = time.strftime("%a-%d-%b-%Y-%H:%M:%S")
 
                 com = 'cp -f ' + file_path + ' ' + file_path + '.creamtesting.orig'
-                _enisc(com , cream_host, 'root', cream_root_pass)
+                _enisc(com , cream_host, 'root')
                 com = 'cp -f ' + file_path + ' ' + file_path + '.save-on.bak.at.' + timestamp
-                _enisc(com , cream_host, 'root', cream_root_pass)
+                _enisc(com , cream_host, 'root')
                 com = 'rm -f ' + file_path
-                _enisc(com, cream_host, 'root', cream_root_pass)
+                _enisc(com, cream_host, 'root')
 
-                ssh_con = paramiko.SSHClient()
-                ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                ssh_con.connect(cream_host,22,'root',cream_root_pass)
-
+                ssh_con = _get_ssh_connection(cream_host, 'root')
                 sftp = ssh_con.open_sftp()
                 src = sftp.file(file_path + '.creamtesting.orig','r')
                 dst = sftp.file(file_path,'w')
@@ -4160,7 +4100,7 @@ def save_batch_job_submission_script_off(ce_endpoint, version, cream_root_pass):
                 dst.close()
 
                 com = 'chmod +x ' + file_path
-                _enisc(com, cream_host, 'root', cream_root_pass)
+                _enisc(com, cream_host, 'root')
 ###
 ###
 
@@ -4253,11 +4193,9 @@ def get_arch_smp_size(ce_endpoint, ldap_port):
                                 raise _error('Invalid GlueHostArchitectureSMPSize value: "' + smp_size + '"')
 
         raise _error('GlueHostArchitectureSMPSize not found in: ' + output)
-
-        print "Under construction"
 ##############################################################################################################################
 ##############################################################################################################################
-def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenodes=0, cpunumber=0, \
+def cpu_allocation_test(jid, ce_endpoint, test_type=0, wholenodes=0, cpunumber=0, \
                         smpgranularity=0, hostnumber=0, smpsize=0, batch_system=0):
         '''
                 |  Description:  |  Validate the contents of the batch job submission script, according to:           |
@@ -4292,7 +4230,6 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
                 |                |        arguments. These default values serve no other purpose.                     |
                 |  Arguments:    |  jid              |  CREAM job identifier                                          |
                 |                |  ce_endpoint      |  the CREAM endpoint                                            |
-                |                |  cream_root_pass  |  CREAM root password                                           |
                 |                |  test_type        |  one of the aforementioned test types, as an integer           |
                 |                |  wholenodes       |  jdl attribute in use (either true or false!)                  |
                 |                |  cpunumber        |  jdl attribute in use                                          |
@@ -4318,9 +4255,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
         cream_host = ce_endpoint.split(":")[0]
 
         cream_config_xml = "/etc/glite-ce-cream/cream-config.xml"
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         fPtr = sftp.file(cream_config_xml,'r')
         contents = fPtr.read()
@@ -4338,9 +4273,7 @@ def cpu_allocation_test(jid, ce_endpoint, cream_root_pass, test_type=0, wholenod
 
 
 
-        ssh_con = paramiko.SSHClient()
-        ssh_con.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh_con.connect(cream_host,22,'root',cream_root_pass)
+        ssh_con = _get_ssh_connection(cream_host, 'root')
         sftp = ssh_con.open_sftp()
         fPtr = sftp.file(batch_subm_file_path,'r')
         contents = fPtr.read()
@@ -4473,7 +4406,7 @@ def _log_to_screen(string, status, bold):
                 |  Description:  |  Log a message directly to screen, bypassing Robot Framework's buffers               | \n
                 |  Arguments:    |  string              |    a string                                                   |
                 |                |  status              |    color to use                                               |
-                |                |  bold                |    boolean, blold or not                                      | \n
+                |                |  bold                |    boolean, bold or not                                      | \n
                 |  Returns:      |  True or raise error                                                                 |
         '''
         attr = []
@@ -4488,49 +4421,6 @@ def _log_to_screen(string, status, bold):
 
         output = '\n\x1b[%sm%s\x1b[0m\n' % (';'.join(attr), string)
         sys.__stderr__.write(output)
-##############################################################################################################################
-##############################################################################################################################
-def execute_remote_mysql_query(db_host, db_host_user, db_host_pass, db_user, db_pass, db_name, query):
-        '''
-                |  Description:  |  Execute a mysql query on a remote host through ssh                          | \n
-                |  Arguments:    |  db_host              | the database's host                                  |
-                |                |  db_host_user         | the database's host user                             |
-                |                |  db_host_pass         | the database's host user password                    |
-                |                |  db_user              | the database user                                    |
-                |                |  db_pass              | the database user password                           |
-                |                |  db_name              | the database to use                                  |
-                |                |  query                | the actual mysql query                               | \n
-                |  Returns:      |  List with the query's results.                                              |
-                |                |  Each line represents a list item. Fields are seperated by tabs.             |
-        '''
-
-        mysql_com = 'mysql -B -u ' + db_user + ' -p ' + db_name + ' -e "' + query + '"'
-        com = 'ssh ' + db_host_user + '@' + db_host + ' \'' + mysql_com + '\''
-
-        print com
-
-        child = pexpect.spawn(com)
-        child.expect('password')
-        child.sendline(db_host_pass)
-        child.expect('password')
-        child.sendline(db_pass)
-        child.expect(pexpect.EOF)
-        child.close(force=False)
-
-        (output,retVal) = pexpect.run(com, timeout=30, withexitstatus=True)
-
-        print "Exit status: " + str(child.exitstatus)
-        if child.exitstatus != 0:
-                raise _error("Job status polling command: " + com + " failed with return value: " \
-                + str(p.returncode) + "\nCommand reported: " + output)
-
-        results = []
-        for line in child.before.split('\n')[2:]:
-                if len(line.strip()) > 0:
-                        results.append(line)
-
-        #print repr(results)
-        return results
 ##############################################################################################################################
 ##############################################################################################################################
 def delegation_info(deleg_endpoint,deleg_id):
@@ -4584,5 +4474,233 @@ def delegation_info(deleg_endpoint,deleg_id):
 		raise _error("Delegation info failed with return value: " + str(p.returncode) + " \n")
 
         return ','.join(output)
+##############################################################################################################################
+##############################################################################################################################
+def ldap_search(host, port, search_base, search_filter):
+        '''
+                |  Description:  |  Perform a simple ldapsearch. The option -LLL is always set.                 | \n
+                |  Arguments:    |  host           |     the ldap host                                          |
+                |                |  port           |     the ldap listening port                                |
+                |                |  search_base    |     the search base                                        |
+                |                |  search_filter  |     the search filter                                      | \n
+                |  Returns:      |  The commands output.                                                        |
+        '''
+
+        port = str(port)
+        com='/usr/bin/ldapsearch -LLL -h ' + host + ' -x -p ' + port + ' ' + '-b "' + search_base + '" "' + search_filter + '"'
+        args = shlex.split(com.encode('ascii'))
+        p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        fPtr=p.stdout
+        retVal=p.wait()
+        output=fPtr.readlines()
+
+        if retVal != 0:
+                raise _error('Command "' + com + '" failed with return code: ' + str(p.returncode) + ' \nCommand reported: ' +  ','.join(output))
+        else:
+                print 'Command "' + com + '" executed succesfully. Output follows:'
+                for item in output:
+                        print item
+
+        return output
+##############################################################################################################################
+##############################################################################################################################
+def check_resource_bdii_published_values(results):
+        '''
+                |  Description:  |  Validate the CREAM resource BDII published values according to                          |
+                |                |  https://wiki.italiangrid.it/twiki/bin/view/CREAM/CreamTestWorkPlan#Resource_BDII_test   | \n
+                |  Arguments:    |  results     |       list with ldapsearch results                                        | \n
+                |  Returns:      |  Nothing. Raises exception upon non-confirmation.                                        |
+        '''
+
+        error=False
+        for i in range(0,len(results)):
+                if i%2 == 0:
+                        if len(results[i]) == 0:
+                                error=True
+                                print 'Value for "' + results[i+1] + '" is not set!'
+
+        if error:
+                raise _error('Some values are not published! Please check the report file!')
+##############################################################################################################################
+##############################################################################################################################
+def wms_job_submit(jdl_path,wmproxy_endpoint=None,ce_endpoint=None,delegId=None):
+        '''
+                |  Description: |   Submit a job to the WMS, with automatic or explicit delegation and return it's job id.              |
+                |               |   NOTE: this method only supports some basic options of the Workload Management System!               | \n
+                |  Arguments:   |   jdl_path          |  path to the jdl file                                                           |
+                |               |   ce_endpoint       |  the cream endpoint,containing the queue                                        |
+                |               |   wmproxy_endpoint  |  the wmproxy endpoint                                                           |
+                |               |   delegId           |  if specified,uses the given delegation id, else it uses automatic delegation   | \n
+                |  Returns:     |   the resulting cream job id as a string                                                          |
+        '''
+
+        com = "/usr/bin/glite-wms-job-submit "
+
+        if delegId is None:
+                deleg = '-a'
+        else:
+                deleg = '-d ' + delegId
+
+        if ce_endpoint is None:
+                ce_id = ''
+        else:
+                ce_id = '-r ' + ce_endpoint
+
+        if wmproxy_endpoint is None:
+                wmp_id = ''
+        else:
+                wmp_id = '-e ' + wmproxy_endpoint
+
+        com = com + ' ' + wmp_id + ' ' + ce_id + ' ' + deleg + ' ' + jdl_path
+
+        args = shlex.split(com.encode('ascii'))
+	p = subprocess.Popen( args , shell=False , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+	fPtr=p.stdout
+        retVal=p.wait()
+        output=fPtr.readlines()
+
+        if "error" in ','.join(output) or "fault" in ','.join(output) or retVal != 0 :
+		raise _error("WMS Job submission failed with return value: " + str(p.returncode) + " \nCommand reported: " +  ','.join(output) )
+
+        return output[-5]
+##############################################################################################################################
+##############################################################################################################################
+def wms_get_job_status(job_id, verbosity='1'):
+        '''
+                |  Description:  |  Return the current status of a wms job,with the use of the glite-wms-job-status command.    |
+                |                |  This function will NOT wait until the job is in a final state.                              | \n
+                |  Arguments:    |  job_id     |     the job id,as returned by the submit operation.                            |
+                |                |  verbosity  |     the status operation's verbosity. One of 0,1,2,3                           | \n
+                |  Returns:      |  job's status as a string.                                                                   |
+        '''
+
+        #states=['ABORTED','CANCELLED','CLEARED','DONE','PURGED','READY','RUNNING','SCHEDULED','SUBMITTED','UNDEF','UNKNOWN','WAITING']
+
+        v = str(verbosity)
+        if v != '0' and v != '1' and v != '2' and v != '3':
+                raise _error('WMS Job status verbosity level out of bounds! Must be one of 0,1,2,3, you entered: ' + v)
+
+        com="/usr/bin/glite-wms-job-status -v " + v + ' ' + job_id
+        args = shlex.split(com.encode('ascii'))
+
+        p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        fPtr=p.stdout
+        retVal=p.wait()
+        output=fPtr.readlines()
+
+        if retVal != 0:
+                raise _error("WMS Job status polling failed with return value: " + str(p.returncode) + "\nCommand reported: " + ','.join(output))
+
+        for item in output:
+                print item.strip('\n')
+
+        found=False
+        for i in output:
+                if "Current Status" in i:
+                        match=i
+                        found=True
+
+        if found == False:
+                raise _error("Status couldn't be determined for jid " + job_id + ". Command reported: " + ','.join(output))
+
+
+        split1 = match.split(':')
+        cur_status=split1[1].strip()
+
+        return cur_status
+##############################################################################################################################
+##############################################################################################################################
+def wms_get_final_job_status(job_id, verbosity='1'):
+        '''
+                |  Description:  |  Return the final status of a wms job,with the use of the glite-wms-job-status command.      |
+                |                |  This function WILL wait until the job is in a final state.                                  | \n
+                |  Arguments:    |  job_id     |     the job id,as returned by the submit operation.                            |
+                |                |  verbosity  |     the status operation's verbosity. One of 0,1,2,3                           | \n
+                |  Returns:      |  job's status as a string.                                                                   |
+        '''
+
+        final_states=['Done','Cleared','Aborted','Cancelled','Unknown']
+
+        v = str(verbosity)
+        if v != '0' and v != '1' and v != '2' and v != '3':
+                raise _error('WMS Job status verbosity level out of bounds! Must be one of 0,1,2,3, you entered: ' + v)
+
+        while 1:
+                status = wms_get_job_status(job_id,v)
+
+                for final_state in final_states:
+                        if final_state.lower() in status.lower():
+                                return status
+
+                time.sleep(10)
+##############################################################################################################################
+##############################################################################################################################
+def wms_job_logging_info(job_id, verbosity='1'):
+        '''
+                |  Description:  |  Return the current status of a wms job,with the use of the glite-wms-job-status command.    |
+                |                |  This function will NOT wait until the job is in a final state.                              | \n
+                |  Arguments:    |  job_id     |     the job id,as returned by the submit operation.                            |
+                |                |  verbosity  |     the status operation's verbosity. One of 0,1,2,3                           | \n
+                |  Returns:      |  job's status as a string.                                                                   |
+        '''
+
+        #states=['ABORTED','CANCELLED','CLEARED','DONE','PURGED','READY','RUNNING','SCHEDULED','SUBMITTED','UNDEF','UNKNOWN','WAITING']
+
+        v = str(verbosity)
+        if v != '0' and v != '1' and v != '2' and v != '3':
+                raise _error('WMS Job logging info verbosity level out of bounds! Must be one of 0,1,2,3, you entered: ' + v)
+
+        com="/usr/bin/glite-wms-job-logging-info -v " + v + ' ' + job_id
+        args = shlex.split(com.encode('ascii'))
+
+        p = subprocess.Popen( args , stderr=subprocess.STDOUT , stdout=subprocess.PIPE )
+        fPtr=p.stdout
+        retVal=p.wait()
+        output=fPtr.readlines()
+
+        if retVal != 0:
+                raise _error("WMS Job logging info operation failed with return value: " + str(p.returncode) + "\nCommand reported: " + ','.join(output))
+
+        for item in output:
+                print item.strip('\n')
+
+        return output
+##############################################################################################################################
+##############################################################################################################################
+def check_wms_logging_info(output):
+        '''
+                |  Description:   |  Validates the output of a glite-wms-job-logging-info command             | \n
+                |  Arguments:     |  output     |  the output of a wms job status logging ingo command        | \n
+                |  Returns:       |  Nothing (raises exception uppon non-validation)                          |
+        '''
+
+        i=0
+        for line in output:
+                if 'source' in line.lower():
+                        if 'lrms' in line.lower():
+                                i=i+1
+
+        if i != 3:
+                raise _error("There weren't found 3 events sourcing from LRMS! Found only " + str(i) + ". Please check report!")
+##############################################################################################################################
+##############################################################################################################################
+def stop_old_blparser(host):
+        '''
+                |  Description:  |   Stop the old blparser service                                             | \n
+                |  Arguments:    |   host        |      the service's host                                     | \n
+                |  Returns:      |   Nothing (raises exception upon error)                                     |
+        '''
+
+        _enisc('/etc/init.d/glite-ce-blah-parser stop', host, 'root')
+##############################################################################################################################
+##############################################################################################################################
+def start_old_blparser(host):
+        '''
+                |  Description:  |   Start the old blparser service                                             | \n
+                |  Arguments:    |   host        |      the service's host                                      | \n
+                |  Returns:      |   Nothing (raises exception upon error)                                      |
+        '''
+
+        _enisc('/etc/init.d/glite-ce-blah-parser start', host, 'root')
 ##############################################################################################################################
 ##############################################################################################################################
